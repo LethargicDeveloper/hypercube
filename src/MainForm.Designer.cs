@@ -34,6 +34,7 @@ partial class MainForm
             this.openCubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,26 +63,26 @@ partial class MainForm
             // newCubeToolStripMenuItem
             // 
             this.newCubeToolStripMenuItem.Name = "newCubeToolStripMenuItem";
-            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.newCubeToolStripMenuItem.Text = "&New Cube...";
             this.newCubeToolStripMenuItem.Click += new System.EventHandler(this.NewCubeToolStripMenuItem_Click);
             // 
             // openCubeToolStripMenuItem
             // 
             this.openCubeToolStripMenuItem.Name = "openCubeToolStripMenuItem";
-            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(172, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(175, 26);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -110,4 +111,5 @@ partial class MainForm
     private ToolStripMenuItem openCubeToolStripMenuItem;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripMenuItem exitToolStripMenuItem;
+    private FolderBrowserDialog folderBrowserDialog;
 }

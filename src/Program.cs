@@ -21,7 +21,7 @@ static class Program
 
     static void ConfigureServices(IServiceCollection services)
     {
-        services.AddScoped<FormNavigation>();
+        services.AddScoped<FormFactory>();
 
         var forms =
             from type in typeof(Program).Assembly.GetExportedTypes()
@@ -35,5 +35,7 @@ static class Program
 
         services.AddHttpClient<ScryfallClient>(client =>
             client.BaseAddress = new Uri("https://api.scryfall.com/"));
+
+        services.AddSingleton(CubeManager.Create());
     }
 }

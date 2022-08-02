@@ -5,16 +5,20 @@ namespace Hypercube;
 public partial class NewCubeForm : Form
 {
     readonly ScryfallClient client;
+    readonly CubeManager cubeManager;
 
     List<Expansion> expansions;
 
-    public NewCubeForm(ScryfallClient client)
+    public NewCubeForm(ScryfallClient client, CubeManager cubeManager)
     {
         InitializeComponent();
 
         this.client = client;
+        this.cubeManager = cubeManager;
         this.expansions = new List<Expansion>();
     }
+
+    public Cube Cube { get; private set; } = null!;
 
     void CancelButton_Click(object sender, EventArgs e)
     {
@@ -42,6 +46,24 @@ public partial class NewCubeForm : Form
 
     void OkButton_Click(object sender, EventArgs e)
     {
+        this.Cube = new Cube
+        {
+            CubeName = this.cubeNameTextBox.Text,
+            ScryfallUri = ((Expansion)this.setListBox.SelectedItem)
+                .SearchUri
+                .Replace("include_extras=true", "include_extras=false")
+                .Replace("include_variations=true", "include_variations=false")
+                .Replace("order=set", "order=color")
+        };
+
+        if (this.cubeManager.CreateCube(this.Cube))
+        {
+            DialogResult = DialogResult.OK;
+            this.Close();
+            return;
+        }
+
+        MessageBox.Show($"The cube \"{this.Cube.CubeName}\" already exists.", "Error");
     }
 
     void CubeNameTextBox_TextChanged(object sender, EventArgs e)
