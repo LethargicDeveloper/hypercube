@@ -12,6 +12,8 @@ public partial class MainForm : Form
         Dock = DockStyle.Fill
     };
 
+    int currentCard = 0;
+
     public MainForm(FormFactory form, CubeManager cubeManager, ScryfallClient scryfallClient)
     {
         InitializeComponent();
@@ -57,11 +59,18 @@ public partial class MainForm : Form
     void LoadCube(Cube cube)
     {
         this.Cursor = Cursors.WaitCursor;
-        var cards = this.scryfallClient.GetCardsForCube(cube);
+        var cards = this.scryfallClient.GetCardsForCube(cube)?.ToList();
         this.Cursor = Cursors.Default;
+
+        if (cards == null || cards.Count == 0)
+        {
+            return;
+        }
 
         this.cubeNameLabel.Text = cube.CubeName;
         this.expansionNameLabel.Text = cube.Expansion;
+        this.expansionCardPictureBox.ImageLocation = cards.First().ImageUris.Normal;
+
         this.panel.Hide();
     }
 }

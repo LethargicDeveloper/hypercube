@@ -95,10 +95,10 @@ partial class MainForm
             // 
             // expansionCardPictureBox
             // 
-            this.expansionCardPictureBox.Location = new System.Drawing.Point(12, 113);
+            this.expansionCardPictureBox.Location = new System.Drawing.Point(121, 95);
             this.expansionCardPictureBox.Name = "expansionCardPictureBox";
-            this.expansionCardPictureBox.Size = new System.Drawing.Size(336, 536);
-            this.expansionCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.expansionCardPictureBox.Size = new System.Drawing.Size(244, 340);
+            this.expansionCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.expansionCardPictureBox.TabIndex = 1;
             this.expansionCardPictureBox.TabStop = false;
             // 
