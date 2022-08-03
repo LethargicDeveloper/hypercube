@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using Hypercube.Scryfall;
+using System.Text.Json;
 
 namespace Hypercube;
 
@@ -6,16 +7,21 @@ public class CubeManager
 {
     const string BaseDir = "Cubes";
 
-    private CubeManager() { }
+    readonly ScryfallClient scryfall;
 
-    public static CubeManager Create()
+    private CubeManager(ScryfallClient scryfall)
+    {
+        this.scryfall = scryfall;
+    }
+
+    public static CubeManager Create(ScryfallClient scryfall)
     {
         if (!Directory.Exists(BaseDir))
         {
             Directory.CreateDirectory(BaseDir);
         }
 
-        return new CubeManager();
+        return new CubeManager(scryfall);
     }
 
     public IEnumerable<string> GetCubes()
@@ -33,10 +39,8 @@ public class CubeManager
 
         Directory.CreateDirectory(path);
 
-        var json = JsonSerializer.Serialize(cube);
-        File.WriteAllText(Path.Combine(path, "cube.json"), json);
-
-        // TODO: create scryfall.json of all cards in the set
+        CreateCubeConfig(path, cube);
+        CreateScryfallCache(path, cube);
 
         return true;
     }
@@ -51,5 +55,16 @@ public class CubeManager
 
         var json = File.ReadAllText(Path.Combine(path, "cube.json"));
         return JsonSerializer.Deserialize<Cube>(json);
+    }
+
+    void CreateCubeConfig(string path, Cube cube)
+    {
+        var json = JsonSerializer.Serialize(cube);
+        File.WriteAllText(Path.Combine(path, "cube.json"), json);
+    }
+
+    void CreateScryfallCache(string path, Cube cube)
+    {
+        this.scryfall.GetCardsForCube(cube);
     }
 }

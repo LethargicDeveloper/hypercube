@@ -36,6 +36,10 @@ static class Program
         services.AddHttpClient<ScryfallClient>(client =>
             client.BaseAddress = new Uri("https://api.scryfall.com/"));
 
-        services.AddSingleton(CubeManager.Create());
+        services.AddSingleton(provider =>
+        {
+            var scryfallClient = provider.GetRequiredService<ScryfallClient>();
+            return CubeManager.Create(scryfallClient);
+        });
     }
 }

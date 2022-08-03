@@ -46,23 +46,26 @@ public partial class NewCubeForm : Form
 
     void OkButton_Click(object sender, EventArgs e)
     {
+        var expansion = (Expansion)this.setListBox.SelectedItem;
+
         this.Cube = new Cube
         {
             CubeName = this.cubeNameTextBox.Text,
-            ScryfallUri = ((Expansion)this.setListBox.SelectedItem)
-                .SearchUri
-                .Replace("include_extras=true", "include_extras=false")
-                .Replace("include_variations=true", "include_variations=false")
-                .Replace("order=set", "order=color")
+            Expansion = expansion.Name,
+            ExpansionCode = expansion.Code,
+            ScryfallUri = expansion.SearchUri
         };
 
+        this.Cursor = Cursors.WaitCursor;
         if (this.cubeManager.CreateCube(this.Cube))
         {
+            this.Cursor = Cursors.Default;
             DialogResult = DialogResult.OK;
             this.Close();
             return;
         }
 
+        this.Cursor = Cursors.Default;
         MessageBox.Show($"The cube \"{this.Cube.CubeName}\" already exists.", "Error");
     }
 
