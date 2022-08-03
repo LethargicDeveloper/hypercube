@@ -110,15 +110,18 @@ public partial class MainForm : Form
             return;
         }
 
+        var card = cards[0];
+        var cardTypes = card.TypeLine.Split(" — ");
+
         this.cubeNameLabel.Text = cube.CubeName;
         this.expansionNameLabel.Text = cube.Expansion;
-        this.expansionCardPictureBox.ImageLocation = cards.First().ImageUris.Normal;
+        this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
 
-        //for (int i = 0; i < 4; ++i)
-        //{
-        //    var cardImageUri =  
-        //    //this.cardImageFlowLayoutPanel
-        //}
+        this.cardNameTextBox.Text = card.Name;
+        this.manaCostTextBox.Text = card.ManaCost;
+        this.typeComboBox.Text = cardTypes[0];
+        this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
+        this.rarityComboBox.Text = card.Rarity;
 
         SetControlsEnabled(true);
         this.panel.Hide();

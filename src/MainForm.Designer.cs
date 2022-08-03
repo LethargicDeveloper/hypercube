@@ -110,7 +110,7 @@ partial class MainForm
             // expansionCardPictureBox
             // 
             this.expansionCardPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expansionCardPictureBox.Location = new System.Drawing.Point(138, 127);
+            this.expansionCardPictureBox.Location = new System.Drawing.Point(138, 147);
             this.expansionCardPictureBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.expansionCardPictureBox.Name = "expansionCardPictureBox";
             this.expansionCardPictureBox.Size = new System.Drawing.Size(326, 453);
