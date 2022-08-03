@@ -23,6 +23,8 @@ public partial class MainForm : Form
         this.scryfallClient = scryfallClient;
         this.Controls.Add(this.panel);
         this.panel.BringToFront();
+
+        SetControlsEnabled(false);
     }
 
     void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,6 +58,47 @@ public partial class MainForm : Form
         }
     }
 
+    void CardNameTextBox_TextChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void ManaCostTextBox_TextChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void FrameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void TypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void SubtypeTextBox_TextChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+    }
+
+    void SetControlsEnabled(bool enabled)
+    {
+        foreach (Control control in this.Controls)
+        {
+            if (control is Label)
+            {
+                control.Enabled = enabled;
+            }
+        }
+    }
+
     void LoadCube(Cube cube)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -71,6 +114,22 @@ public partial class MainForm : Form
         this.expansionNameLabel.Text = cube.Expansion;
         this.expansionCardPictureBox.ImageLocation = cards.First().ImageUris.Normal;
 
+        //for (int i = 0; i < 4; ++i)
+        //{
+        //    var cardImageUri =  
+        //    //this.cardImageFlowLayoutPanel
+        //}
+
+        SetControlsEnabled(true);
         this.panel.Hide();
+    }
+
+    void CanGenerateCard()
+    {
+        this.generateButton.Enabled =
+            !string.IsNullOrEmpty(this.cardNameTextBox.Text) &&
+            !string.IsNullOrEmpty(this.frameComboBox.Text) &&
+            !string.IsNullOrEmpty(this.typeComboBox.Text) &&
+            !string.IsNullOrEmpty(this.rarityComboBox.Text);
     }
 }
