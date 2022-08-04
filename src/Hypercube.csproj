@@ -14,4 +14,10 @@
     <PackageReference Include="restsharp" Version="108.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="img\frames\w.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

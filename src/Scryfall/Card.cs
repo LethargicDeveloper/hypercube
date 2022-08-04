@@ -22,6 +22,7 @@ public class Card
     [JsonPropertyName("collector_number")]
     public string CollectorNumber { get; init; } = string.Empty;
     public string Rarity { get; init; } = string.Empty;
+    public List<string> Colors { get; set; } = new();
 }
 
 public class ImageUri

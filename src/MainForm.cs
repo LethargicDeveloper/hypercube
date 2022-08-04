@@ -71,6 +71,12 @@ public partial class MainForm : Form
     void FrameComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+        
+        var path = Path.Combine(".\\img", "frames",
+            ((Frame)this.frameComboBox.SelectedItem).Path);
+
+        this.cardPictureBox.ImageLocation = path;
+        this.cardPictureBox.Load();
     }
 
     void TypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,6 +122,14 @@ public partial class MainForm : Form
         this.cubeNameLabel.Text = cube.CubeName;
         this.expansionNameLabel.Text = cube.Expansion;
         this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
+
+        var frames = Frames.GetFrames();
+        this.frameComboBox.BeginUpdate();
+        this.frameComboBox.Items.Clear();
+        this.frameComboBox.Items.AddRange(frames.ToArray());
+        this.frameComboBox.EndUpdate();
+        this.frameComboBox.Text = Frames.GetDefaultFrame();
+
 
         //this.cardNameTextBox.Text = card.Name;
         //this.manaCostTextBox.Text = card.ManaCost;
