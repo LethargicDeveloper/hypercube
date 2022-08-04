@@ -63,13 +63,14 @@ partial class MainForm
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.hasPowerToughnessCheckBox = new System.Windows.Forms.CheckBox();
-            this.cardImage1 = new Hypercube.CardImageUserControl();
-            this.cardImage3 = new Hypercube.CardImageUserControl();
-            this.cardImage4 = new Hypercube.CardImageUserControl();
-            this.cardImage2 = new Hypercube.CardImageUserControl();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.newCardTabPage = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.newCardTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -323,7 +324,7 @@ partial class MainForm
             this.generateButton.Location = new System.Drawing.Point(607, 874);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(363, 103);
-            this.generateButton.TabIndex = 29;
+            this.generateButton.TabIndex = 100;
             this.generateButton.Text = "&Generate";
             this.generateButton.UseVisualStyleBackColor = true;
             // 
@@ -372,16 +373,17 @@ partial class MainForm
             this.cardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.cardPictureBox.TabIndex = 21;
             this.cardPictureBox.TabStop = false;
+            this.cardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.CardPictureBox_Paint);
             // 
             // cardTextBox
             // 
-            this.cardTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardTextBox.Location = new System.Drawing.Point(607, 497);
+            this.cardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardTextBox.Location = new System.Drawing.Point(0, 0);
             this.cardTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cardTextBox.Multiline = true;
             this.cardTextBox.Name = "cardTextBox";
-            this.cardTextBox.Size = new System.Drawing.Size(363, 333);
-            this.cardTextBox.TabIndex = 21;
+            this.cardTextBox.Size = new System.Drawing.Size(355, 303);
+            this.cardTextBox.TabIndex = 22;
             // 
             // label10
             // 
@@ -401,7 +403,7 @@ partial class MainForm
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(114, 27);
-            this.textBox1.TabIndex = 23;
+            this.textBox1.TabIndex = 24;
             // 
             // textBox2
             // 
@@ -410,7 +412,7 @@ partial class MainForm
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(114, 27);
-            this.textBox2.TabIndex = 24;
+            this.textBox2.TabIndex = 25;
             // 
             // label11
             // 
@@ -430,68 +432,50 @@ partial class MainForm
             this.hasPowerToughnessCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hasPowerToughnessCheckBox.Name = "hasPowerToughnessCheckBox";
             this.hasPowerToughnessCheckBox.Size = new System.Drawing.Size(18, 17);
-            this.hasPowerToughnessCheckBox.TabIndex = 22;
+            this.hasPowerToughnessCheckBox.TabIndex = 23;
             this.hasPowerToughnessCheckBox.UseVisualStyleBackColor = true;
             // 
-            // cardImage1
+            // tabControl1
             // 
-            this.cardImage1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardImage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardImage1.Checked = false;
-            this.cardImage1.Location = new System.Drawing.Point(1014, 641);
-            this.cardImage1.Name = "cardImage1";
-            this.cardImage1.Size = new System.Drawing.Size(141, 165);
-            this.cardImage1.TabIndex = 25;
-            this.cardImage1.Click += new System.EventHandler(this.CardImage1_Click);
+            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tabControl1.Controls.Add(this.newCardTabPage);
+            this.tabControl1.Location = new System.Drawing.Point(607, 497);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(363, 336);
+            this.tabControl1.TabIndex = 21;
             // 
-            // cardImage3
+            // newCardTabPage
             // 
-            this.cardImage3.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardImage3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardImage3.Checked = false;
-            this.cardImage3.Location = new System.Drawing.Point(1014, 812);
-            this.cardImage3.Name = "cardImage3";
-            this.cardImage3.Size = new System.Drawing.Size(141, 165);
-            this.cardImage3.TabIndex = 27;
-            this.cardImage3.Click += new System.EventHandler(this.CardImage3_Click);
+            this.newCardTabPage.Controls.Add(this.cardTextBox);
+            this.newCardTabPage.Location = new System.Drawing.Point(4, 29);
+            this.newCardTabPage.Name = "newCardTabPage";
+            this.newCardTabPage.Size = new System.Drawing.Size(355, 303);
+            this.newCardTabPage.TabIndex = 4;
+            this.newCardTabPage.Text = "New Card";
+            this.newCardTabPage.UseVisualStyleBackColor = true;
             // 
-            // cardImage4
+            // flowLayoutPanel1
             // 
-            this.cardImage4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardImage4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardImage4.Checked = false;
-            this.cardImage4.Location = new System.Drawing.Point(1160, 812);
-            this.cardImage4.Name = "cardImage4";
-            this.cardImage4.Size = new System.Drawing.Size(141, 165);
-            this.cardImage4.TabIndex = 28;
-            this.cardImage4.Click += new System.EventHandler(this.CardImage4_Click);
-            // 
-            // cardImage2
-            // 
-            this.cardImage2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardImage2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardImage2.Checked = false;
-            this.cardImage2.Location = new System.Drawing.Point(1160, 641);
-            this.cardImage2.Name = "cardImage2";
-            this.cardImage2.Size = new System.Drawing.Size(141, 165);
-            this.cardImage2.TabIndex = 26;
-            this.cardImage2.Click += new System.EventHandler(this.CardImage2_Click);
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(1014, 630);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(293, 347);
+            this.flowLayoutPanel1.TabIndex = 31;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1394, 993);
-            this.Controls.Add(this.cardImage2);
-            this.Controls.Add(this.cardImage4);
-            this.Controls.Add(this.cardImage3);
-            this.Controls.Add(this.cardImage1);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.hasPowerToughnessCheckBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.cardTextBox);
             this.Controls.Add(this.cardPictureBox);
             this.Controls.Add(this.subtypeComboBox);
             this.Controls.Add(this.supertypeComboBox);
@@ -524,6 +508,9 @@ partial class MainForm
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.newCardTabPage.ResumeLayout(false);
+            this.newCardTabPage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,8 +553,7 @@ partial class MainForm
     private TextBox textBox2;
     private Label label11;
     private CheckBox hasPowerToughnessCheckBox;
-    private CardImageUserControl cardImage1;
-    private CardImageUserControl cardImage3;
-    private CardImageUserControl cardImage4;
-    private CardImageUserControl cardImage2;
+    private TabControl tabControl1;
+    private TabPage newCardTabPage;
+    private FlowLayoutPanel flowLayoutPanel1;
 }

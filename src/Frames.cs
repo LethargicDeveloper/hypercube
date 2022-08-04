@@ -6,19 +6,30 @@ public class Frames
 {
     static Dictionary<string, (string desc, string path)> frames = new()
     {
+        { "", ("Colorless", "0.png") },
         { "w", ("White", "w.png") }
     };
 
-    public static string GetFramePath(Card card)
+    public static Frame GetFrameForCard(Card card)
     {
         var key = string.Join("", card.Colors.OrderBy(_ => _));
 
         if (frames.TryGetValue(key, out var val))
         {
-            return val.path;
+            return new()
+            {
+                Key = key,
+                Description = val.desc,
+                Path = val.path
+            };
         }
 
-        return "w.png";
+        return new()
+        {
+            Key = "",
+            Description = "Colorless",
+            Path = "0.png"
+        };
     }
 
     public static List<Frame> GetFrames()
@@ -30,8 +41,6 @@ public class Frames
             Path = _.Value.path
         }).ToList();
     }
-
-    public static string GetDefaultFrame() => "White";
 }
 
 public class Frame

@@ -61,6 +61,8 @@ public partial class MainForm : Form
     void CardNameTextBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+
+        this.cardPictureBox.Refresh();
     }
 
     void ManaCostTextBox_TextChanged(object sender, EventArgs e)
@@ -92,6 +94,14 @@ public partial class MainForm : Form
     void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+    }
+
+    void CardPictureBox_Paint(object sender, PaintEventArgs e)
+    {
+        using (Font font = new("Arial", 10))
+        {
+            e.Graphics.DrawString(this.cardNameTextBox.Text, font, Brushes.Black, new Point(25, 25));
+        }
     }
 
     void SetControlsEnabled(bool enabled)
@@ -128,8 +138,7 @@ public partial class MainForm : Form
         this.frameComboBox.Items.Clear();
         this.frameComboBox.Items.AddRange(frames.ToArray());
         this.frameComboBox.EndUpdate();
-        this.frameComboBox.Text = Frames.GetDefaultFrame();
-
+        this.frameComboBox.Text = Frames.GetFrameForCard(card).Description;
 
         //this.cardNameTextBox.Text = card.Name;
         //this.manaCostTextBox.Text = card.ManaCost;
@@ -153,33 +162,5 @@ public partial class MainForm : Form
             !string.IsNullOrEmpty(this.frameComboBox.Text) &&
             !string.IsNullOrEmpty(this.typeComboBox.Text) &&
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
-    }
-
-    private void CardImage1_Click(object sender, EventArgs e)
-    {
-        this.cardImage2.Checked = false;
-        this.cardImage3.Checked = false;
-        this.cardImage4.Checked = false;
-    }
-
-    private void CardImage2_Click(object sender, EventArgs e)
-    {
-        this.cardImage1.Checked = false;
-        this.cardImage3.Checked = false;
-        this.cardImage4.Checked = false;
-    }
-
-    private void CardImage3_Click(object sender, EventArgs e)
-    {
-        this.cardImage1.Checked = false;
-        this.cardImage2.Checked = false;
-        this.cardImage4.Checked = false;
-    }
-
-    private void CardImage4_Click(object sender, EventArgs e)
-    {
-        this.cardImage1.Checked = false;
-        this.cardImage2.Checked = false;
-        this.cardImage3.Checked = false;
     }
 }
