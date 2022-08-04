@@ -35,30 +35,39 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.Location = new System.Drawing.Point(3, 2);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(250, 250);
+            this.pictureBox.Size = new System.Drawing.Size(217, 186);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.PictureBox_Click);
             // 
             // radioButton
             // 
+            this.radioButton.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.radioButton.AutoSize = true;
-            this.radioButton.Location = new System.Drawing.Point(114, 259);
+            this.radioButton.Location = new System.Drawing.Point(99, 192);
+            this.radioButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButton.Name = "radioButton";
-            this.radioButton.Size = new System.Drawing.Size(17, 16);
+            this.radioButton.Size = new System.Drawing.Size(14, 13);
             this.radioButton.TabIndex = 1;
             this.radioButton.TabStop = true;
             this.radioButton.UseVisualStyleBackColor = true;
             // 
             // CardImageUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.radioButton);
             this.Controls.Add(this.pictureBox);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CardImageUserControl";
-            this.Size = new System.Drawing.Size(256, 284);
+            this.Size = new System.Drawing.Size(222, 211);
             this.Click += new System.EventHandler(this.CardImageUserControl_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);

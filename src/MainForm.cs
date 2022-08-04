@@ -117,11 +117,16 @@ public partial class MainForm : Form
         this.expansionNameLabel.Text = cube.Expansion;
         this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
 
-        this.cardNameTextBox.Text = card.Name;
-        this.manaCostTextBox.Text = card.ManaCost;
-        this.typeComboBox.Text = cardTypes[0];
-        this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
-        this.rarityComboBox.Text = card.Rarity;
+        //this.cardNameTextBox.Text = card.Name;
+        //this.manaCostTextBox.Text = card.ManaCost;
+        //this.typeComboBox.Text = cardTypes[0];
+        //this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
+
+        //this.rarityComboBox.SelectedIndex = this.rarityComboBox.FindStringExact(card.Rarity);
+        //if (this.rarityComboBox.SelectedIndex == -1)
+        //{
+        //    this.rarityComboBox.SelectedIndex = 0;
+        //}
 
         SetControlsEnabled(true);
         this.panel.Hide();
@@ -134,5 +139,33 @@ public partial class MainForm : Form
             !string.IsNullOrEmpty(this.frameComboBox.Text) &&
             !string.IsNullOrEmpty(this.typeComboBox.Text) &&
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
+    }
+
+    private void CardImage1_Click(object sender, EventArgs e)
+    {
+        this.cardImage2.Checked = false;
+        this.cardImage3.Checked = false;
+        this.cardImage4.Checked = false;
+    }
+
+    private void CardImage2_Click(object sender, EventArgs e)
+    {
+        this.cardImage1.Checked = false;
+        this.cardImage3.Checked = false;
+        this.cardImage4.Checked = false;
+    }
+
+    private void CardImage3_Click(object sender, EventArgs e)
+    {
+        this.cardImage1.Checked = false;
+        this.cardImage2.Checked = false;
+        this.cardImage4.Checked = false;
+    }
+
+    private void CardImage4_Click(object sender, EventArgs e)
+    {
+        this.cardImage1.Checked = false;
+        this.cardImage2.Checked = false;
+        this.cardImage3.Checked = false;
     }
 }
