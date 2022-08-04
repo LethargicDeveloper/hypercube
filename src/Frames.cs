@@ -7,12 +7,12 @@ public class Frames
     static Dictionary<string, (string desc, string path)> frames = new()
     {
         { "", ("Colorless", "0.png") },
-        { "w", ("White", "w.png") }
+        { "W", ("White", "w.png") }
     };
 
     public static Frame GetFrameForCard(Card card)
     {
-        var key = string.Join("", card.Colors.OrderBy(_ => _));
+        var key = string.Join("", card.Colors.OrderBy(_ => _)).ToUpper();
 
         if (frames.TryGetValue(key, out var val))
         {
