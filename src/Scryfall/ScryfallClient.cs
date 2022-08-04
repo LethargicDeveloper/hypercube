@@ -58,7 +58,7 @@ public class ScryfallClient
 
     bool TryLoadCache<T>(string key, out T? data)
     {
-        var filename = $"{key}.cache";
+        var filename = $".\\Cache\\{key}.cache";
         if (!File.Exists(filename))
         {
             data = default;
@@ -74,7 +74,12 @@ public class ScryfallClient
     {
         if (data == null) return;
 
+        if (!Directory.Exists("Cache"))
+        {
+            Directory.CreateDirectory("Cache");
+        }
+
         var json = JsonSerializer.Serialize(data);
-        File.WriteAllText($"{key}.cache", json);
+        File.WriteAllText($".\\Cache\\{key}.cache", json);
     }
 }

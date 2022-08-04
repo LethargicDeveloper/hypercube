@@ -140,7 +140,7 @@ public partial class MainForm : Form
         this.frameComboBox.EndUpdate();
         this.frameComboBox.Text = Frames.GetFrameForCard(card).Description;
 
-        //this.cardNameTextBox.Text = card.Name;
+        this.cardNameTextBox.Text = card.Name;
         //this.manaCostTextBox.Text = card.ManaCost;
         //this.typeComboBox.Text = cardTypes[0];
         //this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
