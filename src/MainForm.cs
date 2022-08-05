@@ -141,6 +141,12 @@ public partial class MainForm : Form
         this.frameComboBox.Text = Frames.GetFrameForCard(card).Description;
 
         this.cardNameTextBox.Text = card.Name;
+
+        this.supertype1ComboBox.BeginUpdate();
+        this.supertype1ComboBox.Items.Clear();
+        this.supertype1ComboBox.Items.AddRange(CardTypes.Supertypes.ToArray());
+        this.supertype1ComboBox.EndUpdate();
+
         //this.manaCostTextBox.Text = card.ManaCost;
         //this.typeComboBox.Text = cardTypes[0];
         //this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
@@ -160,7 +166,7 @@ public partial class MainForm : Form
         this.generateButton.Enabled =
             !string.IsNullOrEmpty(this.cardNameTextBox.Text) &&
             !string.IsNullOrEmpty(this.frameComboBox.Text) &&
-            !string.IsNullOrEmpty(this.typeComboBox.Text) &&
+            !string.IsNullOrEmpty(this.type1ComboBox.Text) &&
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
     }
 }

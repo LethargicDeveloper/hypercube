@@ -48,14 +48,13 @@ partial class MainForm
             this.label5 = new System.Windows.Forms.Label();
             this.frameComboBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.typeComboBox = new System.Windows.Forms.ComboBox();
+            this.type1ComboBox = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.rarityComboBox = new System.Windows.Forms.ComboBox();
             this.generateButton = new System.Windows.Forms.Button();
-            this.supertypeComboBox = new System.Windows.Forms.ComboBox();
+            this.supertype1ComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.subtypeComboBox = new System.Windows.Forms.ComboBox();
             this.cardPictureBox = new System.Windows.Forms.PictureBox();
             this.cardTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -66,6 +65,12 @@ partial class MainForm
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.newCardTabPage = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.supertype2ComboBox = new System.Windows.Forms.ComboBox();
+            this.type2ComboBox = new System.Windows.Forms.ComboBox();
+            this.type3ComboBox = new System.Windows.Forms.ComboBox();
+            this.subtype3ComboBox = new System.Windows.Forms.ComboBox();
+            this.subtype2ComboBox = new System.Windows.Forms.ComboBox();
+            this.subtype1ComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -249,7 +254,7 @@ partial class MainForm
             this.frameComboBox.DisplayMember = "Description";
             this.frameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.frameComboBox.FormattingEnabled = true;
-            this.frameComboBox.Location = new System.Drawing.Point(607, 243);
+            this.frameComboBox.Location = new System.Drawing.Point(606, 245);
             this.frameComboBox.Name = "frameComboBox";
             this.frameComboBox.Size = new System.Drawing.Size(363, 28);
             this.frameComboBox.TabIndex = 11;
@@ -264,20 +269,20 @@ partial class MainForm
             this.label6.Location = new System.Drawing.Point(535, 344);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(62, 28);
-            this.label6.TabIndex = 14;
+            this.label6.TabIndex = 15;
             this.label6.Text = "&Type:";
             // 
-            // typeComboBox
+            // type1ComboBox
             // 
-            this.typeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.typeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.typeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.typeComboBox.FormattingEnabled = true;
-            this.typeComboBox.Location = new System.Drawing.Point(607, 347);
-            this.typeComboBox.Name = "typeComboBox";
-            this.typeComboBox.Size = new System.Drawing.Size(363, 28);
-            this.typeComboBox.TabIndex = 15;
-            this.typeComboBox.SelectedIndexChanged += new System.EventHandler(this.TypeComboBox_SelectedIndexChanged);
+            this.type1ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.type1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.type1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.type1ComboBox.FormattingEnabled = true;
+            this.type1ComboBox.Location = new System.Drawing.Point(608, 344);
+            this.type1ComboBox.Name = "type1ComboBox";
+            this.type1ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.type1ComboBox.TabIndex = 16;
+            this.type1ComboBox.SelectedIndexChanged += new System.EventHandler(this.TypeComboBox_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -287,7 +292,7 @@ partial class MainForm
             this.label7.Location = new System.Drawing.Point(504, 393);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(94, 28);
-            this.label7.TabIndex = 16;
+            this.label7.TabIndex = 19;
             this.label7.Text = "Su&btype:";
             // 
             // label8
@@ -298,7 +303,7 @@ partial class MainForm
             this.label8.Location = new System.Drawing.Point(525, 443);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 28);
-            this.label8.TabIndex = 18;
+            this.label8.TabIndex = 23;
             this.label8.Text = "&Rarity:";
             // 
             // rarityComboBox
@@ -311,10 +316,10 @@ partial class MainForm
             "Uncommon",
             "Rare",
             "Mythic"});
-            this.rarityComboBox.Location = new System.Drawing.Point(607, 445);
+            this.rarityComboBox.Location = new System.Drawing.Point(607, 443);
             this.rarityComboBox.Name = "rarityComboBox";
             this.rarityComboBox.Size = new System.Drawing.Size(363, 28);
-            this.rarityComboBox.TabIndex = 19;
+            this.rarityComboBox.TabIndex = 24;
             this.rarityComboBox.SelectedIndexChanged += new System.EventHandler(this.RarityComboBox_SelectedIndexChanged);
             // 
             // generateButton
@@ -328,16 +333,16 @@ partial class MainForm
             this.generateButton.Text = "&Generate";
             this.generateButton.UseVisualStyleBackColor = true;
             // 
-            // supertypeComboBox
+            // supertype1ComboBox
             // 
-            this.supertypeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.supertypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.supertypeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.supertypeComboBox.FormattingEnabled = true;
-            this.supertypeComboBox.Location = new System.Drawing.Point(607, 295);
-            this.supertypeComboBox.Name = "supertypeComboBox";
-            this.supertypeComboBox.Size = new System.Drawing.Size(363, 28);
-            this.supertypeComboBox.TabIndex = 13;
+            this.supertype1ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.supertype1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.supertype1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.supertype1ComboBox.FormattingEnabled = true;
+            this.supertype1ComboBox.Location = new System.Drawing.Point(607, 295);
+            this.supertype1ComboBox.Name = "supertype1ComboBox";
+            this.supertype1ComboBox.Size = new System.Drawing.Size(178, 28);
+            this.supertype1ComboBox.TabIndex = 13;
             // 
             // label9
             // 
@@ -349,17 +354,6 @@ partial class MainForm
             this.label9.Size = new System.Drawing.Size(114, 28);
             this.label9.TabIndex = 12;
             this.label9.Text = "&Supertype:";
-            // 
-            // subtypeComboBox
-            // 
-            this.subtypeComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.subtypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.subtypeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.subtypeComboBox.FormattingEnabled = true;
-            this.subtypeComboBox.Location = new System.Drawing.Point(607, 396);
-            this.subtypeComboBox.Name = "subtypeComboBox";
-            this.subtypeComboBox.Size = new System.Drawing.Size(363, 28);
-            this.subtypeComboBox.TabIndex = 17;
             // 
             // cardPictureBox
             // 
@@ -383,7 +377,7 @@ partial class MainForm
             this.cardTextBox.Multiline = true;
             this.cardTextBox.Name = "cardTextBox";
             this.cardTextBox.Size = new System.Drawing.Size(355, 303);
-            this.cardTextBox.TabIndex = 22;
+            this.cardTextBox.TabIndex = 27;
             // 
             // label10
             // 
@@ -393,7 +387,7 @@ partial class MainForm
             this.label10.Location = new System.Drawing.Point(495, 497);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(106, 28);
-            this.label10.TabIndex = 20;
+            this.label10.TabIndex = 25;
             this.label10.Text = "Card Te&xt:";
             // 
             // textBox1
@@ -403,7 +397,7 @@ partial class MainForm
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(114, 27);
-            this.textBox1.TabIndex = 24;
+            this.textBox1.TabIndex = 29;
             // 
             // textBox2
             // 
@@ -412,7 +406,7 @@ partial class MainForm
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(114, 27);
-            this.textBox2.TabIndex = 25;
+            this.textBox2.TabIndex = 30;
             // 
             // label11
             // 
@@ -432,7 +426,7 @@ partial class MainForm
             this.hasPowerToughnessCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.hasPowerToughnessCheckBox.Name = "hasPowerToughnessCheckBox";
             this.hasPowerToughnessCheckBox.Size = new System.Drawing.Size(18, 17);
-            this.hasPowerToughnessCheckBox.TabIndex = 23;
+            this.hasPowerToughnessCheckBox.TabIndex = 28;
             this.hasPowerToughnessCheckBox.UseVisualStyleBackColor = true;
             // 
             // tabControl1
@@ -443,7 +437,7 @@ partial class MainForm
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(363, 336);
-            this.tabControl1.TabIndex = 21;
+            this.tabControl1.TabIndex = 26;
             // 
             // newCardTabPage
             // 
@@ -464,11 +458,88 @@ partial class MainForm
             this.flowLayoutPanel1.Size = new System.Drawing.Size(293, 347);
             this.flowLayoutPanel1.TabIndex = 31;
             // 
+            // supertype2ComboBox
+            // 
+            this.supertype2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.supertype2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.supertype2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.supertype2ComboBox.Enabled = false;
+            this.supertype2ComboBox.FormattingEnabled = true;
+            this.supertype2ComboBox.Location = new System.Drawing.Point(792, 295);
+            this.supertype2ComboBox.Name = "supertype2ComboBox";
+            this.supertype2ComboBox.Size = new System.Drawing.Size(178, 28);
+            this.supertype2ComboBox.TabIndex = 14;
+            // 
+            // type2ComboBox
+            // 
+            this.type2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.type2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.type2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.type2ComboBox.Enabled = false;
+            this.type2ComboBox.FormattingEnabled = true;
+            this.type2ComboBox.Location = new System.Drawing.Point(729, 344);
+            this.type2ComboBox.Name = "type2ComboBox";
+            this.type2ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.type2ComboBox.TabIndex = 17;
+            // 
+            // type3ComboBox
+            // 
+            this.type3ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.type3ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.type3ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.type3ComboBox.Enabled = false;
+            this.type3ComboBox.FormattingEnabled = true;
+            this.type3ComboBox.Location = new System.Drawing.Point(850, 344);
+            this.type3ComboBox.Name = "type3ComboBox";
+            this.type3ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.type3ComboBox.TabIndex = 18;
+            // 
+            // subtype3ComboBox
+            // 
+            this.subtype3ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.subtype3ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.subtype3ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.subtype3ComboBox.Enabled = false;
+            this.subtype3ComboBox.FormattingEnabled = true;
+            this.subtype3ComboBox.Location = new System.Drawing.Point(850, 393);
+            this.subtype3ComboBox.Name = "subtype3ComboBox";
+            this.subtype3ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.subtype3ComboBox.TabIndex = 22;
+            // 
+            // subtype2ComboBox
+            // 
+            this.subtype2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.subtype2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.subtype2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.subtype2ComboBox.Enabled = false;
+            this.subtype2ComboBox.FormattingEnabled = true;
+            this.subtype2ComboBox.Location = new System.Drawing.Point(729, 393);
+            this.subtype2ComboBox.Name = "subtype2ComboBox";
+            this.subtype2ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.subtype2ComboBox.TabIndex = 21;
+            // 
+            // subtype1ComboBox
+            // 
+            this.subtype1ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.subtype1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.subtype1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.subtype1ComboBox.FormattingEnabled = true;
+            this.subtype1ComboBox.Location = new System.Drawing.Point(608, 393);
+            this.subtype1ComboBox.Name = "subtype1ComboBox";
+            this.subtype1ComboBox.Size = new System.Drawing.Size(120, 28);
+            this.subtype1ComboBox.TabIndex = 20;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1394, 993);
+            this.Controls.Add(this.subtype3ComboBox);
+            this.Controls.Add(this.subtype2ComboBox);
+            this.Controls.Add(this.subtype1ComboBox);
+            this.Controls.Add(this.type3ComboBox);
+            this.Controls.Add(this.type2ComboBox);
+            this.Controls.Add(this.supertype2ComboBox);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.hasPowerToughnessCheckBox);
@@ -477,14 +548,13 @@ partial class MainForm
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cardPictureBox);
-            this.Controls.Add(this.subtypeComboBox);
-            this.Controls.Add(this.supertypeComboBox);
+            this.Controls.Add(this.supertype1ComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.generateButton);
             this.Controls.Add(this.rarityComboBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.typeComboBox);
+            this.Controls.Add(this.type1ComboBox);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.frameComboBox);
             this.Controls.Add(this.label5);
@@ -538,14 +608,13 @@ partial class MainForm
     private Label label5;
     private ComboBox frameComboBox;
     private Label label6;
-    private ComboBox typeComboBox;
+    private ComboBox type1ComboBox;
     private Label label7;
     private Label label8;
     private ComboBox rarityComboBox;
     private Button generateButton;
-    private ComboBox supertypeComboBox;
+    private ComboBox supertype1ComboBox;
     private Label label9;
-    private ComboBox subtypeComboBox;
     private PictureBox cardPictureBox;
     private TextBox cardTextBox;
     private Label label10;
@@ -556,4 +625,10 @@ partial class MainForm
     private TabControl tabControl1;
     private TabPage newCardTabPage;
     private FlowLayoutPanel flowLayoutPanel1;
+    private ComboBox supertype2ComboBox;
+    private ComboBox type2ComboBox;
+    private ComboBox type3ComboBox;
+    private ComboBox subtype3ComboBox;
+    private ComboBox subtype2ComboBox;
+    private ComboBox subtype1ComboBox;
 }
