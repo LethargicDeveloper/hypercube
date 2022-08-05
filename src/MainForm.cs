@@ -98,10 +98,10 @@ public partial class MainForm : Form
 
     void CardPictureBox_Paint(object sender, PaintEventArgs e)
     {
-        using (Font font = new("Arial", 10))
-        {
-            e.Graphics.DrawString(this.cardNameTextBox.Text, font, Brushes.Black, new Point(25, 25));
-        }
+        var fontFamily = Fonts.GetFontFamily("Beleren");
+        using var font = new Font(fontFamily, 10);
+        
+        e.Graphics.DrawString(this.cardNameTextBox.Text, font, Brushes.Black, new Point(23, 26));
     }
 
     void SetControlsEnabled(bool enabled)

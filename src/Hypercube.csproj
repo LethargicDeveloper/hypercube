@@ -15,6 +15,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="fonts\beleren-bold_P1.01.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\belerensmallcaps-bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\matrixb.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\MatrixBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="fonts\relay-medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\frames\0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

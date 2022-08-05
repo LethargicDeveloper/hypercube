@@ -2,7 +2,7 @@
 
 namespace Hypercube;
 
-public class Frames
+public static class Frames
 {
     static Dictionary<string, (string desc, string path)> frames = new()
     {
