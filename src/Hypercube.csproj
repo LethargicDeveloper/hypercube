@@ -33,6 +33,9 @@
     <None Update="img\frames\0.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\frames\0L.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\frames\w.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -228,7 +228,7 @@ partial class MainForm
             // 
             this.manaCostHelpButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.manaCostHelpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.manaCostHelpButton.Location = new System.Drawing.Point(942, 180);
+            this.manaCostHelpButton.Location = new System.Drawing.Point(942, 185);
             this.manaCostHelpButton.Name = "manaCostHelpButton";
             this.manaCostHelpButton.Size = new System.Drawing.Size(27, 39);
             this.manaCostHelpButton.TabIndex = 0;
@@ -282,7 +282,7 @@ partial class MainForm
             this.type1ComboBox.Name = "type1ComboBox";
             this.type1ComboBox.Size = new System.Drawing.Size(120, 28);
             this.type1ComboBox.TabIndex = 16;
-            this.type1ComboBox.SelectedIndexChanged += new System.EventHandler(this.TypeComboBox_SelectedIndexChanged);
+            this.type1ComboBox.SelectedIndexChanged += new System.EventHandler(this.Type1ComboBox_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -343,6 +343,7 @@ partial class MainForm
             this.supertype1ComboBox.Name = "supertype1ComboBox";
             this.supertype1ComboBox.Size = new System.Drawing.Size(178, 28);
             this.supertype1ComboBox.TabIndex = 13;
+            this.supertype1ComboBox.SelectedIndexChanged += new System.EventHandler(this.Supertype1ComboBox_SelectedIndexChanged);
             // 
             // label9
             // 

@@ -12,8 +12,6 @@ public partial class MainForm : Form
         Dock = DockStyle.Fill
     };
 
-    int currentCard = 0;
-
     public MainForm(FormFactory form, CubeManager cubeManager, ScryfallClient scryfallClient)
     {
         InitializeComponent();
@@ -81,7 +79,13 @@ public partial class MainForm : Form
         this.cardPictureBox.Load();
     }
 
-    void TypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    void Supertype1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+        this.supertype2ComboBox.Enabled = !string.IsNullOrEmpty(this.supertype1ComboBox.Text);
+    }
+
+    void Type1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
     }
@@ -127,7 +131,6 @@ public partial class MainForm : Form
         }
 
         var card = cards[0];
-        var cardTypes = card.TypeLine.Split(" — ");
 
         this.cubeNameLabel.Text = cube.CubeName;
         this.expansionNameLabel.Text = cube.Expansion;
@@ -142,20 +145,39 @@ public partial class MainForm : Form
 
         this.cardNameTextBox.Text = card.Name;
 
+        var supertypes = new[] { "" }.Concat(CardTypes.Supertypes).ToArray();
         this.supertype1ComboBox.BeginUpdate();
         this.supertype1ComboBox.Items.Clear();
-        this.supertype1ComboBox.Items.AddRange(CardTypes.Supertypes.ToArray());
+        this.supertype1ComboBox.Items.AddRange(supertypes);
         this.supertype1ComboBox.EndUpdate();
 
-        //this.manaCostTextBox.Text = card.ManaCost;
-        //this.typeComboBox.Text = cardTypes[0];
-        //this.subtypeTextBox.Text = cardTypes.Length == 2 ? cardTypes[1] : string.Empty;
+        this.supertype2ComboBox.BeginUpdate();
+        this.supertype2ComboBox.Items.Clear();
+        this.supertype2ComboBox.Items.AddRange(supertypes);
+        this.supertype2ComboBox.EndUpdate();
 
-        //this.rarityComboBox.SelectedIndex = this.rarityComboBox.FindStringExact(card.Rarity);
-        //if (this.rarityComboBox.SelectedIndex == -1)
-        //{
-        //    this.rarityComboBox.SelectedIndex = 0;
-        //}
+        var allCardTypes = card.TypeLine.Split(" — ");
+        var cardTypes = allCardTypes[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+        var subtypes = allCardTypes.Length > 1
+            ? allCardTypes[1].Split(" ", StringSplitOptions.RemoveEmptyEntries)
+            : Array.Empty<string>();
+
+        for (int i = 0; i < cardTypes.Length; ++i)
+        {
+            var cardType = cardTypes[i];
+            if (CardTypes.Supertypes.Contains(cardType))
+            {
+                if (i == 0)
+                {
+                    this.supertype1ComboBox.Text = cardType;
+                }
+                else if (i == 1)
+                {
+                    this.supertype2ComboBox.Text = cardType;
+                }
+                else break;
+            }
+        }
 
         SetControlsEnabled(true);
         this.panel.Hide();
