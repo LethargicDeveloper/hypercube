@@ -4,7 +4,7 @@ namespace Hypercube;
 
 public static class Frames
 {
-    static Dictionary<string, (string desc, string path)> frames = new()
+    static readonly Dictionary<string, (string desc, string path)> frames = new()
     {
         { "", ("Colorless", "0.png") },
         { "L", ("Colorless (Legendary)", "0L.png") },

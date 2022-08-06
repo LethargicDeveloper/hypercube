@@ -134,6 +134,7 @@ public partial class MainForm : Form
     void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+        this.cardPictureBox.Refresh();
     }
 
     void CardPictureBox_Paint(object sender, PaintEventArgs e)
@@ -165,9 +166,13 @@ public partial class MainForm : Form
         var regex = new Regex("[ ]{2,}", options);
         cardType = regex.Replace(cardType, " ").Trim();
 
-        //cardType = "Legendary Enchantment - Background";
-
         e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(28, 300));
+
+        var rarity = Path.Combine(".\\img", "expansions",
+            Rarities.GetIconPath(this.rarityComboBox.Text));
+
+        var rarityImage = Image.FromFile(rarity);
+        e.Graphics.DrawImage(rarityImage, 324, 298, 20, 20);
     }
 
     void SetControlsEnabled(bool enabled)
@@ -265,6 +270,10 @@ public partial class MainForm : Form
                 else if (subtypeCount == 3) this.subtype3TextBox.Text = cardType;
             }
         }
+
+        this.rarityComboBox.Text = this.rarityComboBox.Items.Contains(card.Rarity)
+            ? card.Rarity
+            : "Common";
 
         SetControlsEnabled(true);
         this.panel.Hide();
