@@ -6,4 +6,9 @@ public static class CardTypes
     {
         "Basic", "Legendary", "Ongoing", "Snow", "World"
     };
+
+    public static List<string> Types = new()
+    {
+        "Land", "Creature", "Enchantment", "Artifact", "Instant", "Sorcery"
+    };
 }

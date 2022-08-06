@@ -1,4 +1,5 @@
 using Hypercube.Scryfall;
+using System.Text.RegularExpressions;
 
 namespace Hypercube;
 
@@ -79,20 +80,55 @@ public partial class MainForm : Form
         this.cardPictureBox.Load();
     }
 
-    void Supertype1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    void Supertype1ComboBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+
         this.supertype2ComboBox.Enabled = !string.IsNullOrEmpty(this.supertype1ComboBox.Text);
+        this.cardPictureBox.Refresh();
     }
 
-    void Type1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    void Supertype2ComboBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
+        this.cardPictureBox.Refresh();
     }
 
-    void SubtypeTextBox_TextChanged(object sender, EventArgs e)
+    void Type1ComboBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+
+        this.type2ComboBox.Enabled = !string.IsNullOrEmpty(this.type1ComboBox.Text);
+        this.cardPictureBox.Refresh();
+    }
+
+    void Type2ComboBox_TextChanged(object sender, EventArgs e)
+    {
+        this.type3ComboBox.Enabled = !string.IsNullOrEmpty(this.type2ComboBox.Text);
+        this.cardPictureBox.Refresh();
+    }
+
+    void Type3ComboBox_TextChanged(object sender, EventArgs e)
+    {
+        this.cardPictureBox.Refresh();
+    }
+
+    void Subtype1TextBox_TextChanged(object sender, EventArgs e)
+    {
+        CanGenerateCard();
+
+        this.subtype2TextBox.Enabled = !string.IsNullOrEmpty(this.subtype1TextBox.Text);
+        this.cardPictureBox.Refresh();
+    }
+
+    void Subtype2TextBox_TextChanged(object sender, EventArgs e)
+    {
+        this.subtype3TextBox.Enabled = !string.IsNullOrEmpty(this.subtype2TextBox.Text);
+        this.cardPictureBox.Refresh();
+    }
+
+    void Subtype3TextBox_TextChanged(object sender, EventArgs e)
+    {
+        this.cardPictureBox.Refresh();
     }
 
     void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -102,10 +138,36 @@ public partial class MainForm : Form
 
     void CardPictureBox_Paint(object sender, PaintEventArgs e)
     {
-        var fontFamily = Fonts.GetFontFamily("Beleren");
-        using var font = new Font(fontFamily, 10);
-        
-        e.Graphics.DrawString(this.cardNameTextBox.Text, font, Brushes.Black, new Point(23, 26));
+        var beleren = Fonts.GetFontFamily("Beleren");
+        var relay = Fonts.GetFontFamily("Relay-Medium");
+
+        using var belerenFont = new Font(beleren, 10);
+        using var relayFont = new Font(relay, 8);
+
+        e.Graphics.DrawString(this.cardNameTextBox.Text, belerenFont, Brushes.Black, new Point(25, 30));
+
+        var cardType = string.Format("{0} {1} {2} {3} {4}",
+            this.supertype1ComboBox.Text,
+            this.supertype2ComboBox.Text,
+            this.type1ComboBox.Text,
+            this.type2ComboBox.Text,
+            this.type3ComboBox.Text);
+
+        if (!string.IsNullOrEmpty(subtype1TextBox.Text))
+        {
+            cardType += string.Format(" — {0} {1} {2}",
+                this.subtype1TextBox.Text,
+                this.subtype2TextBox.Text,
+                this.subtype3TextBox.Text);
+        }
+
+        RegexOptions options = RegexOptions.None;
+        var regex = new Regex("[ ]{2,}", options);
+        cardType = regex.Replace(cardType, " ").Trim();
+
+        //cardType = "Legendary Enchantment - Background";
+
+        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(28, 300));
     }
 
     void SetControlsEnabled(bool enabled)
@@ -132,8 +194,6 @@ public partial class MainForm : Form
 
         var card = cards[0];
 
-        this.cubeNameLabel.Text = cube.CubeName;
-        this.expansionNameLabel.Text = cube.Expansion;
         this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
 
         var frames = Frames.GetFrames();
@@ -156,26 +216,53 @@ public partial class MainForm : Form
         this.supertype2ComboBox.Items.AddRange(supertypes);
         this.supertype2ComboBox.EndUpdate();
 
-        var allCardTypes = card.TypeLine.Split(" — ");
-        var cardTypes = allCardTypes[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        var subtypes = allCardTypes.Length > 1
-            ? allCardTypes[1].Split(" ", StringSplitOptions.RemoveEmptyEntries)
-            : Array.Empty<string>();
+        var cardtypes = new[] { "" }.Concat(CardTypes.Types).ToArray();
+        this.type1ComboBox.BeginUpdate();
+        this.type1ComboBox.Items.Clear();
+        this.type1ComboBox.Items.AddRange(cardtypes);
+        this.type1ComboBox.EndUpdate();
 
-        for (int i = 0; i < cardTypes.Length; ++i)
+        this.type2ComboBox.BeginUpdate();
+        this.type2ComboBox.Items.Clear();
+        this.type2ComboBox.Items.AddRange(cardtypes);
+        this.type2ComboBox.EndUpdate();
+
+        this.type3ComboBox.BeginUpdate();
+        this.type3ComboBox.Items.Clear();
+        this.type3ComboBox.Items.AddRange(cardtypes);
+        this.type3ComboBox.EndUpdate();
+
+        var allCardTypes = card.TypeLine
+            .Replace(" — ", " ")
+            .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+        int supertypeCount = 0;
+        int typeCount = 0;
+        int subtypeCount = 0;
+
+        for (int i = 0; i < allCardTypes.Length; ++i)
         {
-            var cardType = cardTypes[i];
+            var cardType = allCardTypes[i];
             if (CardTypes.Supertypes.Contains(cardType))
             {
-                if (i == 0)
-                {
-                    this.supertype1ComboBox.Text = cardType;
-                }
-                else if (i == 1)
-                {
-                    this.supertype2ComboBox.Text = cardType;
-                }
-                else break;
+                supertypeCount++;
+                if (supertypeCount == 1) this.supertype1ComboBox.Text = cardType;
+                else if (supertypeCount == 2) this.supertype2ComboBox.Text = cardType;
+
+            }
+            else if (CardTypes.Types.Contains(cardType))
+            {
+                typeCount++;
+                if (typeCount == 1) this.type1ComboBox.Text = cardType;
+                else if (typeCount == 2) this.type2ComboBox.Text = cardType;
+                else if (typeCount == 3) this.type3ComboBox.Text = cardType;
+            }
+            else
+            {
+                subtypeCount++;
+                if (subtypeCount == 1) this.subtype1TextBox.Text = cardType;
+                else if (subtypeCount == 2) this.subtype2TextBox.Text = cardType;
+                else if (subtypeCount == 3) this.subtype3TextBox.Text = cardType;
             }
         }
 
