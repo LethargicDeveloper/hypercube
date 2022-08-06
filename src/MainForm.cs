@@ -192,6 +192,23 @@ public partial class MainForm : Form
         var cards = this.scryfallClient.GetCardsForCube(cube)?.ToList();
         this.Cursor = Cursors.Default;
 
+        this.cardNameTextBox.Text = string.Empty;
+        this.manaCostTextBox.Text = string.Empty;
+        this.frameComboBox.Text = string.Empty;
+        this.supertype1ComboBox.Text = string.Empty;
+        this.supertype2ComboBox.Text = string.Empty;
+        this.type1ComboBox.Text = string.Empty;
+        this.type2ComboBox.Text = string.Empty;
+        this.type3ComboBox.Text = string.Empty;
+        this.subtype1TextBox.Text = string.Empty;
+        this.subtype2TextBox.Text = string.Empty;
+        this.subtype3TextBox.Text = string.Empty;
+        this.rarityComboBox.Text = string.Empty;
+        this.cardNameTextBox.Text = string.Empty;
+        this.hasPowerToughnessCheckBox.Checked = false;
+        this.powertTextBox.Text = string.Empty;
+        this.toughnessTextBox.Text = string.Empty;
+
         if (cards == null || cards.Count == 0)
         {
             return;
@@ -271,9 +288,7 @@ public partial class MainForm : Form
             }
         }
 
-        this.rarityComboBox.Text = this.rarityComboBox.Items.Contains(card.Rarity)
-            ? card.Rarity
-            : "Common";
+        this.rarityComboBox.Text = Rarities.GetRarity(card.Rarity);
 
         SetControlsEnabled(true);
         this.panel.Hide();

@@ -21,4 +21,10 @@ public static class Rarities
 
         return "gear_common.png";
     }
+
+    public static string GetRarity(string rarity)
+    {
+        return rarities.Keys.FirstOrDefault(_ => string.Equals(rarity, _, StringComparison.OrdinalIgnoreCase))
+            ?? "Common";
+    }
 }

@@ -54,8 +54,8 @@ partial class MainForm
             this.cardPictureBox = new System.Windows.Forms.PictureBox();
             this.cardTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.powertTextBox = new System.Windows.Forms.TextBox();
+            this.toughnessTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.hasPowerToughnessCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -343,23 +343,23 @@ partial class MainForm
             this.label10.TabIndex = 25;
             this.label10.Text = "Card Te&xt:";
             // 
-            // textBox1
+            // powertTextBox
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.Location = new System.Drawing.Point(664, 789);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(114, 27);
-            this.textBox1.TabIndex = 29;
+            this.powertTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.powertTextBox.Location = new System.Drawing.Point(664, 789);
+            this.powertTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.powertTextBox.Name = "powertTextBox";
+            this.powertTextBox.Size = new System.Drawing.Size(114, 27);
+            this.powertTextBox.TabIndex = 29;
             // 
-            // textBox2
+            // toughnessTextBox
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox2.Location = new System.Drawing.Point(803, 789);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(114, 27);
-            this.textBox2.TabIndex = 30;
+            this.toughnessTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.toughnessTextBox.Location = new System.Drawing.Point(803, 789);
+            this.toughnessTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.toughnessTextBox.Name = "toughnessTextBox";
+            this.toughnessTextBox.Size = new System.Drawing.Size(114, 27);
+            this.toughnessTextBox.TabIndex = 30;
             // 
             // label11
             // 
@@ -494,8 +494,8 @@ partial class MainForm
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.hasPowerToughnessCheckBox);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.toughnessTextBox);
+            this.Controls.Add(this.powertTextBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cardPictureBox);
             this.Controls.Add(this.supertype1ComboBox);
@@ -560,8 +560,8 @@ partial class MainForm
     private PictureBox cardPictureBox;
     private TextBox cardTextBox;
     private Label label10;
-    private TextBox textBox1;
-    private TextBox textBox2;
+    private TextBox powertTextBox;
+    private TextBox toughnessTextBox;
     private Label label11;
     private CheckBox hasPowerToughnessCheckBox;
     private TabControl tabControl1;
