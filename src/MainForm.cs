@@ -145,6 +145,21 @@ public partial class MainForm : Form
         this.cardPictureBox.Refresh();
     }
 
+    void HasPowerToughnessCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        this.cardPictureBox.Refresh();
+    }
+
+    void PowerTextBox_TextChanged(object sender, EventArgs e)
+    {
+        this.cardPictureBox.Refresh();
+    }
+
+    void ToughnessTextBox_TextChanged(object sender, EventArgs e)
+    {
+        this.cardPictureBox.Refresh();
+    }
+
     void CardPictureBox_Paint(object sender, PaintEventArgs e)
     {
         var beleren = Fonts.GetFontFamily("Beleren");
@@ -193,6 +208,25 @@ public partial class MainForm : Form
 
             e.Graphics.DrawImage(manaSymbol, 325 - (20 * i++), 30);
         }
+
+        if (this.hasPowerToughnessCheckBox.Checked)
+        {
+            var powerAndToughness = Image.FromFile(".\\img\\frames\\power_toughness.png");
+            e.Graphics.DrawImage(powerAndToughness, 275, 460);
+
+            var powerFontSize = this.powerTextBox.Text.Length <= 2 ? 14 : 10;
+            var powerLeftOffset = (this.powerTextBox.Text.Length <= 2 ? 14 : 7) *
+                (this.powerTextBox.Text.Length - 1);
+            var powerTopOffset = this.powerTextBox.Text.Length <= 2 ? 0 : 5;
+            using var powerFont = new Font(beleren, powerFontSize);
+            e.Graphics.DrawString(this.powerTextBox.Text, powerFont, Brushes.Black,
+                new Point(295 - powerLeftOffset, 465 + powerTopOffset));
+
+            var toughnessTopOffset = this.toughnessTextBox.Text.Length <= 2 ? 0 : 5;
+            using var toughnessFont = new Font(beleren, this.toughnessTextBox.Text.Length <= 2 ? 14 : 10);
+            e.Graphics.DrawString(this.toughnessTextBox.Text, toughnessFont, Brushes.Black,
+                new Point(320, 465 + toughnessTopOffset));
+        }
     }
 
     void SetControlsEnabled(bool enabled)
@@ -226,7 +260,7 @@ public partial class MainForm : Form
         this.rarityComboBox.Text = string.Empty;
         this.cardNameTextBox.Text = string.Empty;
         this.hasPowerToughnessCheckBox.Checked = false;
-        this.powertTextBox.Text = string.Empty;
+        this.powerTextBox.Text = string.Empty;
         this.toughnessTextBox.Text = string.Empty;
 
         if (cards == null || cards.Count == 0)
@@ -311,6 +345,12 @@ public partial class MainForm : Form
         }
 
         this.rarityComboBox.Text = Rarities.GetRarity(card.Rarity);
+        this.hasPowerToughnessCheckBox.Checked =
+            !string.IsNullOrEmpty(card.Power) ||
+            !string.IsNullOrEmpty(card.Toughness);
+
+        this.powerTextBox.Text = card.Power;
+        this.toughnessTextBox.Text = card.Toughness;
 
         SetControlsEnabled(true);
         this.panel.Hide();
@@ -331,14 +371,5 @@ public partial class MainForm : Form
         proc.StartInfo.UseShellExecute = true;
         proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
         proc.Start();
-    }
-}
-
-
-public static class GraphcisExtensions
-{
-    public static void FillCircle(this Graphics g, Brush brush, float centerX, float centerY, float radius)
-    {
-        g.FillEllipse(brush, centerX - radius, centerY - radius, radius + radius, radius + radius);
     }
 }

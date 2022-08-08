@@ -49,6 +49,9 @@
     <None Update="img\frames\0L.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="img\frames\power_toughness.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="img\frames\w.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

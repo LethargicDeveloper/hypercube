@@ -54,7 +54,7 @@ partial class MainForm
             this.cardPictureBox = new System.Windows.Forms.PictureBox();
             this.cardTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.powertTextBox = new System.Windows.Forms.TextBox();
+            this.powerTextBox = new System.Windows.Forms.TextBox();
             this.toughnessTextBox = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.hasPowerToughnessCheckBox = new System.Windows.Forms.CheckBox();
@@ -344,23 +344,27 @@ partial class MainForm
             this.label10.TabIndex = 25;
             this.label10.Text = "Card Te&xt:";
             // 
-            // powertTextBox
+            // powerTextBox
             // 
-            this.powertTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.powertTextBox.Location = new System.Drawing.Point(664, 789);
-            this.powertTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.powertTextBox.Name = "powertTextBox";
-            this.powertTextBox.Size = new System.Drawing.Size(114, 27);
-            this.powertTextBox.TabIndex = 29;
+            this.powerTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.powerTextBox.Location = new System.Drawing.Point(664, 789);
+            this.powerTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.powerTextBox.MaxLength = 3;
+            this.powerTextBox.Name = "powerTextBox";
+            this.powerTextBox.Size = new System.Drawing.Size(114, 27);
+            this.powerTextBox.TabIndex = 29;
+            this.powerTextBox.TextChanged += new System.EventHandler(this.PowerTextBox_TextChanged);
             // 
             // toughnessTextBox
             // 
             this.toughnessTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.toughnessTextBox.Location = new System.Drawing.Point(803, 789);
             this.toughnessTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.toughnessTextBox.MaxLength = 3;
             this.toughnessTextBox.Name = "toughnessTextBox";
             this.toughnessTextBox.Size = new System.Drawing.Size(114, 27);
             this.toughnessTextBox.TabIndex = 30;
+            this.toughnessTextBox.TextChanged += new System.EventHandler(this.ToughnessTextBox_TextChanged);
             // 
             // label11
             // 
@@ -382,6 +386,7 @@ partial class MainForm
             this.hasPowerToughnessCheckBox.Size = new System.Drawing.Size(18, 17);
             this.hasPowerToughnessCheckBox.TabIndex = 28;
             this.hasPowerToughnessCheckBox.UseVisualStyleBackColor = true;
+            this.hasPowerToughnessCheckBox.CheckedChanged += new System.EventHandler(this.HasPowerToughnessCheckBox_CheckedChanged);
             // 
             // tabControl1
             // 
@@ -496,7 +501,7 @@ partial class MainForm
             this.Controls.Add(this.hasPowerToughnessCheckBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.toughnessTextBox);
-            this.Controls.Add(this.powertTextBox);
+            this.Controls.Add(this.powerTextBox);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cardPictureBox);
             this.Controls.Add(this.supertype1ComboBox);
@@ -561,7 +566,7 @@ partial class MainForm
     private PictureBox cardPictureBox;
     private TextBox cardTextBox;
     private Label label10;
-    private TextBox powertTextBox;
+    private TextBox powerTextBox;
     private TextBox toughnessTextBox;
     private Label label11;
     private CheckBox hasPowerToughnessCheckBox;
