@@ -1,4 +1,5 @@
 using Hypercube.Scryfall;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace Hypercube;
@@ -322,6 +323,14 @@ public partial class MainForm : Form
             !string.IsNullOrEmpty(this.frameComboBox.Text) &&
             !string.IsNullOrEmpty(this.type1ComboBox.Text) &&
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
+    }
+
+    void ManaCostHelpButton_Click(object sender, EventArgs e)
+    {
+        Process proc = new Process();
+        proc.StartInfo.UseShellExecute = true;
+        proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
+        proc.Start();
     }
 }
 

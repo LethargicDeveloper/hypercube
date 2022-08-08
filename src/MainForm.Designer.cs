@@ -188,6 +188,7 @@ partial class MainForm
             this.manaCostHelpButton.Text = "?";
             this.manaCostHelpButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.manaCostHelpButton.UseVisualStyleBackColor = true;
+            this.manaCostHelpButton.Click += new System.EventHandler(this.ManaCostHelpButton_Click);
             // 
             // label5
             // 
