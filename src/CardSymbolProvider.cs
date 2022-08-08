@@ -18,7 +18,7 @@ public class CardSymbolProvider
     public ICollection<string> GetCardSymbolImagePaths(string text)
     {
         var imagePaths = new List<string>();
-        var matches = Regex.Matches(text, "{.+?}");
+        var matches = Regex.Matches(text.ToUpper(), "{.+?}");
         foreach (Match match in matches)
         {
             if(cardSymbols.TryGetValue(match.Value, out var symbol))
