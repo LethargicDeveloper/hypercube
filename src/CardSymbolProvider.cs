@@ -32,8 +32,8 @@ public class CardSymbolProvider
                     var svg = this.client.GetSymbol(symbol.SvgUri);
                     File.WriteAllText($"{path}.svg", svg);
                     var doc = SvgDocument.Open($"{path}.svg");
-                    doc.Width = 18;
-                    doc.Height = 18;
+                    doc.Width = 15;
+                    doc.Height = 15;
                     var img = doc.Draw();
                     img?.Save($"{path}.png");
                     File.Delete($"{path}.svg");

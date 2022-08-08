@@ -168,7 +168,18 @@ public partial class MainForm : Form
         using var belerenFont = new Font(beleren, 10);
         using var relayFont = new Font(relay, 8);
 
-        e.Graphics.DrawString(this.cardNameTextBox.Text, belerenFont, Brushes.Black, new Point(25, 30));
+        e.Graphics.DrawString(this.cardNameTextBox.Text, belerenFont, Brushes.Black, new Point(25, 23));
+
+        var manaSymbolPaths = this.cardSymbolProvider
+            .GetCardSymbolImagePaths(this.manaCostTextBox.Text)
+            .Reverse();
+
+        int i = 0;
+        foreach (var manaSymbolPath in manaSymbolPaths)
+        {
+            var manaSymbol = Image.FromFile(manaSymbolPath);
+            e.Graphics.DrawImage(manaSymbol, 285 - (16 * i++), 22);
+        }
 
         var cardType = string.Format("{0} {1} {2} {3} {4}",
             this.supertype1ComboBox.Text,
@@ -189,43 +200,31 @@ public partial class MainForm : Form
         var regex = new Regex("[ ]{2,}", options);
         cardType = regex.Replace(cardType, " ").Trim();
 
-        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(28, 300));
+        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(25, 223));
 
         var rarity = Path.Combine(".\\img", "expansions",
             Rarities.GetIconPath(this.rarityComboBox.Text));
 
         var rarityImage = Image.FromFile(rarity);
-        e.Graphics.DrawImage(rarityImage, 324, 298, 20, 20);
-
-        var manaSymbolPaths = this.cardSymbolProvider
-            .GetCardSymbolImagePaths(this.manaCostTextBox.Text)
-            .Reverse();
-
-        int i = 0;
-        foreach (var manaSymbolPath in manaSymbolPaths)
-        {
-            var manaSymbol = Image.FromFile(manaSymbolPath);
-
-            e.Graphics.DrawImage(manaSymbol, 325 - (20 * i++), 30);
-        }
+        e.Graphics.DrawImage(rarityImage, 285, 222, 17, 17);
 
         if (this.hasPowerToughnessCheckBox.Checked)
         {
             var powerAndToughness = Image.FromFile(".\\img\\frames\\power_toughness.png");
-            e.Graphics.DrawImage(powerAndToughness, 275, 460);
+            e.Graphics.DrawImage(powerAndToughness, 250, 343);
 
-            var powerFontSize = this.powerTextBox.Text.Length <= 2 ? 14 : 10;
-            var powerLeftOffset = (this.powerTextBox.Text.Length <= 2 ? 14 : 7) *
+            var powerTopOffset = this.powerTextBox.Text.Length <= 2 ? 0 : 2;
+            var powerLeftOffset = (this.powerTextBox.Text.Length <= 2 ? 11 : 5) *
                 (this.powerTextBox.Text.Length - 1);
-            var powerTopOffset = this.powerTextBox.Text.Length <= 2 ? 0 : 5;
+            var powerFontSize = this.powerTextBox.Text.Length <= 2 ? 14 : 10;
             using var powerFont = new Font(beleren, powerFontSize);
             e.Graphics.DrawString(this.powerTextBox.Text, powerFont, Brushes.Black,
-                new Point(295 - powerLeftOffset, 465 + powerTopOffset));
+                new Point(266 - powerLeftOffset, 349 + powerTopOffset));
 
-            var toughnessTopOffset = this.toughnessTextBox.Text.Length <= 2 ? 0 : 5;
+            var toughnessTopOffset = this.toughnessTextBox.Text.Length <= 2 ? 0 : 2;
             using var toughnessFont = new Font(beleren, this.toughnessTextBox.Text.Length <= 2 ? 14 : 10);
             e.Graphics.DrawString(this.toughnessTextBox.Text, toughnessFont, Brushes.Black,
-                new Point(320, 465 + toughnessTopOffset));
+                new Point(286, 349 + toughnessTopOffset));
         }
     }
 
