@@ -8,18 +8,24 @@ public partial class MainForm : Form
     readonly FormFactory form;
     readonly CubeManager cubeManager;
     readonly ScryfallClient scryfallClient;
+    readonly CardSymbolProvider cardSymbolProvider;
     readonly Panel panel = new()
     {
         Dock = DockStyle.Fill
     };
 
-    public MainForm(FormFactory form, CubeManager cubeManager, ScryfallClient scryfallClient)
+    public MainForm(
+        FormFactory form,
+        CubeManager cubeManager,
+        ScryfallClient scryfallClient,
+        CardSymbolProvider cardSymbolProvider)
     {
         InitializeComponent();
 
         this.form = form;
         this.cubeManager = cubeManager;
         this.scryfallClient = scryfallClient;
+        this.cardSymbolProvider = cardSymbolProvider;
         this.Controls.Add(this.panel);
         this.panel.BringToFront();
 
@@ -67,6 +73,7 @@ public partial class MainForm : Form
     void ManaCostTextBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
+        this.cardPictureBox.Refresh();
     }
 
     void FrameComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -173,6 +180,18 @@ public partial class MainForm : Form
 
         var rarityImage = Image.FromFile(rarity);
         e.Graphics.DrawImage(rarityImage, 324, 298, 20, 20);
+
+        var manaSymbolPaths = this.cardSymbolProvider
+            .GetCardSymbolImagePaths(this.manaCostTextBox.Text)
+            .Reverse();
+
+        int i = 0;
+        foreach (var manaSymbolPath in manaSymbolPaths)
+        {
+            var manaSymbol = Image.FromFile(manaSymbolPath);
+
+            e.Graphics.DrawImage(manaSymbol, 325 - (20 * i++), 30);
+        }
     }
 
     void SetControlsEnabled(bool enabled)
@@ -217,6 +236,8 @@ public partial class MainForm : Form
         var card = cards[0];
 
         this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
+
+        this.manaCostTextBox.Text = card.ManaCost;
 
         var frames = Frames.GetFrames();
         this.frameComboBox.BeginUpdate();
@@ -301,5 +322,14 @@ public partial class MainForm : Form
             !string.IsNullOrEmpty(this.frameComboBox.Text) &&
             !string.IsNullOrEmpty(this.type1ComboBox.Text) &&
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
+    }
+}
+
+
+public static class GraphcisExtensions
+{
+    public static void FillCircle(this Graphics g, Brush brush, float centerX, float centerY, float radius)
+    {
+        g.FillEllipse(brush, centerX - radius, centerY - radius, radius + radius, radius + radius);
     }
 }

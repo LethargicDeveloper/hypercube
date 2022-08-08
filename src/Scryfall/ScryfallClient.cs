@@ -25,6 +25,26 @@ public class ScryfallClient
         return expansions ?? Enumerable.Empty<Expansion>();
     }
 
+    public IEnumerable<CardSymbol> GetSymbols(bool reload = false)
+    {
+        if (reload || !TryLoadCache("symbology", out List<CardSymbol>? cardSymbols))
+        {
+            var request = new RestRequest("symbology");
+            var result = this.client.Get<ScryfallResponse<CardSymbol>>(request);
+            cardSymbols = result?.Data?.ToList();
+            SaveCache("symbology", cardSymbols);
+        }
+
+        return cardSymbols ?? Enumerable.Empty<CardSymbol>();
+    }
+
+    public string? GetSymbol(string url)
+    {
+        var request = new RestRequest(url);
+        var response = this.client.Get(request);
+        return response?.Content;
+    }
+
     public IEnumerable<Card> GetCardsForCube(Cube cube, bool reload = false)
     {
         if (reload || !TryLoadCache($"{cube.ExpansionCode}", out List<Card>? cards))

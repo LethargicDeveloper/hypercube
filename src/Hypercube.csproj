@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="microsoft.extensions.http" Version="6.0.0" />
     <PackageReference Include="restsharp" Version="108.0.1" />
+    <PackageReference Include="Svg" Version="3.4.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +50,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="img\frames\w.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="img\symbols\blank.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

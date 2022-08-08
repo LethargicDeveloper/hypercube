@@ -22,6 +22,7 @@ static class Program
     static void ConfigureServices(IServiceCollection services)
     {
         services.AddScoped<FormFactory>();
+        services.AddScoped<CardSymbolProvider>();
 
         var forms =
             from type in typeof(Program).Assembly.GetExportedTypes()
