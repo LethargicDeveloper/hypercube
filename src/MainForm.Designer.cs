@@ -28,6 +28,7 @@ partial class MainForm
     /// </summary>
     private void InitializeComponent()
     {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newCubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,11 +69,13 @@ partial class MainForm
             this.subtype2TextBox = new System.Windows.Forms.TextBox();
             this.subtype3TextBox = new System.Windows.Forms.TextBox();
             this.cardTextRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.newCardTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -500,18 +503,33 @@ partial class MainForm
             // cardTextRichTextBox
             // 
             this.cardTextRichTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cardTextRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(237)))), ((int)(((byte)(235)))));
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.cardTextRichTextBox.Location = new System.Drawing.Point(72, 488);
+            this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 301);
             this.cardTextRichTextBox.Name = "cardTextRichTextBox";
-            this.cardTextRichTextBox.Size = new System.Drawing.Size(246, 153);
+            this.cardTextRichTextBox.Size = new System.Drawing.Size(271, 114);
             this.cardTextRichTextBox.TabIndex = 101;
             this.cardTextRichTextBox.Text = "";
+            // 
+            // powerAndToughnessPictureBox
+            // 
+            this.powerAndToughnessPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.powerAndToughnessPictureBox.BackColor = System.Drawing.SystemColors.Window;
+            this.powerAndToughnessPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.powerAndToughnessPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("powerAndToughnessPictureBox.Image")));
+            this.powerAndToughnessPictureBox.Location = new System.Drawing.Point(1090, 397);
+            this.powerAndToughnessPictureBox.Name = "powerAndToughnessPictureBox";
+            this.powerAndToughnessPictureBox.Size = new System.Drawing.Size(65, 31);
+            this.powerAndToughnessPictureBox.TabIndex = 102;
+            this.powerAndToughnessPictureBox.TabStop = false;
+            this.powerAndToughnessPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PowerAndToughnessPictureBox_Paint);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 745);
+            this.Controls.Add(this.powerAndToughnessPictureBox);
             this.Controls.Add(this.cardTextRichTextBox);
             this.Controls.Add(this.subtype3TextBox);
             this.Controls.Add(this.subtype2TextBox);
@@ -558,6 +576,7 @@ partial class MainForm
             this.tabControl1.ResumeLayout(false);
             this.newCardTabPage.ResumeLayout(false);
             this.newCardTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -605,4 +624,5 @@ partial class MainForm
     private TextBox subtype2TextBox;
     private TextBox subtype3TextBox;
     private RichTextBox cardTextRichTextBox;
+    private PictureBox powerAndToughnessPictureBox;
 }

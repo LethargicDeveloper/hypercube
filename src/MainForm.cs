@@ -85,7 +85,7 @@ public partial class MainForm : Form
             ((Frame)this.frameComboBox.SelectedItem).Path);
 
         this.cardPictureBox.ImageLocation = path;
-        this.cardPictureBox.Load();
+        this.cardPictureBox.LoadAsync();
     }
 
     void Supertype1ComboBox_TextChanged(object sender, EventArgs e)
@@ -147,17 +147,20 @@ public partial class MainForm : Form
 
     void HasPowerToughnessCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        this.cardPictureBox.Refresh();
+        //this.cardPictureBox.Refresh();
+        this.powerAndToughnessPictureBox.Visible = this.hasPowerToughnessCheckBox.Checked;
     }
 
     void PowerTextBox_TextChanged(object sender, EventArgs e)
     {
-        this.cardPictureBox.Refresh();
+        //this.cardPictureBox.Refresh();
+        this.powerAndToughnessPictureBox.Refresh();
     }
 
     void ToughnessTextBox_TextChanged(object sender, EventArgs e)
     {
-        this.cardPictureBox.Refresh();
+        //this.cardPictureBox.Refresh();
+        this.powerAndToughnessPictureBox.Refresh();
     }
 
     void CardPictureBox_Paint(object sender, PaintEventArgs e)
@@ -207,24 +210,27 @@ public partial class MainForm : Form
 
         var rarityImage = Image.FromFile(rarity);
         e.Graphics.DrawImage(rarityImage, 285, 222, 17, 17);
+    }
+
+    void PowerAndToughnessPictureBox_Paint(object sender, PaintEventArgs e)
+    {
+        var beleren = Fonts.GetFontFamily("Beleren");
+        using var belerenFont = new Font(beleren, 10);
 
         if (this.hasPowerToughnessCheckBox.Checked)
         {
-            var powerAndToughness = Image.FromFile(".\\img\\frames\\power_toughness.png");
-            e.Graphics.DrawImage(powerAndToughness, 250, 343);
-
             var powerTopOffset = this.powerTextBox.Text.Length <= 2 ? 0 : 2;
             var powerLeftOffset = (this.powerTextBox.Text.Length <= 2 ? 11 : 5) *
                 (this.powerTextBox.Text.Length - 1);
             var powerFontSize = this.powerTextBox.Text.Length <= 2 ? 14 : 10;
             using var powerFont = new Font(beleren, powerFontSize);
             e.Graphics.DrawString(this.powerTextBox.Text, powerFont, Brushes.Black,
-                new Point(266 - powerLeftOffset, 349 + powerTopOffset));
+                new Point(16 - powerLeftOffset, 6 + powerTopOffset));
 
             var toughnessTopOffset = this.toughnessTextBox.Text.Length <= 2 ? 0 : 2;
             using var toughnessFont = new Font(beleren, this.toughnessTextBox.Text.Length <= 2 ? 14 : 10);
             e.Graphics.DrawString(this.toughnessTextBox.Text, toughnessFont, Brushes.Black,
-                new Point(286, 349 + toughnessTopOffset));
+                new Point(36, 6 + toughnessTopOffset));
         }
     }
 
