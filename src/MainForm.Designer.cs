@@ -70,12 +70,14 @@ partial class MainForm
             this.subtype3TextBox = new System.Windows.Forms.TextBox();
             this.cardTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
+            this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.newCardTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -338,7 +340,7 @@ partial class MainForm
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(387, 334);
+            this.label10.Location = new System.Drawing.Point(388, 359);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 21);
             this.label10.TabIndex = 25;
@@ -389,11 +391,11 @@ partial class MainForm
             // 
             this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.newCardTabPage);
-            this.tabControl1.Location = new System.Drawing.Point(485, 334);
+            this.tabControl1.Location = new System.Drawing.Point(485, 359);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(318, 252);
+            this.tabControl1.Size = new System.Drawing.Size(318, 227);
             this.tabControl1.TabIndex = 26;
             // 
             // newCardTabPage
@@ -402,7 +404,7 @@ partial class MainForm
             this.newCardTabPage.Location = new System.Drawing.Point(4, 24);
             this.newCardTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.newCardTabPage.Name = "newCardTabPage";
-            this.newCardTabPage.Size = new System.Drawing.Size(310, 224);
+            this.newCardTabPage.Size = new System.Drawing.Size(310, 199);
             this.newCardTabPage.TabIndex = 4;
             this.newCardTabPage.Text = "New Card";
             this.newCardTabPage.UseVisualStyleBackColor = true;
@@ -413,7 +415,7 @@ partial class MainForm
             this.cardTextBox.Location = new System.Drawing.Point(0, 0);
             this.cardTextBox.Multiline = true;
             this.cardTextBox.Name = "cardTextBox";
-            this.cardTextBox.Size = new System.Drawing.Size(310, 224);
+            this.cardTextBox.Size = new System.Drawing.Size(310, 199);
             this.cardTextBox.TabIndex = 27;
             this.cardTextBox.TextChanged += new System.EventHandler(this.CardTextBox_TextChanged);
             // 
@@ -506,6 +508,7 @@ partial class MainForm
             this.cardTextRichTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardTextRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(237)))), ((int)(((byte)(235)))));
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cardTextRichTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 301);
             this.cardTextRichTextBox.Name = "cardTextRichTextBox";
             this.cardTextRichTextBox.ReadOnly = true;
@@ -527,11 +530,24 @@ partial class MainForm
             this.powerAndToughnessPictureBox.TabStop = false;
             this.powerAndToughnessPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PowerAndToughnessPictureBox_Paint);
             // 
+            // fontSizeTrackBar
+            // 
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(486, 320);
+            this.fontSizeTrackBar.Maximum = 15;
+            this.fontSizeTrackBar.Minimum = 8;
+            this.fontSizeTrackBar.Name = "fontSizeTrackBar";
+            this.fontSizeTrackBar.Size = new System.Drawing.Size(318, 45);
+            this.fontSizeTrackBar.TabIndex = 103;
+            this.fontSizeTrackBar.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
+            this.fontSizeTrackBar.Value = 11;
+            this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 745);
+            this.Controls.Add(this.fontSizeTrackBar);
             this.Controls.Add(this.powerAndToughnessPictureBox);
             this.Controls.Add(this.cardTextRichTextBox);
             this.Controls.Add(this.subtype3TextBox);
@@ -580,6 +596,7 @@ partial class MainForm
             this.newCardTabPage.ResumeLayout(false);
             this.newCardTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -628,4 +645,5 @@ partial class MainForm
     private RichTextBox cardTextRichTextBox;
     private PictureBox powerAndToughnessPictureBox;
     private TextBox cardTextBox;
+    private TrackBar fontSizeTrackBar;
 }

@@ -339,7 +339,7 @@ public partial class MainForm : Form
         this.Cursor = Cursors.Default;
 
         var cardTextFontFamily = Fonts.GetFontFamily("MPlantin");
-        using var cardTextFont = new Font(cardTextFontFamily, 10, FontStyle.Regular);
+        using var cardTextFont = new Font(cardTextFontFamily, 11, FontStyle.Regular);
         this.cardTextRichTextBox.Font = cardTextFont;
 
         this.cardNameTextBox.Text = string.Empty;
@@ -467,5 +467,14 @@ public partial class MainForm : Form
         proc.StartInfo.UseShellExecute = true;
         proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
         proc.Start();
+    }
+
+    void FontSizeTrackBar_Scroll(object sender, EventArgs e)
+    {
+        this.cardTextRichTextBox.SelectionStart = 0;
+        this.cardTextRichTextBox.SelectionLength = this.cardTextRichTextBox.Text.Length;
+        this.cardTextRichTextBox.SelectionFont = new Font(
+            this.cardTextRichTextBox.Font.FontFamily,
+            this.fontSizeTrackBar.Value);
     }
 }
