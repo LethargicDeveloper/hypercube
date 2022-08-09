@@ -1,5 +1,6 @@
 using Hypercube.Scryfall;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -270,7 +271,8 @@ public partial class MainForm : Form
             {
                 symbol = false;
                 var filename = this.cardSymbolProvider.GetCardSymbolImagePath($"{{{symbolChars}}}");
-                var bmp = new Bitmap(filename);
+                Bitmap original = (Bitmap)Bitmap.FromFile(filename);
+                Bitmap bmp = original.RemoveTransparency();
                 var hex = bmp.ToMetafileHexString();
 
                 var picw = (int)Math.Round((bmp.Width / this.dpiX) * 2540);
@@ -278,7 +280,7 @@ public partial class MainForm : Form
                 var picwgoal = (int)Math.Round((bmp.Width / this.dpiX) * 1440);
                 var pichgoal = (int)Math.Round((bmp.Height / this.dpiY) * 1440);
 
-                sb.Append($@"\pvpg{{\pict\wmetafile8\picw{picw}\pich{pich}\picwgoal{picwgoal}\pichgoal{pichgoal} {hex}}} ");
+                sb.Append($@"\pvpg{{\pict\wmetafile8\picw{picw}\pich{pich}\picwgoal{picwgoal}\pichgoal{pichgoal} {hex}}}");
                 symbolChars = string.Empty;
             }
             else if (symbol)

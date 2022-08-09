@@ -58,4 +58,13 @@ public static class BitmapExtensions
 
         return hex;
     }
+
+    public static Bitmap RemoveTransparency(this Bitmap image)
+    {
+        var tmp = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
+        var g = Graphics.FromImage(tmp);
+        g.Clear(Color.FromArgb(255, 242, 240, 241));
+        g.DrawImage(image, Point.Empty);
+        return tmp;
+    }
 }
