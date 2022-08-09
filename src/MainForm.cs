@@ -79,6 +79,7 @@ public partial class MainForm : Form
         CanGenerateCard();
 
         this.cardPictureBox.Refresh();
+        CardTextBox_TextChanged(sender, e);
     }
 
     void ManaCostTextBox_TextChanged(object sender, EventArgs e)
@@ -263,14 +264,15 @@ public partial class MainForm : Form
         {
             var @char = text[i];
 
-            if (@char == '{')
+            if (@char == '{' && text.IndexOf('}', i) > -1)
             {
-                symbol = true;
+                symbol = text.IndexOf('}', i) > -1;
             }
             else if (symbol && @char == '}')
             {
                 symbol = false;
                 var filename = this.cardSymbolProvider.GetCardSymbolImagePath($"{{{symbolChars}}}");
+                if (string.IsNullOrEmpty(filename)) continue;
                 Bitmap original = (Bitmap)Bitmap.FromFile(filename);
                 Bitmap bmp = original.RemoveTransparency();
                 var hex = bmp.ToMetafileHexString();
@@ -387,8 +389,6 @@ public partial class MainForm : Form
         this.frameComboBox.Items.AddRange(frames.ToArray());
         this.frameComboBox.EndUpdate();
         this.frameComboBox.Text = Frames.GetFrameForCard(card).Description;
-
-        this.cardNameTextBox.Text = card.Name;
 
         var supertypes = new[] { "" }.Concat(CardTypes.Supertypes).ToArray();
         this.supertype1ComboBox.BeginUpdate();

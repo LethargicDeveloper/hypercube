@@ -532,6 +532,7 @@ partial class MainForm
             // 
             // fontSizeTrackBar
             // 
+            this.fontSizeTrackBar.LargeChange = 1;
             this.fontSizeTrackBar.Location = new System.Drawing.Point(486, 320);
             this.fontSizeTrackBar.Maximum = 15;
             this.fontSizeTrackBar.Minimum = 8;
