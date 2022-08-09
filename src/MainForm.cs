@@ -2,6 +2,7 @@ using Hypercube.Scryfall;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace Hypercube;
 
@@ -15,6 +16,9 @@ public partial class MainForm : Form
     {
         Dock = DockStyle.Fill
     };
+
+    readonly float dpiX;
+    readonly float dpiY;
 
     public MainForm(
         FormFactory form,
@@ -30,6 +34,10 @@ public partial class MainForm : Form
         this.cardSymbolProvider = cardSymbolProvider;
         this.Controls.Add(this.panel);
         this.panel.BringToFront();
+
+        using var graphics = this.CreateGraphics();
+        this.dpiX = graphics.DpiX;
+        this.dpiY = graphics.DpiY;
 
         SetControlsEnabled(false);
     }
@@ -240,18 +248,42 @@ public partial class MainForm : Form
         if (string.IsNullOrEmpty(this.cardTextRichTextBox.Text))
             this.cardTextRichTextBox.Clear();
 
+        var text = this.cardTextBox.Text
+            .Replace("~", this.cardNameTextBox.Text);
+
         var sb = new StringBuilder();
         sb.Append(@"{\rtf1\ansi\deff0");
 
         bool italic = false;
         bool bold = false;
-        for (int i = 0; i < this.cardTextBox.Text.Length; ++i)
+        bool symbol = false;
+        string symbolChars = string.Empty;
+        for (int i = 0; i < text.Length; ++i)
         {
-            var @char = this.cardTextBox.Text[i];
+            var @char = text[i];
 
-            if ("\\{}".Contains(@char))
+            if (@char == '{')
             {
-                sb.Append($@"\{@char}");
+                symbol = true;
+            }
+            else if (symbol && @char == '}')
+            {
+                symbol = false;
+                var filename = this.cardSymbolProvider.GetCardSymbolImagePath($"{{{symbolChars}}}");
+                var bmp = new Bitmap(filename);
+                var hex = bmp.ToMetafileHexString();
+
+                var picw = (int)Math.Round((bmp.Width / this.dpiX) * 2540);
+                var pich = (int)Math.Round((bmp.Height / this.dpiY) * 2540);
+                var picwgoal = (int)Math.Round((bmp.Width / this.dpiX) * 1440);
+                var pichgoal = (int)Math.Round((bmp.Height / this.dpiY) * 1440);
+
+                sb.Append($@"\pvpg{{\pict\wmetafile8\picw{picw}\pich{pich}\picwgoal{picwgoal}\pichgoal{pichgoal} {hex}}} ");
+                symbolChars = string.Empty;
+            }
+            else if (symbol)
+            {
+                symbolChars += @char;
             }
             else if (@char == '_')
             {
@@ -272,6 +304,10 @@ public partial class MainForm : Form
                 sb.Append(@"\par ");
             }
             else if (@char == '\r') { }
+            else if ("\\{}".Contains(@char))
+            {
+                sb.Append($@"\{@char}");
+            }
             else
             {
                 sb.Append(@char);

@@ -6,6 +6,8 @@ namespace Hypercube;
 
 public class CardSymbolProvider
 {
+    const string Extension = ".png";
+
     readonly ScryfallClient client;
     Dictionary<string, CardSymbol> cardSymbols = new();
 
@@ -27,7 +29,7 @@ public class CardSymbolProvider
                 filename = string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
 
                 var path = $".\\img\\symbols\\{filename}";
-                if (!File.Exists($"{path}.png"))
+                if (!File.Exists($"{path}{Extension}"))
                 {
                     var svg = this.client.GetSymbol(symbol.SvgUri);
                     File.WriteAllText($"{path}.svg", svg);
@@ -35,15 +37,25 @@ public class CardSymbolProvider
                     doc.Width = 15;
                     doc.Height = 15;
                     var img = doc.Draw();
-                    img?.Save($"{path}.png");
+                    img?.Save($"{path}{Extension}");
                     File.Delete($"{path}.svg");
+
+                    while (!File.Exists($"{path}{Extension}"))
+                    {
+                        Thread.Sleep(10);
+                    }
                 }
 
-                imagePaths.Add($"{path}.png");
+                imagePaths.Add($"{path}{Extension}");
             }
         }
 
         return imagePaths;
+    }
+
+    public string GetCardSymbolImagePath(string text)
+    {
+        return GetCardSymbolImagePaths(text).FirstOrDefault() ?? string.Empty;
     }
 
     void LoadSymbols()
