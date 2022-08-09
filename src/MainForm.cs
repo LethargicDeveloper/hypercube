@@ -1,5 +1,6 @@
 using Hypercube.Scryfall;
 using System.Diagnostics;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Hypercube;
@@ -234,6 +235,54 @@ public partial class MainForm : Form
         }
     }
 
+    void CardTextBox_TextChanged(object sender, EventArgs e)
+    {
+        if (string.IsNullOrEmpty(this.cardTextRichTextBox.Text))
+            this.cardTextRichTextBox.Clear();
+
+        var sb = new StringBuilder();
+        sb.Append(@"{\rtf1\ansi\deff0");
+
+        bool italic = false;
+        bool bold = false;
+        for (int i = 0; i < this.cardTextBox.Text.Length; ++i)
+        {
+            var @char = this.cardTextBox.Text[i];
+
+            if ("\\{}".Contains(@char))
+            {
+                sb.Append($@"\{@char}");
+            }
+            else if (@char == '_')
+            {
+                sb.Append(@"\i");
+                if (italic) sb.Append(@"0");
+                sb.Append(" ");
+                italic = !italic;
+            }
+            else if (@char == '*')
+            {
+                sb.Append(@"\b");
+                if (bold) sb.Append(@"0");
+                sb.Append(" ");
+                bold = !bold;
+            }
+            else if (@char == '\n')
+            {
+                sb.Append(@"\par ");
+            }
+            else if (@char == '\r') { }
+            else
+            {
+                sb.Append(@char);
+            }
+        }
+
+        sb.Append("}");
+
+        this.cardTextRichTextBox.Rtf = sb.ToString();
+    }
+
     void SetControlsEnabled(bool enabled)
     {
         foreach (Control control in this.Controls)
@@ -250,6 +299,10 @@ public partial class MainForm : Form
         this.Cursor = Cursors.WaitCursor;
         var cards = this.scryfallClient.GetCardsForCube(cube)?.ToList();
         this.Cursor = Cursors.Default;
+
+        var cardTextFontFamily = Fonts.GetFontFamily("MPlantin");
+        using var cardTextFont = new Font(cardTextFontFamily, 10, FontStyle.Regular);
+        this.cardTextRichTextBox.Font = cardTextFont;
 
         this.cardNameTextBox.Text = string.Empty;
         this.manaCostTextBox.Text = string.Empty;

@@ -53,7 +53,6 @@ partial class MainForm
             this.supertype1ComboBox = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.cardPictureBox = new System.Windows.Forms.PictureBox();
-            this.cardTextBox = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.powerTextBox = new System.Windows.Forms.TextBox();
             this.toughnessTextBox = new System.Windows.Forms.TextBox();
@@ -61,6 +60,7 @@ partial class MainForm
             this.hasPowerToughnessCheckBox = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.newCardTabPage = new System.Windows.Forms.TabPage();
+            this.cardTextBox = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.supertype2ComboBox = new System.Windows.Forms.ComboBox();
             this.type2ComboBox = new System.Windows.Forms.ComboBox();
@@ -333,15 +333,6 @@ partial class MainForm
             this.cardPictureBox.TabStop = false;
             this.cardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.CardPictureBox_Paint);
             // 
-            // cardTextBox
-            // 
-            this.cardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardTextBox.Location = new System.Drawing.Point(0, 0);
-            this.cardTextBox.Multiline = true;
-            this.cardTextBox.Name = "cardTextBox";
-            this.cardTextBox.Size = new System.Drawing.Size(310, 224);
-            this.cardTextBox.TabIndex = 27;
-            // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -415,6 +406,16 @@ partial class MainForm
             this.newCardTabPage.TabIndex = 4;
             this.newCardTabPage.Text = "New Card";
             this.newCardTabPage.UseVisualStyleBackColor = true;
+            // 
+            // cardTextBox
+            // 
+            this.cardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardTextBox.Location = new System.Drawing.Point(0, 0);
+            this.cardTextBox.Multiline = true;
+            this.cardTextBox.Name = "cardTextBox";
+            this.cardTextBox.Size = new System.Drawing.Size(310, 224);
+            this.cardTextBox.TabIndex = 27;
+            this.cardTextBox.TextChanged += new System.EventHandler(this.CardTextBox_TextChanged);
             // 
             // flowLayoutPanel1
             // 
@@ -507,6 +508,8 @@ partial class MainForm
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 301);
             this.cardTextRichTextBox.Name = "cardTextRichTextBox";
+            this.cardTextRichTextBox.ReadOnly = true;
+            this.cardTextRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.cardTextRichTextBox.Size = new System.Drawing.Size(271, 114);
             this.cardTextRichTextBox.TabIndex = 101;
             this.cardTextRichTextBox.Text = "";
@@ -608,7 +611,6 @@ partial class MainForm
     private ComboBox supertype1ComboBox;
     private Label label9;
     private PictureBox cardPictureBox;
-    private TextBox cardTextBox;
     private Label label10;
     private TextBox powerTextBox;
     private TextBox toughnessTextBox;
@@ -625,4 +627,5 @@ partial class MainForm
     private TextBox subtype3TextBox;
     private RichTextBox cardTextRichTextBox;
     private PictureBox powerAndToughnessPictureBox;
+    private TextBox cardTextBox;
 }
