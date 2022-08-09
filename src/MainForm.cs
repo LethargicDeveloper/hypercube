@@ -321,6 +321,17 @@ public partial class MainForm : Form
         this.cardTextRichTextBox.Rtf = sb.ToString();
     }
 
+    void FontSizeTrackBar_Scroll(object sender, EventArgs e)
+    {
+        this.cardTextRichTextBox.SelectionStart = 0;
+        this.cardTextRichTextBox.SelectionLength = this.cardTextRichTextBox.Text.Length;
+        this.cardTextRichTextBox.SelectionFont = new Font(
+            this.cardTextRichTextBox.Font.FontFamily,
+            this.fontSizeTrackBar.Value);
+
+        this.cardTextRichTextBox.DeselectAll();
+    }
+
     void SetControlsEnabled(bool enabled)
     {
         foreach (Control control in this.Controls)
@@ -467,14 +478,5 @@ public partial class MainForm : Form
         proc.StartInfo.UseShellExecute = true;
         proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
         proc.Start();
-    }
-
-    void FontSizeTrackBar_Scroll(object sender, EventArgs e)
-    {
-        this.cardTextRichTextBox.SelectionStart = 0;
-        this.cardTextRichTextBox.SelectionLength = this.cardTextRichTextBox.Text.Length;
-        this.cardTextRichTextBox.SelectionFont = new Font(
-            this.cardTextRichTextBox.Font.FontFamily,
-            this.fontSizeTrackBar.Value);
     }
 }
