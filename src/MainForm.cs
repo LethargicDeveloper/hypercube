@@ -395,31 +395,10 @@ public partial class MainForm : Form
             };
 
             cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+            cardImageUserControl.LoadCompleted += CardImageUserControl_LoadCompleted;
             cardImageUserControl.Selected = (selectedImage != null && i == 0);
 
             this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
-        }
-    }
-
-    void CardImageUserControl_SelectedChanged(object? sender, EventArgs e)
-    {
-        var control = sender as CardImageUserControl;
-        if (control == null) return;
-
-        foreach (CardImageUserControl cardImageUserControl in this.cardImageFlowLayoutPanel.Controls)
-        {
-            if (cardImageUserControl != control)
-            {
-                cardImageUserControl.SelectedChanged -= CardImageUserControl_SelectedChanged;
-                cardImageUserControl.Selected = false;
-                cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
-            }
-        }
-
-        if (control.Selected)
-        {
-            this.selectedImage = control;
-            this.cardPictureBox.Refresh();
         }
     }
 
@@ -452,6 +431,7 @@ public partial class MainForm : Form
             };
 
             cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+            cardImageUserControl.LoadCompleted += CardImageUserControl_LoadCompleted;
 
             if (this.selectedImage == null)
             {
@@ -460,6 +440,39 @@ public partial class MainForm : Form
             }
 
             this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
+        }
+    }
+
+    void CardImageUserControl_SelectedChanged(object? sender, EventArgs e)
+    {
+        var control = sender as CardImageUserControl;
+        if (control == null) return;
+
+        foreach (CardImageUserControl cardImageUserControl in this.cardImageFlowLayoutPanel.Controls)
+        {
+            if (cardImageUserControl != control)
+            {
+                cardImageUserControl.SelectedChanged -= CardImageUserControl_SelectedChanged;
+                cardImageUserControl.Selected = false;
+                cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+            }
+        }
+
+        if (control.Selected)
+        {
+            this.selectedImage = control;
+            this.cardPictureBox.Refresh();
+        }
+    }
+
+    void CardImageUserControl_LoadCompleted(object? sender, EventArgs e)
+    {
+        var control = sender as CardImageUserControl;
+        if (control == null) return;
+
+        if (control.Selected)
+        {
+            this.cardPictureBox.Refresh();
         }
     }
 

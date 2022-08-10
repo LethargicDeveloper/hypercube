@@ -12,6 +12,7 @@ public partial class CardImageUserControl : UserControl
     }
 
     public event EventHandler? SelectedChanged;
+    public event EventHandler? LoadCompleted;
 
     public bool Selected
     {
@@ -46,18 +47,24 @@ public partial class CardImageUserControl : UserControl
         get => this.pictureBox.Image;
     }
 
-    private void CardImage_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    protected virtual void OnSelectedChanged(EventArgs e)
+    {
+        var handler = SelectedChanged;
+        handler?.Invoke(this, e);
+    }
+
+    protected virtual void OnLoadCompleted(EventArgs e)
+    {
+        var handler = LoadCompleted;
+        handler?.Invoke(this, e);
+    }
+
+    void CardImage_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(CardImage.ArtUrl))
         {
             this.pictureBox.ImageLocation = this.cardImage?.ArtUrl;
         }
-    }
-
-    protected virtual void OnSelectedChanged(EventArgs e)
-    {
-        var handler = SelectedChanged;
-        handler?.Invoke(this, e);
     }
 
     void CardImageUserControl_Click(object sender, EventArgs e)
@@ -77,5 +84,10 @@ public partial class CardImageUserControl : UserControl
     void RadioButton_CheckedChanged(object sender, EventArgs e)
     {
         OnSelectedChanged(e);
+    }
+
+    void PictureBox_LoadCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+    {
+        OnLoadCompleted(e);
     }
 }
