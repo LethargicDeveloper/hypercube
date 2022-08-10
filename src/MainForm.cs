@@ -396,7 +396,12 @@ public partial class MainForm : Form
 
             cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
             cardImageUserControl.LoadCompleted += CardImageUserControl_LoadCompleted;
-            cardImageUserControl.Selected = (selectedImage != null && i == 0);
+            
+            if (this.selectedImage == null)
+            {
+                this.selectedImage = cardImageUserControl;
+                cardImageUserControl.Selected = true;
+            }
 
             this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
         }
