@@ -1,9 +1,8 @@
 using Hypercube.Scryfall;
+using Hypercube.UrzasAI;
 using System.Diagnostics;
-using System.Drawing.Imaging;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace Hypercube;
 
@@ -12,6 +11,7 @@ public partial class MainForm : Form
     readonly FormFactory form;
     readonly CubeManager cubeManager;
     readonly ScryfallClient scryfallClient;
+    readonly UrzasAIClient urzasClient;
     readonly CardSymbolProvider cardSymbolProvider;
     readonly Panel panel = new()
     {
@@ -25,6 +25,7 @@ public partial class MainForm : Form
         FormFactory form,
         CubeManager cubeManager,
         ScryfallClient scryfallClient,
+        UrzasAIClient urzasClient,
         CardSymbolProvider cardSymbolProvider)
     {
         InitializeComponent();
@@ -32,6 +33,7 @@ public partial class MainForm : Form
         this.form = form;
         this.cubeManager = cubeManager;
         this.scryfallClient = scryfallClient;
+        this.urzasClient = urzasClient;
         this.cardSymbolProvider = cardSymbolProvider;
         this.Controls.Add(this.panel);
         this.panel.BringToFront();
@@ -158,19 +160,16 @@ public partial class MainForm : Form
 
     void HasPowerToughnessCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        //this.cardPictureBox.Refresh();
-        this.powerAndToughnessPictureBox.Visible = this.hasPowerToughnessCheckBox.Checked;
+        this.powerAndToughnessPictureBox.Visible = this.cardTextUserControl.HasPowerAndToughness;
     }
 
     void PowerTextBox_TextChanged(object sender, EventArgs e)
     {
-        //this.cardPictureBox.Refresh();
         this.powerAndToughnessPictureBox.Refresh();
     }
 
     void ToughnessTextBox_TextChanged(object sender, EventArgs e)
     {
-        //this.cardPictureBox.Refresh();
         this.powerAndToughnessPictureBox.Refresh();
     }
 
@@ -228,19 +227,21 @@ public partial class MainForm : Form
         var beleren = Fonts.GetFontFamily("Beleren");
         using var belerenFont = new Font(beleren, 10);
 
-        if (this.hasPowerToughnessCheckBox.Checked)
+        if (this.cardTextUserControl.HasPowerAndToughness)
         {
-            var powerTopOffset = this.powerTextBox.Text.Length <= 2 ? 0 : 2;
-            var powerLeftOffset = (this.powerTextBox.Text.Length <= 2 ? 11 : 5) *
-                (this.powerTextBox.Text.Length - 1);
-            var powerFontSize = this.powerTextBox.Text.Length <= 2 ? 14 : 10;
+            var power = this.cardTextUserControl.Power;
+            var powerTopOffset = power.Length <= 2 ? 0 : 2;
+            var powerLeftOffset = (power.Length <= 2 ? 11 : 5) *
+                (power.Length - 1);
+            var powerFontSize = power.Length <= 2 ? 14 : 10;
             using var powerFont = new Font(beleren, powerFontSize);
-            e.Graphics.DrawString(this.powerTextBox.Text, powerFont, Brushes.Black,
+            e.Graphics.DrawString(power, powerFont, Brushes.Black,
                 new Point(16 - powerLeftOffset, 6 + powerTopOffset));
 
-            var toughnessTopOffset = this.toughnessTextBox.Text.Length <= 2 ? 0 : 2;
-            using var toughnessFont = new Font(beleren, this.toughnessTextBox.Text.Length <= 2 ? 14 : 10);
-            e.Graphics.DrawString(this.toughnessTextBox.Text, toughnessFont, Brushes.Black,
+            var toughness = this.cardTextUserControl.Toughness;
+            var toughnessTopOffset = toughness.Length <= 2 ? 0 : 2;
+            using var toughnessFont = new Font(beleren, toughness.Length <= 2 ? 14 : 10);
+            e.Graphics.DrawString(toughness, toughnessFont, Brushes.Black,
                 new Point(36, 6 + toughnessTopOffset));
         }
     }
@@ -250,7 +251,7 @@ public partial class MainForm : Form
         if (string.IsNullOrEmpty(this.cardTextRichTextBox.Text))
             this.cardTextRichTextBox.Clear();
 
-        var text = this.cardTextBox.Text
+        var text = this.cardTextUserControl.CardText
             .Replace("~", this.cardNameTextBox.Text);
 
         var sb = new StringBuilder();
@@ -334,15 +335,120 @@ public partial class MainForm : Form
         this.cardTextRichTextBox.DeselectAll();
     }
 
-    void SetControlsEnabled(bool enabled)
+    void ManaCostHelpButton_Click(object sender, EventArgs e)
     {
-        foreach (Control control in this.Controls)
+        Process proc = new Process();
+        proc.StartInfo.UseShellExecute = true;
+        proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
+        proc.Start();
+    }
+
+    async void GenerateButton_Click(object sender, EventArgs e)
+    {
+        (CardText, CardImage)[]? results;
+
+        try
         {
-            if (control is Label)
+            SetControlsEnabled(false);
+            Application.UseWaitCursor = true;
+
+            var tasks = Enumerable
+                .Range(0, this.cardTextTabControl.TabCount == 1 ? 4 : 1)
+                .Select(_ => GenerateCard());
+
+            results = await Task.WhenAll(tasks);
+        }
+        finally
+        {
+            Application.UseWaitCursor = false;
+            SetControlsEnabled(true);
+        }
+
+        for (int i = 0; i < results.Length; ++i)
+        {
+            var (cardText, cardImage) = results[i];
+
+            var cardTextUserControl = new CardTextUserControl
             {
-                control.Enabled = enabled;
+                CardText = $"{cardText.Text.ReplaceLineEndings()}\r\n\r\n_{cardText.FlavorText}_",
+                HasPowerAndToughness = !string.IsNullOrEmpty(cardText.Power) || !string.IsNullOrEmpty(cardText.Toughness),
+                Power = cardText.Power,
+                Toughness = cardText.Toughness,
+                Readonly = true
+            };
+
+            var tabPage = new TabPage($"Card {this.cardTextTabControl.TabCount}");
+            tabPage.Controls.Add(cardTextUserControl);
+
+            this.cardTextTabControl.TabPages.Add(tabPage);
+
+            var cardImageUserControl = new CardImageUserControl
+            {
+                CardImage = cardImage,
+                Width = 150,
+                Height = 150
+            };
+
+            cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+            cardImageUserControl.Selected = i == 0;
+
+            this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
+        }
+    }
+
+    void CardImageUserControl_SelectedChanged(object? sender, EventArgs e)
+    {
+        var control = sender as CardImageUserControl;
+        if (control == null) return;
+
+        foreach (CardImageUserControl cardImageUserControl in this.cardImageFlowLayoutPanel.Controls)
+        {
+            if (cardImageUserControl != control)
+            {
+                cardImageUserControl.Selected = false;
             }
         }
+    }
+
+    async Task<(CardText, CardImage)> GenerateCard()
+    {
+        var types = new List<string>
+        {
+            this.supertype1ComboBox.Text,
+            this.supertype2ComboBox.Text,
+            this.type1ComboBox.Text,
+            this.type2ComboBox.Text,
+            this.type3ComboBox.Text
+        };
+
+        var typesString = string.Join(" ", types.Where(_ => !string.IsNullOrEmpty(_))).Trim();
+
+        var subtypes = new List<string>
+        {
+            this.subtype1TextBox.Text,
+            this.subtype2TextBox.Text,
+            this.subtype3TextBox.Text
+        };
+
+        var subtypesString = string.Join(" ", subtypes.Where(_ => !string.IsNullOrEmpty(_))).Trim();
+
+        CardText cardText = new CardText();
+        CardImage cardImage = new CardImage();
+
+        cardText = await this.urzasClient.GenerateCardTextAsync(new UrzasAIRequest
+        {
+            Presets = new CardText
+            {
+                Name = this.cardNameTextBox.Text,
+                ManaCost = this.manaCostTextBox.Text,
+                Types = typesString,
+                Subtypes = subtypesString,
+            }
+        });
+
+        cardImage = await this.urzasClient.GenerateImageAsync(cardText);
+
+        return (cardText, cardImage);
     }
 
     void LoadCube(Cube cube)
@@ -368,9 +474,12 @@ public partial class MainForm : Form
         this.subtype3TextBox.Text = string.Empty;
         this.rarityComboBox.Text = string.Empty;
         this.cardNameTextBox.Text = string.Empty;
-        this.hasPowerToughnessCheckBox.Checked = false;
-        this.powerTextBox.Text = string.Empty;
-        this.toughnessTextBox.Text = string.Empty;
+        this.cardTextTabControl.SelectedIndex = 0;
+        this.cardTextUserControl.CardText = string.Empty;
+        this.cardTextUserControl.HasPowerAndToughness = false;
+        this.cardTextUserControl.Power = string.Empty;
+        this.cardTextUserControl.Toughness = string.Empty;
+        ClearTabs();
 
         if (cards == null || cards.Count == 0)
         {
@@ -378,8 +487,6 @@ public partial class MainForm : Form
         }
 
         var card = cards[0];
-
-        this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
 
         this.manaCostTextBox.Text = card.ManaCost;
 
@@ -417,6 +524,8 @@ public partial class MainForm : Form
         this.type3ComboBox.Items.AddRange(cardtypes);
         this.type3ComboBox.EndUpdate();
 
+        this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
+
         var allCardTypes = card.TypeLine
             .Replace(" — ", " ")
             .Split(" ", StringSplitOptions.RemoveEmptyEntries);
@@ -452,12 +561,12 @@ public partial class MainForm : Form
         }
 
         this.rarityComboBox.Text = Rarities.GetRarity(card.Rarity);
-        this.hasPowerToughnessCheckBox.Checked =
+        this.cardTextUserControl.HasPowerAndToughness =
             !string.IsNullOrEmpty(card.Power) ||
             !string.IsNullOrEmpty(card.Toughness);
 
-        this.powerTextBox.Text = card.Power;
-        this.toughnessTextBox.Text = card.Toughness;
+        this.cardTextUserControl.Power = card.Power;
+        this.cardTextUserControl.Toughness = card.Power;
 
         SetControlsEnabled(true);
         this.panel.Hide();
@@ -472,11 +581,22 @@ public partial class MainForm : Form
             !string.IsNullOrEmpty(this.rarityComboBox.Text);
     }
 
-    void ManaCostHelpButton_Click(object sender, EventArgs e)
+    void ClearTabs()
     {
-        Process proc = new Process();
-        proc.StartInfo.UseShellExecute = true;
-        proc.StartInfo.FileName = "https://www.scryfall.com/docs/api/colors";
-        proc.Start();
+        for (int i = 1; i < this.cardTextTabControl.TabPages.Count - 1; ++i)
+        {
+            this.cardTextTabControl.TabPages.RemoveAt(1);
+        }
+    }
+
+    void SetControlsEnabled(bool enabled)
+    {
+        foreach (Control control in this.Controls)
+        {
+            if (control is not MenuStrip)
+            {
+                control.Enabled = enabled;
+            }
+        }
     }
 }

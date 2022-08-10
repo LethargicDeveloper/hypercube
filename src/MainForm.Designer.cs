@@ -54,14 +54,10 @@ partial class MainForm
             this.label9 = new System.Windows.Forms.Label();
             this.cardPictureBox = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.powerTextBox = new System.Windows.Forms.TextBox();
-            this.toughnessTextBox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.hasPowerToughnessCheckBox = new System.Windows.Forms.CheckBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.cardTextTabControl = new System.Windows.Forms.TabControl();
             this.newCardTabPage = new System.Windows.Forms.TabPage();
-            this.cardTextBox = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.cardTextUserControl = new Hypercube.CardTextUserControl();
+            this.cardImageFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.supertype2ComboBox = new System.Windows.Forms.ComboBox();
             this.type2ComboBox = new System.Windows.Forms.ComboBox();
             this.type3ComboBox = new System.Windows.Forms.ComboBox();
@@ -74,7 +70,7 @@ partial class MainForm
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
-            this.tabControl1.SuspendLayout();
+            this.cardTextTabControl.SuspendLayout();
             this.newCardTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
@@ -134,7 +130,7 @@ partial class MainForm
             this.expansionCardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.expansionCardPictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.expansionCardPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.expansionCardPictureBox.Location = new System.Drawing.Point(23, 53);
+            this.expansionCardPictureBox.Location = new System.Drawing.Point(23, 94);
             this.expansionCardPictureBox.Name = "expansionCardPictureBox";
             this.expansionCardPictureBox.Size = new System.Drawing.Size(328, 394);
             this.expansionCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -146,7 +142,7 @@ partial class MainForm
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(374, 70);
+            this.label3.Location = new System.Drawing.Point(374, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 21);
             this.label3.TabIndex = 6;
@@ -157,7 +153,7 @@ partial class MainForm
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(379, 107);
+            this.label4.Location = new System.Drawing.Point(379, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 21);
             this.label4.TabIndex = 8;
@@ -166,7 +162,7 @@ partial class MainForm
             // cardNameTextBox
             // 
             this.cardNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardNameTextBox.Location = new System.Drawing.Point(486, 70);
+            this.cardNameTextBox.Location = new System.Drawing.Point(486, 111);
             this.cardNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cardNameTextBox.Name = "cardNameTextBox";
             this.cardNameTextBox.Size = new System.Drawing.Size(318, 23);
@@ -176,7 +172,7 @@ partial class MainForm
             // manaCostTextBox
             // 
             this.manaCostTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.manaCostTextBox.Location = new System.Drawing.Point(486, 104);
+            this.manaCostTextBox.Location = new System.Drawing.Point(486, 145);
             this.manaCostTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.manaCostTextBox.Name = "manaCostTextBox";
             this.manaCostTextBox.Size = new System.Drawing.Size(288, 23);
@@ -187,7 +183,7 @@ partial class MainForm
             // 
             this.manaCostHelpButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.manaCostHelpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.manaCostHelpButton.Location = new System.Drawing.Point(779, 99);
+            this.manaCostHelpButton.Location = new System.Drawing.Point(779, 140);
             this.manaCostHelpButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.manaCostHelpButton.Name = "manaCostHelpButton";
             this.manaCostHelpButton.Size = new System.Drawing.Size(24, 29);
@@ -203,7 +199,7 @@ partial class MainForm
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(411, 144);
+            this.label5.Location = new System.Drawing.Point(411, 185);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 21);
             this.label5.TabIndex = 10;
@@ -215,7 +211,7 @@ partial class MainForm
             this.frameComboBox.DisplayMember = "Description";
             this.frameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.frameComboBox.FormattingEnabled = true;
-            this.frameComboBox.Location = new System.Drawing.Point(485, 144);
+            this.frameComboBox.Location = new System.Drawing.Point(485, 185);
             this.frameComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.frameComboBox.Name = "frameComboBox";
             this.frameComboBox.Size = new System.Drawing.Size(318, 23);
@@ -228,7 +224,7 @@ partial class MainForm
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(423, 218);
+            this.label6.Location = new System.Drawing.Point(423, 259);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 21);
             this.label6.TabIndex = 15;
@@ -240,7 +236,7 @@ partial class MainForm
             this.type1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.type1ComboBox.FormattingEnabled = true;
-            this.type1ComboBox.Location = new System.Drawing.Point(486, 218);
+            this.type1ComboBox.Location = new System.Drawing.Point(486, 259);
             this.type1ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.type1ComboBox.Name = "type1ComboBox";
             this.type1ComboBox.Size = new System.Drawing.Size(106, 23);
@@ -252,7 +248,7 @@ partial class MainForm
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(396, 255);
+            this.label7.Location = new System.Drawing.Point(396, 296);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(77, 21);
             this.label7.TabIndex = 19;
@@ -263,7 +259,7 @@ partial class MainForm
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(414, 292);
+            this.label8.Location = new System.Drawing.Point(414, 333);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 21);
             this.label8.TabIndex = 23;
@@ -279,7 +275,7 @@ partial class MainForm
             "Uncommon",
             "Rare",
             "Mythic"});
-            this.rarityComboBox.Location = new System.Drawing.Point(486, 292);
+            this.rarityComboBox.Location = new System.Drawing.Point(486, 333);
             this.rarityComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rarityComboBox.Name = "rarityComboBox";
             this.rarityComboBox.Size = new System.Drawing.Size(318, 23);
@@ -290,13 +286,14 @@ partial class MainForm
             // 
             this.generateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.generateButton.Enabled = false;
-            this.generateButton.Location = new System.Drawing.Point(488, 628);
+            this.generateButton.Location = new System.Drawing.Point(489, 739);
             this.generateButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.generateButton.Name = "generateButton";
             this.generateButton.Size = new System.Drawing.Size(318, 77);
             this.generateButton.TabIndex = 100;
             this.generateButton.Text = "&Generate";
             this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.GenerateButton_Click);
             // 
             // supertype1ComboBox
             // 
@@ -304,7 +301,7 @@ partial class MainForm
             this.supertype1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.supertype1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.supertype1ComboBox.FormattingEnabled = true;
-            this.supertype1ComboBox.Location = new System.Drawing.Point(486, 182);
+            this.supertype1ComboBox.Location = new System.Drawing.Point(486, 223);
             this.supertype1ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.supertype1ComboBox.Name = "supertype1ComboBox";
             this.supertype1ComboBox.Size = new System.Drawing.Size(156, 23);
@@ -316,7 +313,7 @@ partial class MainForm
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(381, 182);
+            this.label9.Location = new System.Drawing.Point(381, 223);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(92, 21);
             this.label9.TabIndex = 12;
@@ -327,7 +324,7 @@ partial class MainForm
             this.cardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardPictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.cardPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardPictureBox.Location = new System.Drawing.Point(842, 53);
+            this.cardPictureBox.Location = new System.Drawing.Point(842, 94);
             this.cardPictureBox.Name = "cardPictureBox";
             this.cardPictureBox.Size = new System.Drawing.Size(328, 394);
             this.cardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -340,94 +337,60 @@ partial class MainForm
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(388, 359);
+            this.label10.Location = new System.Drawing.Point(388, 420);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 21);
             this.label10.TabIndex = 25;
             this.label10.Text = "Card Te&xt:";
             // 
-            // powerTextBox
+            // cardTextTabControl
             // 
-            this.powerTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.powerTextBox.Location = new System.Drawing.Point(581, 592);
-            this.powerTextBox.MaxLength = 3;
-            this.powerTextBox.Name = "powerTextBox";
-            this.powerTextBox.Size = new System.Drawing.Size(100, 23);
-            this.powerTextBox.TabIndex = 29;
-            this.powerTextBox.TextChanged += new System.EventHandler(this.PowerTextBox_TextChanged);
-            // 
-            // toughnessTextBox
-            // 
-            this.toughnessTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.toughnessTextBox.Location = new System.Drawing.Point(703, 592);
-            this.toughnessTextBox.MaxLength = 3;
-            this.toughnessTextBox.Name = "toughnessTextBox";
-            this.toughnessTextBox.Size = new System.Drawing.Size(100, 23);
-            this.toughnessTextBox.TabIndex = 30;
-            this.toughnessTextBox.TextChanged += new System.EventHandler(this.ToughnessTextBox_TextChanged);
-            // 
-            // label11
-            // 
-            this.label11.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(687, 595);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(12, 15);
-            this.label11.TabIndex = 25;
-            this.label11.Text = "/";
-            // 
-            // hasPowerToughnessCheckBox
-            // 
-            this.hasPowerToughnessCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.hasPowerToughnessCheckBox.AutoSize = true;
-            this.hasPowerToughnessCheckBox.Location = new System.Drawing.Point(560, 596);
-            this.hasPowerToughnessCheckBox.Name = "hasPowerToughnessCheckBox";
-            this.hasPowerToughnessCheckBox.Size = new System.Drawing.Size(15, 14);
-            this.hasPowerToughnessCheckBox.TabIndex = 28;
-            this.hasPowerToughnessCheckBox.UseVisualStyleBackColor = true;
-            this.hasPowerToughnessCheckBox.CheckedChanged += new System.EventHandler(this.HasPowerToughnessCheckBox_CheckedChanged);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tabControl1.Controls.Add(this.newCardTabPage);
-            this.tabControl1.Location = new System.Drawing.Point(485, 359);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(318, 227);
-            this.tabControl1.TabIndex = 26;
+            this.cardTextTabControl.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cardTextTabControl.Controls.Add(this.newCardTabPage);
+            this.cardTextTabControl.Location = new System.Drawing.Point(486, 420);
+            this.cardTextTabControl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cardTextTabControl.Name = "cardTextTabControl";
+            this.cardTextTabControl.SelectedIndex = 0;
+            this.cardTextTabControl.Size = new System.Drawing.Size(318, 315);
+            this.cardTextTabControl.TabIndex = 26;
             // 
             // newCardTabPage
             // 
-            this.newCardTabPage.Controls.Add(this.cardTextBox);
+            this.newCardTabPage.Controls.Add(this.cardTextUserControl);
             this.newCardTabPage.Location = new System.Drawing.Point(4, 24);
             this.newCardTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.newCardTabPage.Name = "newCardTabPage";
-            this.newCardTabPage.Size = new System.Drawing.Size(310, 199);
+            this.newCardTabPage.Size = new System.Drawing.Size(310, 287);
             this.newCardTabPage.TabIndex = 4;
             this.newCardTabPage.Text = "New Card";
             this.newCardTabPage.UseVisualStyleBackColor = true;
             // 
-            // cardTextBox
+            // cardTextUserControl
             // 
-            this.cardTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cardTextBox.Location = new System.Drawing.Point(0, 0);
-            this.cardTextBox.Multiline = true;
-            this.cardTextBox.Name = "cardTextBox";
-            this.cardTextBox.Size = new System.Drawing.Size(310, 199);
-            this.cardTextBox.TabIndex = 27;
-            this.cardTextBox.TextChanged += new System.EventHandler(this.CardTextBox_TextChanged);
+            this.cardTextUserControl.CardText = "";
+            this.cardTextUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cardTextUserControl.HasPowerAndToughness = false;
+            this.cardTextUserControl.Location = new System.Drawing.Point(0, 0);
+            this.cardTextUserControl.Name = "cardTextUserControl";
+            this.cardTextUserControl.Power = "";
+            this.cardTextUserControl.Readonly = false;
+            this.cardTextUserControl.Size = new System.Drawing.Size(310, 287);
+            this.cardTextUserControl.TabIndex = 104;
+            this.cardTextUserControl.Toughness = "";
+            this.cardTextUserControl.CardTextChanged += new System.EventHandler(this.CardTextBox_TextChanged);
+            this.cardTextUserControl.HasPowerAndToughnessCheckChanged += new System.EventHandler(this.HasPowerToughnessCheckBox_CheckedChanged);
+            this.cardTextUserControl.PowerTextChanged += new System.EventHandler(this.PowerTextBox_TextChanged);
+            this.cardTextUserControl.ToughnessTextChanged += new System.EventHandler(this.ToughnessTextBox_TextChanged);
             // 
-            // flowLayoutPanel1
+            // cardImageFlowLayoutPanel
             // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(842, 473);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(328, 260);
-            this.flowLayoutPanel1.TabIndex = 31;
+            this.cardImageFlowLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cardImageFlowLayoutPanel.AutoScroll = true;
+            this.cardImageFlowLayoutPanel.Location = new System.Drawing.Point(842, 493);
+            this.cardImageFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cardImageFlowLayoutPanel.Name = "cardImageFlowLayoutPanel";
+            this.cardImageFlowLayoutPanel.Size = new System.Drawing.Size(328, 328);
+            this.cardImageFlowLayoutPanel.TabIndex = 31;
             // 
             // supertype2ComboBox
             // 
@@ -436,7 +399,7 @@ partial class MainForm
             this.supertype2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.supertype2ComboBox.Enabled = false;
             this.supertype2ComboBox.FormattingEnabled = true;
-            this.supertype2ComboBox.Location = new System.Drawing.Point(648, 182);
+            this.supertype2ComboBox.Location = new System.Drawing.Point(648, 223);
             this.supertype2ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.supertype2ComboBox.Name = "supertype2ComboBox";
             this.supertype2ComboBox.Size = new System.Drawing.Size(156, 23);
@@ -450,7 +413,7 @@ partial class MainForm
             this.type2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.type2ComboBox.Enabled = false;
             this.type2ComboBox.FormattingEnabled = true;
-            this.type2ComboBox.Location = new System.Drawing.Point(592, 218);
+            this.type2ComboBox.Location = new System.Drawing.Point(592, 259);
             this.type2ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.type2ComboBox.Name = "type2ComboBox";
             this.type2ComboBox.Size = new System.Drawing.Size(106, 23);
@@ -464,7 +427,7 @@ partial class MainForm
             this.type3ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.type3ComboBox.Enabled = false;
             this.type3ComboBox.FormattingEnabled = true;
-            this.type3ComboBox.Location = new System.Drawing.Point(698, 218);
+            this.type3ComboBox.Location = new System.Drawing.Point(698, 259);
             this.type3ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.type3ComboBox.Name = "type3ComboBox";
             this.type3ComboBox.Size = new System.Drawing.Size(106, 23);
@@ -474,7 +437,7 @@ partial class MainForm
             // subtype1TextBox
             // 
             this.subtype1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.subtype1TextBox.Location = new System.Drawing.Point(486, 258);
+            this.subtype1TextBox.Location = new System.Drawing.Point(486, 299);
             this.subtype1TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subtype1TextBox.Name = "subtype1TextBox";
             this.subtype1TextBox.Size = new System.Drawing.Size(106, 23);
@@ -485,7 +448,7 @@ partial class MainForm
             // 
             this.subtype2TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.subtype2TextBox.Enabled = false;
-            this.subtype2TextBox.Location = new System.Drawing.Point(592, 258);
+            this.subtype2TextBox.Location = new System.Drawing.Point(592, 299);
             this.subtype2TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subtype2TextBox.Name = "subtype2TextBox";
             this.subtype2TextBox.Size = new System.Drawing.Size(106, 23);
@@ -496,7 +459,7 @@ partial class MainForm
             // 
             this.subtype3TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.subtype3TextBox.Enabled = false;
-            this.subtype3TextBox.Location = new System.Drawing.Point(698, 258);
+            this.subtype3TextBox.Location = new System.Drawing.Point(698, 299);
             this.subtype3TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subtype3TextBox.Name = "subtype3TextBox";
             this.subtype3TextBox.Size = new System.Drawing.Size(106, 23);
@@ -509,7 +472,7 @@ partial class MainForm
             this.cardTextRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(237)))), ((int)(((byte)(235)))));
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cardTextRichTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 301);
+            this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 342);
             this.cardTextRichTextBox.Name = "cardTextRichTextBox";
             this.cardTextRichTextBox.ReadOnly = true;
             this.cardTextRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -523,7 +486,7 @@ partial class MainForm
             this.powerAndToughnessPictureBox.BackColor = System.Drawing.SystemColors.Window;
             this.powerAndToughnessPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.powerAndToughnessPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("powerAndToughnessPictureBox.Image")));
-            this.powerAndToughnessPictureBox.Location = new System.Drawing.Point(1090, 397);
+            this.powerAndToughnessPictureBox.Location = new System.Drawing.Point(1090, 438);
             this.powerAndToughnessPictureBox.Name = "powerAndToughnessPictureBox";
             this.powerAndToughnessPictureBox.Size = new System.Drawing.Size(65, 31);
             this.powerAndToughnessPictureBox.TabIndex = 102;
@@ -532,8 +495,9 @@ partial class MainForm
             // 
             // fontSizeTrackBar
             // 
+            this.fontSizeTrackBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fontSizeTrackBar.LargeChange = 1;
-            this.fontSizeTrackBar.Location = new System.Drawing.Point(486, 320);
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(485, 370);
             this.fontSizeTrackBar.Maximum = 15;
             this.fontSizeTrackBar.Minimum = 8;
             this.fontSizeTrackBar.Name = "fontSizeTrackBar";
@@ -547,7 +511,7 @@ partial class MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1208, 745);
+            this.ClientSize = new System.Drawing.Size(1208, 827);
             this.Controls.Add(this.fontSizeTrackBar);
             this.Controls.Add(this.powerAndToughnessPictureBox);
             this.Controls.Add(this.cardTextRichTextBox);
@@ -557,12 +521,8 @@ partial class MainForm
             this.Controls.Add(this.type3ComboBox);
             this.Controls.Add(this.type2ComboBox);
             this.Controls.Add(this.supertype2ComboBox);
-            this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.hasPowerToughnessCheckBox);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.toughnessTextBox);
-            this.Controls.Add(this.powerTextBox);
+            this.Controls.Add(this.cardImageFlowLayoutPanel);
+            this.Controls.Add(this.cardTextTabControl);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cardPictureBox);
             this.Controls.Add(this.supertype1ComboBox);
@@ -593,9 +553,8 @@ partial class MainForm
             this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).EndInit();
-            this.tabControl1.ResumeLayout(false);
+            this.cardTextTabControl.ResumeLayout(false);
             this.newCardTabPage.ResumeLayout(false);
-            this.newCardTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
             this.ResumeLayout(false);
@@ -630,13 +589,9 @@ partial class MainForm
     private Label label9;
     private PictureBox cardPictureBox;
     private Label label10;
-    private TextBox powerTextBox;
-    private TextBox toughnessTextBox;
-    private Label label11;
-    private CheckBox hasPowerToughnessCheckBox;
-    private TabControl tabControl1;
+    private TabControl cardTextTabControl;
     private TabPage newCardTabPage;
-    private FlowLayoutPanel flowLayoutPanel1;
+    private FlowLayoutPanel cardImageFlowLayoutPanel;
     private ComboBox supertype2ComboBox;
     private ComboBox type2ComboBox;
     private ComboBox type3ComboBox;
@@ -645,6 +600,6 @@ partial class MainForm
     private TextBox subtype3TextBox;
     private RichTextBox cardTextRichTextBox;
     private PictureBox powerAndToughnessPictureBox;
-    private TextBox cardTextBox;
     private TrackBar fontSizeTrackBar;
+    private CardTextUserControl cardTextUserControl;
 }
