@@ -41,12 +41,16 @@ public partial class CardImageUserControl : UserControl
         }
     }
 
+    public Image RenderedImage
+    {
+        get => this.pictureBox.Image;
+    }
+
     private void CardImage_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(CardImage.ArtUrl))
         {
             this.pictureBox.ImageLocation = this.cardImage?.ArtUrl;
-            //this.pictureBox.Refresh();
         }
     }
 
@@ -68,5 +72,10 @@ public partial class CardImageUserControl : UserControl
     void PictureBox_Click(object sender, EventArgs e)
     {
         this.OnClick(e);
+    }
+
+    void RadioButton_CheckedChanged(object sender, EventArgs e)
+    {
+        OnSelectedChanged(e);
     }
 }

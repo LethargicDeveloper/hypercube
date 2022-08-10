@@ -384,13 +384,17 @@ partial class MainForm
             // 
             // cardImageFlowLayoutPanel
             // 
+            this.cardImageFlowLayoutPanel.AllowDrop = true;
             this.cardImageFlowLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardImageFlowLayoutPanel.AutoScroll = true;
+            this.cardImageFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cardImageFlowLayoutPanel.Location = new System.Drawing.Point(842, 493);
             this.cardImageFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cardImageFlowLayoutPanel.Name = "cardImageFlowLayoutPanel";
             this.cardImageFlowLayoutPanel.Size = new System.Drawing.Size(328, 328);
             this.cardImageFlowLayoutPanel.TabIndex = 31;
+            this.cardImageFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CardImageFlowLayoutPanel_DragDrop);
+            this.cardImageFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.CardImageFlowLayoutPanel_DragOver);
             // 
             // supertype2ComboBox
             // 

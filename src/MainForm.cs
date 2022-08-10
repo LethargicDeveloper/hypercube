@@ -21,6 +21,8 @@ public partial class MainForm : Form
     readonly float dpiX;
     readonly float dpiY;
 
+    CardImageUserControl? selectedImage;
+
     public MainForm(
         FormFactory form,
         CubeManager cubeManager,
@@ -220,6 +222,9 @@ public partial class MainForm : Form
 
         var rarityImage = Image.FromFile(rarity);
         e.Graphics.DrawImage(rarityImage, 285, 222, 17, 17);
+
+        if (this.selectedImage?.RenderedImage != null)
+            e.Graphics.DrawImage(this.selectedImage.RenderedImage, 25, 45, 275, 173);
     }
 
     void PowerAndToughnessPictureBox_Paint(object sender, PaintEventArgs e)
@@ -390,7 +395,7 @@ public partial class MainForm : Form
             };
 
             cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
-            cardImageUserControl.Selected = i == 0;
+            cardImageUserControl.Selected = (selectedImage != null && i == 0);
 
             this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
         }
@@ -405,8 +410,56 @@ public partial class MainForm : Form
         {
             if (cardImageUserControl != control)
             {
+                cardImageUserControl.SelectedChanged -= CardImageUserControl_SelectedChanged;
                 cardImageUserControl.Selected = false;
+                cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
             }
+        }
+
+        if (control.Selected)
+        {
+            this.selectedImage = control;
+            this.cardPictureBox.Refresh();
+        }
+    }
+
+    void CardImageFlowLayoutPanel_DragOver(object sender, DragEventArgs e)
+    {
+        if (e.Data!.GetDataPresent(DataFormats.FileDrop))
+        {
+            e.Effect = DragDropEffects.Link;
+        }
+        else
+        {
+            e.Effect = DragDropEffects.None;
+        }
+    }
+
+    void CardImageFlowLayoutPanel_DragDrop(object sender, DragEventArgs e)
+    {
+        var files = (e.Data!.GetData(DataFormats.FileDrop) as string[]) ?? Array.Empty<string>();
+        foreach (var file in files)
+        {
+            var cardImageUserControl = new CardImageUserControl
+            {
+                CardImage = new CardImage
+                {
+                    ArtUrl = file,
+                    State = "completed"
+                },
+                Width = 150,
+                Height = 150
+            };
+
+            cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+
+            if (this.selectedImage == null)
+            {
+                this.selectedImage = cardImageUserControl;
+                cardImageUserControl.Selected = true;
+            }
+
+            this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
         }
     }
 

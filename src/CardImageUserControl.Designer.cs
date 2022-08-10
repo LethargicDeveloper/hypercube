@@ -38,10 +38,10 @@
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Location = new System.Drawing.Point(3, 2);
+            this.pictureBox.Location = new System.Drawing.Point(-1, -1);
             this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(217, 186);
+            this.pictureBox.Size = new System.Drawing.Size(224, 189);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
@@ -58,6 +58,7 @@
             this.radioButton.TabIndex = 1;
             this.radioButton.TabStop = true;
             this.radioButton.UseVisualStyleBackColor = true;
+            this.radioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
             // CardImageUserControl
             // 
