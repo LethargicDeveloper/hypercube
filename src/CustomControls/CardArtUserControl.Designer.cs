@@ -1,6 +1,6 @@
 ﻿namespace Hypercube
 {
-    partial class CardImageUserControl
+    partial class CardArtUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -61,7 +61,7 @@
             this.radioButton.UseVisualStyleBackColor = true;
             this.radioButton.CheckedChanged += new System.EventHandler(this.RadioButton_CheckedChanged);
             // 
-            // CardImageUserControl
+            // CardArtUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,9 +69,9 @@
             this.Controls.Add(this.radioButton);
             this.Controls.Add(this.pictureBox);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "CardImageUserControl";
+            this.Name = "CardArtUserControl";
             this.Size = new System.Drawing.Size(222, 211);
-            this.Click += new System.EventHandler(this.CardImageUserControl_Click);
+            this.Click += new System.EventHandler(this.CardArtUserControl_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

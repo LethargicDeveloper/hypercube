@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Hypercube.UrzasAI;
 
-public class CardImage : INotifyPropertyChanged
+public class CardArt : INotifyPropertyChanged
 {
     string artUrl = string.Empty;
     string state = string.Empty;

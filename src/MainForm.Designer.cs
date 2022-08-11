@@ -57,7 +57,7 @@ partial class MainForm
             this.cardTextTabControl = new System.Windows.Forms.TabControl();
             this.newCardTabPage = new System.Windows.Forms.TabPage();
             this.cardTextUserControl = new Hypercube.CardTextUserControl();
-            this.cardImageFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.cardArtFlowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.supertype2ComboBox = new System.Windows.Forms.ComboBox();
             this.type2ComboBox = new System.Windows.Forms.ComboBox();
             this.type3ComboBox = new System.Windows.Forms.ComboBox();
@@ -382,19 +382,19 @@ partial class MainForm
             this.cardTextUserControl.PowerTextChanged += new System.EventHandler(this.PowerTextBox_TextChanged);
             this.cardTextUserControl.ToughnessTextChanged += new System.EventHandler(this.ToughnessTextBox_TextChanged);
             // 
-            // cardImageFlowLayoutPanel
+            // cardArtFlowLayoutPanel
             // 
-            this.cardImageFlowLayoutPanel.AllowDrop = true;
-            this.cardImageFlowLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.cardImageFlowLayoutPanel.AutoScroll = true;
-            this.cardImageFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardImageFlowLayoutPanel.Location = new System.Drawing.Point(842, 493);
-            this.cardImageFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cardImageFlowLayoutPanel.Name = "cardImageFlowLayoutPanel";
-            this.cardImageFlowLayoutPanel.Size = new System.Drawing.Size(328, 328);
-            this.cardImageFlowLayoutPanel.TabIndex = 31;
-            this.cardImageFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CardImageFlowLayoutPanel_DragDrop);
-            this.cardImageFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.CardImageFlowLayoutPanel_DragOver);
+            this.cardArtFlowLayoutPanel.AllowDrop = true;
+            this.cardArtFlowLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.cardArtFlowLayoutPanel.AutoScroll = true;
+            this.cardArtFlowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cardArtFlowLayoutPanel.Location = new System.Drawing.Point(842, 493);
+            this.cardArtFlowLayoutPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cardArtFlowLayoutPanel.Name = "cardArtFlowLayoutPanel";
+            this.cardArtFlowLayoutPanel.Size = new System.Drawing.Size(328, 328);
+            this.cardArtFlowLayoutPanel.TabIndex = 31;
+            this.cardArtFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CardArtFlowLayoutPanel_DragDrop);
+            this.cardArtFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.CardArtFlowLayoutPanel_DragOver);
             // 
             // supertype2ComboBox
             // 
@@ -525,7 +525,7 @@ partial class MainForm
             this.Controls.Add(this.type3ComboBox);
             this.Controls.Add(this.type2ComboBox);
             this.Controls.Add(this.supertype2ComboBox);
-            this.Controls.Add(this.cardImageFlowLayoutPanel);
+            this.Controls.Add(this.cardArtFlowLayoutPanel);
             this.Controls.Add(this.cardTextTabControl);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.cardPictureBox);
@@ -595,7 +595,7 @@ partial class MainForm
     private Label label10;
     private TabControl cardTextTabControl;
     private TabPage newCardTabPage;
-    private FlowLayoutPanel cardImageFlowLayoutPanel;
+    private FlowLayoutPanel cardArtFlowLayoutPanel;
     private ComboBox supertype2ComboBox;
     private ComboBox type2ComboBox;
     private ComboBox type3ComboBox;

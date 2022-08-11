@@ -21,7 +21,7 @@ public partial class MainForm : Form
     readonly float dpiX;
     readonly float dpiY;
 
-    CardImageUserControl? selectedImage;
+    CardArtUserControl? selectedCardArtUserControl;
 
     public MainForm(
         FormFactory form,
@@ -223,8 +223,8 @@ public partial class MainForm : Form
         var rarityImage = Image.FromFile(rarity);
         e.Graphics.DrawImage(rarityImage, 285, 222, 17, 17);
 
-        if (this.selectedImage?.RenderedImage != null)
-            e.Graphics.DrawImage(this.selectedImage.RenderedImage, 25, 45, 275, 173);
+        if (this.selectedCardArtUserControl?.RenderedImage != null)
+            e.Graphics.DrawImage(this.selectedCardArtUserControl.RenderedImage, 25, 45, 275, 173);
     }
 
     void PowerAndToughnessPictureBox_Paint(object sender, PaintEventArgs e)
@@ -350,7 +350,7 @@ public partial class MainForm : Form
 
     async void GenerateButton_Click(object sender, EventArgs e)
     {
-        (CardText, CardImage)[]? results;
+        (CardText, CardArt)[]? results;
 
         try
         {
@@ -371,7 +371,7 @@ public partial class MainForm : Form
 
         for (int i = 0; i < results.Length; ++i)
         {
-            var (cardText, cardImage) = results[i];
+            var (cardText, cardArt) = results[i];
 
             var cardTextUserControl = new CardTextUserControl
             {
@@ -387,27 +387,27 @@ public partial class MainForm : Form
 
             this.cardTextTabControl.TabPages.Add(tabPage);
 
-            var cardImageUserControl = new CardImageUserControl
+            var cardArtUserControl = new CardArtUserControl
             {
-                CardImage = cardImage,
+                CardArt = cardArt,
                 Width = 150,
                 Height = 150
             };
 
-            cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
-            cardImageUserControl.LoadCompleted += CardImageUserControl_LoadCompleted;
+            cardArtUserControl.SelectedChanged += CardArtUserControl_SelectedChanged;
+            cardArtUserControl.LoadCompleted += CardArtUserControl_LoadCompleted;
             
-            if (this.selectedImage == null)
+            if (this.selectedCardArtUserControl == null)
             {
-                this.selectedImage = cardImageUserControl;
-                cardImageUserControl.Selected = true;
+                this.selectedCardArtUserControl = cardArtUserControl;
+                cardArtUserControl.Selected = true;
             }
 
-            this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
+            this.cardArtFlowLayoutPanel.Controls.Add(cardArtUserControl);
         }
     }
 
-    void CardImageFlowLayoutPanel_DragOver(object sender, DragEventArgs e)
+    void CardArtFlowLayoutPanel_DragOver(object sender, DragEventArgs e)
     {
         if (e.Data!.GetDataPresent(DataFormats.FileDrop))
         {
@@ -419,14 +419,14 @@ public partial class MainForm : Form
         }
     }
 
-    void CardImageFlowLayoutPanel_DragDrop(object sender, DragEventArgs e)
+    void CardArtFlowLayoutPanel_DragDrop(object sender, DragEventArgs e)
     {
         var files = (e.Data!.GetData(DataFormats.FileDrop) as string[]) ?? Array.Empty<string>();
         foreach (var file in files)
         {
-            var cardImageUserControl = new CardImageUserControl
+            var cardArtUserControl = new CardArtUserControl
             {
-                CardImage = new CardImage
+                CardArt = new CardArt
                 {
                     ArtUrl = file,
                     State = "completed"
@@ -435,44 +435,44 @@ public partial class MainForm : Form
                 Height = 150
             };
 
-            cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
-            cardImageUserControl.LoadCompleted += CardImageUserControl_LoadCompleted;
+            cardArtUserControl.SelectedChanged += CardArtUserControl_SelectedChanged;
+            cardArtUserControl.LoadCompleted += CardArtUserControl_LoadCompleted;
 
-            if (this.selectedImage == null)
+            if (this.selectedCardArtUserControl == null)
             {
-                this.selectedImage = cardImageUserControl;
-                cardImageUserControl.Selected = true;
+                this.selectedCardArtUserControl = cardArtUserControl;
+                cardArtUserControl.Selected = true;
             }
 
-            this.cardImageFlowLayoutPanel.Controls.Add(cardImageUserControl);
+            this.cardArtFlowLayoutPanel.Controls.Add(cardArtUserControl);
         }
     }
 
-    void CardImageUserControl_SelectedChanged(object? sender, EventArgs e)
+    void CardArtUserControl_SelectedChanged(object? sender, EventArgs e)
     {
-        var control = sender as CardImageUserControl;
+        var control = sender as CardArtUserControl;
         if (control == null) return;
 
-        foreach (CardImageUserControl cardImageUserControl in this.cardImageFlowLayoutPanel.Controls)
+        foreach (CardArtUserControl cardArtUserControl in this.cardArtFlowLayoutPanel.Controls)
         {
-            if (cardImageUserControl != control)
+            if (cardArtUserControl != control)
             {
-                cardImageUserControl.SelectedChanged -= CardImageUserControl_SelectedChanged;
-                cardImageUserControl.Selected = false;
-                cardImageUserControl.SelectedChanged += CardImageUserControl_SelectedChanged;
+                cardArtUserControl.SelectedChanged -= CardArtUserControl_SelectedChanged;
+                cardArtUserControl.Selected = false;
+                cardArtUserControl.SelectedChanged += CardArtUserControl_SelectedChanged;
             }
         }
 
         if (control.Selected)
         {
-            this.selectedImage = control;
+            this.selectedCardArtUserControl = control;
             this.cardPictureBox.Refresh();
         }
     }
 
-    void CardImageUserControl_LoadCompleted(object? sender, EventArgs e)
+    void CardArtUserControl_LoadCompleted(object? sender, EventArgs e)
     {
-        var control = sender as CardImageUserControl;
+        var control = sender as CardArtUserControl;
         if (control == null) return;
 
         if (control.Selected)
@@ -481,7 +481,7 @@ public partial class MainForm : Form
         }
     }
 
-    async Task<(CardText, CardImage)> GenerateCard()
+    async Task<(CardText, CardArt)> GenerateCard()
     {
         var types = new List<string>
         {
@@ -504,7 +504,7 @@ public partial class MainForm : Form
         var subtypesString = string.Join(" ", subtypes.Where(_ => !string.IsNullOrEmpty(_))).Trim();
 
         CardText cardText = new CardText();
-        CardImage cardImage = new CardImage();
+        CardArt cardArt = new CardArt();
 
         cardText = await this.urzasClient.GenerateCardTextAsync(new UrzasAIRequest
         {
@@ -517,9 +517,9 @@ public partial class MainForm : Form
             }
         });
 
-        cardImage = await this.urzasClient.GenerateImageAsync(cardText);
+        cardArt = await this.urzasClient.GenerateImageAsync(cardText);
 
-        return (cardText, cardImage);
+        return (cardText, cardArt);
     }
 
     void LoadCube(Cube cube)

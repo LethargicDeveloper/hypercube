@@ -10,7 +10,7 @@ namespace Hypercube.UrzasAI;
 public class UrzasAIClient
 {
     readonly RestClient client;
-    readonly ConcurrentDictionary<string, (BackgroundWorker worker, CardImage image)> imageTasks = new();
+    readonly ConcurrentDictionary<string, (BackgroundWorker worker, CardArt image)> imageTasks = new();
 
     public UrzasAIClient(HttpClient client)
     {
@@ -37,15 +37,15 @@ public class UrzasAIClient
         return result ?? new CardText();
     }
 
-    public async Task<CardImage> GenerateImageAsync(CardText cardText)
+    public async Task<CardArt> GenerateImageAsync(CardText cardText)
     {
         var taskId = await GetWomboTaskIdAsync(cardText);
         if (string.IsNullOrEmpty(taskId))
-            return new CardImage();
+            return new CardArt();
 
         var request = new RestRequest($"art/latest?wombo_task_id={taskId}");
-        var result = await this.client.GetAsync<CardImage>(request);
-        result ??= new CardImage();
+        var result = await this.client.GetAsync<CardArt>(request);
+        result ??= new CardArt();
 
         if (result.State != "completed")
         {
@@ -58,12 +58,12 @@ public class UrzasAIClient
             {
                 bool completed = false;
                 int count = 0;
-                CardImage? image;
+                CardArt? image;
 
                 do
                 {
                     var request = new RestRequest($"art/latest?wombo_task_id={taskId}");
-                    image = this.client.Get<CardImage>(request);
+                    image = this.client.Get<CardArt>(request);
                     completed = image?.State == "completed";
                     if (!completed)
                     {
@@ -73,7 +73,7 @@ public class UrzasAIClient
                 }
                 while (!completed && count < 10);
 
-                image ??= new CardImage();
+                image ??= new CardArt();
 
                 if (this.imageTasks.TryGetValue(e.Argument?.ToString() ?? "", out var task))
                 {
@@ -86,7 +86,7 @@ public class UrzasAIClient
             {
                 if (e.UserState == null) return;
 
-                var (taskImage, image) = (ValueTuple<CardImage, CardImage>)e.UserState;
+                var (taskImage, image) = (ValueTuple<CardArt, CardArt>)e.UserState;
 
                 taskImage.ArtUrl = image.ArtUrl;
                 taskImage.State = image.State;

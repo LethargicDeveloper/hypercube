@@ -2,11 +2,11 @@
 
 namespace Hypercube;
 
-public partial class CardImageUserControl : UserControl
+public partial class CardArtUserControl : UserControl
 {
-    CardImage? cardImage;
+    CardArt? cardArt;
 
-    public CardImageUserControl()
+    public CardArtUserControl()
     {
         InitializeComponent();
     }
@@ -20,23 +20,23 @@ public partial class CardImageUserControl : UserControl
         set => this.radioButton.Checked = value;
     }
 
-    public CardImage? CardImage
+    public CardArt? CardArt
     {
-        get => this.cardImage;
+        get => this.cardArt;
         set
-        {   if (value != this.cardImage)
+        {   if (value != this.cardArt)
             {
-                if (this.cardImage != null)
+                if (this.cardArt != null)
                 {
-                    this.cardImage.PropertyChanged -= CardImage_PropertyChanged;
+                    this.cardArt.PropertyChanged -= CardArt_PropertyChanged;
                 }
 
-                this.cardImage = value;
+                this.cardArt = value;
                 
-                if (this.cardImage != null)
+                if (this.cardArt != null)
                 {
-                    this.pictureBox.ImageLocation = this.cardImage.ArtUrl;
-                    this.cardImage.PropertyChanged += CardImage_PropertyChanged;
+                    this.pictureBox.ImageLocation = this.cardArt.ArtUrl;
+                    this.cardArt.PropertyChanged += CardArt_PropertyChanged;
                 }
             }
         }
@@ -59,15 +59,15 @@ public partial class CardImageUserControl : UserControl
         handler?.Invoke(this, e);
     }
 
-    void CardImage_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    void CardArt_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        if (e.PropertyName == nameof(CardImage.ArtUrl))
+        if (e.PropertyName == nameof(CardArt.ArtUrl))
         {
-            this.pictureBox.ImageLocation = this.cardImage?.ArtUrl;
+            this.pictureBox.ImageLocation = this.cardArt?.ArtUrl;
         }
     }
 
-    void CardImageUserControl_Click(object sender, EventArgs e)
+    void CardArtUserControl_Click(object sender, EventArgs e)
     {
         if (!this.radioButton.Checked)
         {
