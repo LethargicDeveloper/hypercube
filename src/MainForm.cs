@@ -21,6 +21,7 @@ public partial class MainForm : Form
     readonly float dpiX;
     readonly float dpiY;
 
+    Cube cube = new();
     CardArtUserControl? selectedCardArtUserControl;
 
     public MainForm(
@@ -57,7 +58,8 @@ public partial class MainForm : Form
         var newCubeForm = this.form.Create<NewCubeForm>();
         if (newCubeForm.ShowDialog() == DialogResult.OK)
         {
-            LoadCube(newCubeForm.Cube);
+            this.cube = newCubeForm.Cube;
+            LoadCube();
         }
     }
 
@@ -74,7 +76,8 @@ public partial class MainForm : Form
                 return;
             }
 
-            LoadCube(cube);
+            this.cube = cube;
+            LoadCube();
         }
     }
 
@@ -215,16 +218,16 @@ public partial class MainForm : Form
         var regex = new Regex("[ ]{2,}", options);
         cardType = regex.Replace(cardType, " ").Trim();
 
-        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(25, 223));
+        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(25, 224));
 
         var rarity = Path.Combine(".\\img", "expansions",
             Rarities.GetIconPath(this.rarityComboBox.Text));
 
         var rarityImage = Image.FromFile(rarity);
-        e.Graphics.DrawImage(rarityImage, 285, 222, 17, 17);
+        e.Graphics.DrawImage(rarityImage, 285, 223, 17, 17);
 
         if (this.selectedCardArtUserControl?.RenderedImage != null)
-            e.Graphics.DrawImage(this.selectedCardArtUserControl.RenderedImage, 25, 45, 275, 173);
+            e.Graphics.DrawImage(this.selectedCardArtUserControl.RenderedImage, 25, 45, 277, 174);
     }
 
     void PowerAndToughnessPictureBox_Paint(object sender, PaintEventArgs e)
@@ -481,6 +484,90 @@ public partial class MainForm : Form
         }
     }
 
+    void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var cardText = ((CardTextUserControl)this.cardTextTabControl.TabPages[0].Controls[0]);
+        var card = new Card
+        {
+            ScryfallReference = this.expansionCardPictureBox.ImageLocation,
+            CardText = cardText.CardText,
+            FontSize = this.fontSizeTrackBar.Value,
+            Frame = this.frameComboBox.Text,
+            ManaCost = this.manaCostTextBox.Text,
+            Name = this.cardNameTextBox.Text,
+            Power = cardText.HasPowerAndToughness ? cardText.Power : string.Empty,
+            Rarity = this.rarityComboBox.Text,
+            Toughness = cardText.HasPowerAndToughness ? cardText.Toughness : string.Empty,
+            Subtypes = new List<string>
+            {
+                this.subtype1TextBox.Text,
+                this.subtype2TextBox.Text,
+                this.subtype3TextBox.Text
+            },
+            Supertypes = new List<string>
+            {
+                this.supertype1ComboBox.Text,
+                this.supertype2ComboBox.Text,
+            },
+            Types = new List<string>
+            {
+                this.type1ComboBox.Text,
+                this.type2ComboBox.Text,
+                this.type3ComboBox.Text,
+            }
+        };
+
+        this.cube.AddOrUpdate(card);
+        this.cube.Save();
+
+        var artImage = this.selectedCardArtUserControl?.RenderedImage;
+        if (artImage != null)
+        {
+            this.cube.SaveArtImage(card.ScryfallReference, artImage);
+        }
+
+        using var cardImage = RenderCardImage(card);
+        if (cardImage != null)
+        {
+            this.cube.SaveCardImage(card.ScryfallReference, cardImage);
+        }
+    }
+
+    Image RenderCardImage(Card card)
+    {
+        using var cardImage = new Bitmap(this.cardPictureBox.Width, this.cardPictureBox.Height);
+        this.cardPictureBox.DrawToBitmap(cardImage, new Rectangle(0, 0, this.cardPictureBox.Width, this.cardPictureBox.Height));
+
+        using var powerAndToughnessImage = new Bitmap(this.powerAndToughnessPictureBox.Width, this.powerAndToughnessPictureBox.Height);
+        this.powerAndToughnessPictureBox.DrawToBitmap(powerAndToughnessImage, new Rectangle(0, 0, this.powerAndToughnessPictureBox.Width, this.powerAndToughnessPictureBox.Height));
+
+        using var cardText = new Bitmap(this.cardTextRichTextBox.Width, this.cardTextRichTextBox.Height);
+        this.cardTextRichTextBox.DrawToBitmap(cardText, new Rectangle(0, 0, this.cardTextRichTextBox.Width, this.cardTextRichTextBox.Height));
+
+        using var control = new PictureBox();
+        control.Width = this.cardPictureBox.Width;
+        control.Height = this.cardPictureBox.Height;
+        control.Paint += (sender, e) =>
+        {
+            e.Graphics.DrawImage(cardImage, 0, 0);
+
+            if (!string.IsNullOrEmpty(card.CardText))
+            {
+                e.Graphics.DrawImage(cardText, 26, 248);
+            }
+
+            if (card.HasPowerAndToughness)
+            {
+                e.Graphics.DrawImage(powerAndToughnessImage, 250, 345);
+            }
+        };
+        control.Refresh();
+
+        var bmp = new Bitmap(control.Width, control.Height);
+        control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
+        return bmp;
+    }
+
     async Task<(CardText, CardArt)> GenerateCard()
     {
         var types = new List<string>
@@ -522,10 +609,10 @@ public partial class MainForm : Form
         return (cardText, cardArt);
     }
 
-    void LoadCube(Cube cube)
+    void LoadCube()
     {
         this.Cursor = Cursors.WaitCursor;
-        var cards = this.scryfallClient.GetCardsForCube(cube)?.ToList();
+        var cards = this.scryfallClient.GetCardsForCube(this.cube)?.ToList();
         this.Cursor = Cursors.Default;
 
         var cardTextFontFamily = Fonts.GetFontFamily("MPlantin");
@@ -544,7 +631,6 @@ public partial class MainForm : Form
         this.subtype2TextBox.Text = string.Empty;
         this.subtype3TextBox.Text = string.Empty;
         this.rarityComboBox.Text = string.Empty;
-        this.cardNameTextBox.Text = string.Empty;
         this.cardTextTabControl.SelectedIndex = 0;
         this.cardTextUserControl.CardText = string.Empty;
         this.cardTextUserControl.HasPowerAndToughness = false;
@@ -638,7 +724,8 @@ public partial class MainForm : Form
 
         this.cardTextUserControl.Power = card.Power;
         this.cardTextUserControl.Toughness = card.Power;
-
+        this.saveToolStripMenuItem.Enabled = true;
+        
         SetControlsEnabled(true);
         this.panel.Hide();
     }

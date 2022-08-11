@@ -33,6 +33,7 @@ partial class MainForm
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newCubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCubeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
@@ -67,6 +68,7 @@ partial class MainForm
             this.cardTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
             this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
+            this.cardImagePanel = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -74,6 +76,7 @@ partial class MainForm
             this.newCardTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
+            this.cardImagePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -93,6 +96,7 @@ partial class MainForm
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newCubeToolStripMenuItem,
             this.openCubeToolStripMenuItem,
+            this.saveToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -112,6 +116,15 @@ partial class MainForm
             this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Enabled = false;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -323,8 +336,7 @@ partial class MainForm
             // 
             this.cardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardPictureBox.BackColor = System.Drawing.SystemColors.Control;
-            this.cardPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cardPictureBox.Location = new System.Drawing.Point(842, 94);
+            this.cardPictureBox.Location = new System.Drawing.Point(-1, -1);
             this.cardPictureBox.Name = "cardPictureBox";
             this.cardPictureBox.Size = new System.Drawing.Size(328, 394);
             this.cardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -476,11 +488,11 @@ partial class MainForm
             this.cardTextRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(237)))), ((int)(((byte)(235)))));
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.cardTextRichTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.cardTextRichTextBox.Location = new System.Drawing.Point(869, 342);
+            this.cardTextRichTextBox.Location = new System.Drawing.Point(26, 247);
             this.cardTextRichTextBox.Name = "cardTextRichTextBox";
             this.cardTextRichTextBox.ReadOnly = true;
             this.cardTextRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.cardTextRichTextBox.Size = new System.Drawing.Size(271, 114);
+            this.cardTextRichTextBox.Size = new System.Drawing.Size(273, 114);
             this.cardTextRichTextBox.TabIndex = 101;
             this.cardTextRichTextBox.Text = "";
             // 
@@ -490,7 +502,7 @@ partial class MainForm
             this.powerAndToughnessPictureBox.BackColor = System.Drawing.SystemColors.Window;
             this.powerAndToughnessPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.powerAndToughnessPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("powerAndToughnessPictureBox.Image")));
-            this.powerAndToughnessPictureBox.Location = new System.Drawing.Point(1090, 438);
+            this.powerAndToughnessPictureBox.Location = new System.Drawing.Point(247, 343);
             this.powerAndToughnessPictureBox.Name = "powerAndToughnessPictureBox";
             this.powerAndToughnessPictureBox.Size = new System.Drawing.Size(65, 31);
             this.powerAndToughnessPictureBox.TabIndex = 102;
@@ -511,14 +523,24 @@ partial class MainForm
             this.fontSizeTrackBar.Value = 11;
             this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
             // 
+            // cardImagePanel
+            // 
+            this.cardImagePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cardImagePanel.Controls.Add(this.powerAndToughnessPictureBox);
+            this.cardImagePanel.Controls.Add(this.cardTextRichTextBox);
+            this.cardImagePanel.Controls.Add(this.cardPictureBox);
+            this.cardImagePanel.Location = new System.Drawing.Point(842, 94);
+            this.cardImagePanel.Name = "cardImagePanel";
+            this.cardImagePanel.Size = new System.Drawing.Size(328, 394);
+            this.cardImagePanel.TabIndex = 104;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
+            this.Controls.Add(this.cardImagePanel);
             this.Controls.Add(this.fontSizeTrackBar);
-            this.Controls.Add(this.powerAndToughnessPictureBox);
-            this.Controls.Add(this.cardTextRichTextBox);
             this.Controls.Add(this.subtype3TextBox);
             this.Controls.Add(this.subtype2TextBox);
             this.Controls.Add(this.subtype1TextBox);
@@ -528,7 +550,6 @@ partial class MainForm
             this.Controls.Add(this.cardArtFlowLayoutPanel);
             this.Controls.Add(this.cardTextTabControl);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.cardPictureBox);
             this.Controls.Add(this.supertype1ComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.generateButton);
@@ -561,6 +582,7 @@ partial class MainForm
             this.newCardTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
+            this.cardImagePanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,4 +628,6 @@ partial class MainForm
     private PictureBox powerAndToughnessPictureBox;
     private TrackBar fontSizeTrackBar;
     private CardTextUserControl cardTextUserControl;
+    private ToolStripMenuItem saveToolStripMenuItem;
+    private Panel cardImagePanel;
 }

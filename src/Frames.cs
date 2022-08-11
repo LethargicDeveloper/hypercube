@@ -1,6 +1,4 @@
-﻿using Hypercube.Scryfall;
-
-namespace Hypercube;
+﻿namespace Hypercube;
 
 public static class Frames
 {
@@ -11,7 +9,7 @@ public static class Frames
         { "W", ("White", "W.png") }
     };
 
-    public static Frame GetFrameForCard(Card card)
+    public static Frame GetFrameForCard(Scryfall.Card card)
     {
         var key = string.Join("", card.Colors.OrderBy(_ => _)).ToUpper();
 
