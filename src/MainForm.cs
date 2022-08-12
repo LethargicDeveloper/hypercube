@@ -183,10 +183,10 @@ public partial class MainForm : Form
         var beleren = Fonts.GetFontFamily("Beleren");
         var relay = Fonts.GetFontFamily("Relay-Medium");
 
-        using var belerenFont = new Font(beleren, 10);
+        using var belerenFont = new Font(beleren, 12);
         using var relayFont = new Font(relay, 8);
 
-        e.Graphics.DrawString(this.cardNameTextBox.Text, belerenFont, Brushes.Black, new Point(25, 23));
+        e.Graphics.DrawString(this.cardNameTextBox.Text, belerenFont, Brushes.Black, new Point(25, 24));
 
         var manaSymbolPaths = this.cardSymbolProvider
             .GetCardSymbolImagePaths(this.manaCostTextBox.Text)
@@ -196,7 +196,7 @@ public partial class MainForm : Form
         foreach (var manaSymbolPath in manaSymbolPaths)
         {
             var manaSymbol = Image.FromFile(manaSymbolPath);
-            e.Graphics.DrawImage(manaSymbol, 285 - (16 * i++), 22);
+            e.Graphics.DrawImage(manaSymbol, 275 - (16 * i++), 26);
         }
 
         var cardType = string.Format("{0} {1} {2} {3} {4}",
@@ -218,16 +218,16 @@ public partial class MainForm : Form
         var regex = new Regex("[ ]{2,}", options);
         cardType = regex.Replace(cardType, " ").Trim();
 
-        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(25, 224));
+        e.Graphics.DrawString(cardType, relayFont, Brushes.Black, new Point(25, 251));
 
         var rarity = Path.Combine(".\\img", "expansions",
             Rarities.GetIconPath(this.rarityComboBox.Text));
 
         var rarityImage = Image.FromFile(rarity);
-        e.Graphics.DrawImage(rarityImage, 285, 223, 17, 17);
+        e.Graphics.DrawImage(rarityImage, 275, 250, 17, 17);
 
         if (this.selectedCardArtUserControl?.RenderedImage != null)
-            e.Graphics.DrawImage(this.selectedCardArtUserControl.RenderedImage, 25, 45, 277, 174);
+            e.Graphics.DrawImage(this.selectedCardArtUserControl.RenderedImage, 24, 50, 267, 195);
     }
 
     void PowerAndToughnessPictureBox_Paint(object sender, PaintEventArgs e)
@@ -527,6 +527,7 @@ public partial class MainForm : Form
         }
 
         using var cardImage = RenderCardImage(card);
+        //using var scaledCardImage = ScaleImage(cardImage);
         if (cardImage != null)
         {
             this.cube.SaveCardImage(card.ScryfallReference, cardImage);
@@ -549,22 +550,42 @@ public partial class MainForm : Form
         control.Height = this.cardPictureBox.Height;
         control.Paint += (sender, e) =>
         {
+            e.Graphics.FillRectangle(Brushes.Black, new Rectangle(0, 0, control.Width, control.Height));
+
             e.Graphics.DrawImage(cardImage, 0, 0);
 
             if (!string.IsNullOrEmpty(card.CardText))
             {
-                e.Graphics.DrawImage(cardText, 26, 248);
+                e.Graphics.DrawImage(cardText, 26, 277);
             }
 
             if (card.HasPowerAndToughness)
             {
-                e.Graphics.DrawImage(powerAndToughnessImage, 250, 345);
+                e.Graphics.DrawImage(powerAndToughnessImage, 235, 385);
             }
         };
         control.Refresh();
 
         var bmp = new Bitmap(control.Width, control.Height);
         control.DrawToBitmap(bmp, new Rectangle(0, 0, control.Width, control.Height));
+
+        return bmp;
+    }
+
+    Image ScaleImage(Image image, int scale)
+    {
+        int width = 63 * scale;
+        int height = 88 * scale;
+
+        var bmp = new Bitmap(width, height);
+        using var g = Graphics.FromImage(bmp);
+        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+        g.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighQuality;
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+        
+        g.FillRectangle(Brushes.Black, new Rectangle(0, 0, width, height));
+        g.DrawImage(image, new Rectangle(0, 0, width, height));
+
         return bmp;
     }
 
