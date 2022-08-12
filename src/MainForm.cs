@@ -83,22 +83,17 @@ public partial class MainForm : Form
 
     void CardNameTextBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
-
         this.cardPictureBox.Refresh();
         CardTextBox_TextChanged(sender, e);
     }
 
     void ManaCostTextBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
         this.cardPictureBox.Refresh();
     }
 
     void FrameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        CanGenerateCard();
-        
+    {   
         var path = Path.Combine(".\\img", "frames",
             ((Frame)this.frameComboBox.SelectedItem).Path);
 
@@ -108,7 +103,6 @@ public partial class MainForm : Form
 
     void Supertype1ComboBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
         this.cardPictureBox.Refresh();
     }
 
@@ -119,7 +113,6 @@ public partial class MainForm : Form
 
     void Type1ComboBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
         this.cardPictureBox.Refresh();
     }
 
@@ -135,7 +128,6 @@ public partial class MainForm : Form
 
     void Subtype1TextBox_TextChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
         this.cardPictureBox.Refresh();
     }
 
@@ -151,7 +143,6 @@ public partial class MainForm : Form
 
     void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        CanGenerateCard();
         this.cardPictureBox.Refresh();
     }
 
@@ -743,15 +734,6 @@ public partial class MainForm : Form
         
         SetControlsEnabled(true);
         this.panel.Hide();
-    }
-
-    void CanGenerateCard()
-    {
-        this.generateButton.Enabled =
-            !string.IsNullOrEmpty(this.cardNameTextBox.Text) &&
-            !string.IsNullOrEmpty(this.frameComboBox.Text) &&
-            !string.IsNullOrEmpty(this.type1ComboBox.Text) &&
-            !string.IsNullOrEmpty(this.rarityComboBox.Text);
     }
 
     void ClearTabs()
