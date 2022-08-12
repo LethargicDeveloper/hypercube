@@ -109,8 +109,6 @@ public partial class MainForm : Form
     void Supertype1ComboBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
-
-        this.supertype2ComboBox.Enabled = !string.IsNullOrEmpty(this.supertype1ComboBox.Text);
         this.cardPictureBox.Refresh();
     }
 
@@ -122,14 +120,11 @@ public partial class MainForm : Form
     void Type1ComboBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
-
-        this.type2ComboBox.Enabled = !string.IsNullOrEmpty(this.type1ComboBox.Text);
         this.cardPictureBox.Refresh();
     }
 
     void Type2ComboBox_TextChanged(object sender, EventArgs e)
     {
-        this.type3ComboBox.Enabled = !string.IsNullOrEmpty(this.type2ComboBox.Text);
         this.cardPictureBox.Refresh();
     }
 
@@ -141,14 +136,11 @@ public partial class MainForm : Form
     void Subtype1TextBox_TextChanged(object sender, EventArgs e)
     {
         CanGenerateCard();
-
-        this.subtype2TextBox.Enabled = !string.IsNullOrEmpty(this.subtype1TextBox.Text);
         this.cardPictureBox.Refresh();
     }
 
     void Subtype2TextBox_TextChanged(object sender, EventArgs e)
     {
-        this.subtype3TextBox.Enabled = !string.IsNullOrEmpty(this.subtype2TextBox.Text);
         this.cardPictureBox.Refresh();
     }
 
@@ -263,7 +255,9 @@ public partial class MainForm : Form
             .Replace("~", this.cardNameTextBox.Text);
 
         var sb = new StringBuilder();
-        sb.Append(@"{\rtf1\ansi\deff0");
+        // http://www.arcdev.hu/manuals/standard/rtf/rtfspeci.pdf
+        // rtf renders fonts in half points so we multiply our font size by 2.
+        sb.Append($@"{{\rtf1\ansi\deff0\fs{this.fontSizeTrackBar.Value * 2}");
 
         bool italic = false;
         bool bold = false;
@@ -340,7 +334,7 @@ public partial class MainForm : Form
             this.cardTextRichTextBox.Font.FontFamily,
             this.fontSizeTrackBar.Value);
 
-        this.cardTextRichTextBox.DeselectAll();
+        CardTextBox_TextChanged(sender, e);
     }
 
     void ManaCostHelpButton_Click(object sender, EventArgs e)

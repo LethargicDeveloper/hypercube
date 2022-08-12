@@ -411,7 +411,6 @@ partial class MainForm
             this.supertype2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.supertype2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.supertype2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.supertype2ComboBox.Enabled = false;
             this.supertype2ComboBox.FormattingEnabled = true;
             this.supertype2ComboBox.Location = new System.Drawing.Point(648, 223);
             this.supertype2ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -425,7 +424,6 @@ partial class MainForm
             this.type2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.type2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.type2ComboBox.Enabled = false;
             this.type2ComboBox.FormattingEnabled = true;
             this.type2ComboBox.Location = new System.Drawing.Point(592, 259);
             this.type2ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -439,7 +437,6 @@ partial class MainForm
             this.type3ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.type3ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type3ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.type3ComboBox.Enabled = false;
             this.type3ComboBox.FormattingEnabled = true;
             this.type3ComboBox.Location = new System.Drawing.Point(698, 259);
             this.type3ComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -461,7 +458,6 @@ partial class MainForm
             // subtype2TextBox
             // 
             this.subtype2TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.subtype2TextBox.Enabled = false;
             this.subtype2TextBox.Location = new System.Drawing.Point(592, 299);
             this.subtype2TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subtype2TextBox.Name = "subtype2TextBox";
@@ -472,7 +468,6 @@ partial class MainForm
             // subtype3TextBox
             // 
             this.subtype3TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.subtype3TextBox.Enabled = false;
             this.subtype3TextBox.Location = new System.Drawing.Point(698, 299);
             this.subtype3TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.subtype3TextBox.Name = "subtype3TextBox";
