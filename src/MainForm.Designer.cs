@@ -68,6 +68,8 @@ partial class MainForm
             this.cardTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
             this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cardFontSizeInput = new System.Windows.Forms.NumericUpDown();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -75,6 +77,7 @@ partial class MainForm
             this.newCardTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFontSizeInput)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -506,21 +509,43 @@ partial class MainForm
             // 
             this.fontSizeTrackBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fontSizeTrackBar.LargeChange = 1;
-            this.fontSizeTrackBar.Location = new System.Drawing.Point(485, 370);
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(553, 370);
             this.fontSizeTrackBar.Maximum = 15;
             this.fontSizeTrackBar.Minimum = 8;
             this.fontSizeTrackBar.Name = "fontSizeTrackBar";
-            this.fontSizeTrackBar.Size = new System.Drawing.Size(318, 45);
+            this.fontSizeTrackBar.Size = new System.Drawing.Size(250, 45);
             this.fontSizeTrackBar.TabIndex = 103;
             this.fontSizeTrackBar.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.fontSizeTrackBar.Value = 11;
             this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(390, 375);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 21);
+            this.label1.TabIndex = 104;
+            this.label1.Text = "Font Size:";
+            // 
+            // cardFontSizeInput
+            // 
+            this.cardFontSizeInput.Location = new System.Drawing.Point(486, 378);
+            this.cardFontSizeInput.Name = "cardFontSizeInput";
+            this.cardFontSizeInput.Size = new System.Drawing.Size(61, 23);
+            this.cardFontSizeInput.TabIndex = 105;
+            this.cardFontSizeInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.cardFontSizeInput.ValueChanged += new System.EventHandler(this.cardFontSizeInput_ValueChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
+            this.Controls.Add(this.cardFontSizeInput);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.powerAndToughnessPictureBox);
             this.Controls.Add(this.cardTextRichTextBox);
             this.Controls.Add(this.cardPictureBox);
@@ -566,6 +591,7 @@ partial class MainForm
             this.newCardTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cardFontSizeInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -612,4 +638,6 @@ partial class MainForm
     private TrackBar fontSizeTrackBar;
     private CardTextUserControl cardTextUserControl;
     private ToolStripMenuItem saveToolStripMenuItem;
+    private Label label1;
+    private NumericUpDown cardFontSizeInput;
 }

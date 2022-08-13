@@ -45,7 +45,16 @@ public partial class MainForm : Form
         this.dpiX = graphics.DpiX;
         this.dpiY = graphics.DpiY;
 
+        InitFontSizeInput();
+
         SetControlsEnabled(false);
+    }
+
+    void InitFontSizeInput()
+    {
+        this.cardFontSizeInput.Value = this.fontSizeTrackBar.Value;
+        this.cardFontSizeInput.Minimum = this.fontSizeTrackBar.Minimum;
+        this.cardFontSizeInput.Maximum = this.fontSizeTrackBar.Maximum;
     }
 
     void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -324,6 +333,7 @@ public partial class MainForm : Form
         this.cardTextRichTextBox.SelectionFont = new Font(
             this.cardTextRichTextBox.Font.FontFamily,
             this.fontSizeTrackBar.Value);
+        this.cardFontSizeInput.Value = this.fontSizeTrackBar.Value;
 
         CardTextBox_TextChanged(sender, e);
     }
@@ -753,5 +763,10 @@ public partial class MainForm : Form
                 control.Enabled = enabled;
             }
         }
+    }
+
+    private void cardFontSizeInput_ValueChanged(object sender, EventArgs e)
+    {
+        this.fontSizeTrackBar.Value = (int)this.cardFontSizeInput.Value;
     }
 }
