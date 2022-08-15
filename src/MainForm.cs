@@ -22,7 +22,9 @@ public partial class MainForm : Form
     readonly float dpiY;
 
     Cube cube = new();
+    int currentCard = 0;
     CardArtUserControl? selectedCardArtUserControl;
+    List<Scryfall.Card> scryfallCards = new();
 
     public MainForm(
         FormFactory form,
@@ -46,6 +48,39 @@ public partial class MainForm : Form
         this.dpiY = graphics.DpiY;
 
         SetControlsEnabled(false);
+
+        var frames = Frames.GetFrames();
+        this.frameComboBox.BeginUpdate();
+        this.frameComboBox.Items.Clear();
+        this.frameComboBox.Items.AddRange(frames.ToArray());
+        this.frameComboBox.EndUpdate();
+
+        var supertypes = new[] { "" }.Concat(CardTypes.Supertypes).ToArray();
+        this.supertype1ComboBox.BeginUpdate();
+        this.supertype1ComboBox.Items.Clear();
+        this.supertype1ComboBox.Items.AddRange(supertypes);
+        this.supertype1ComboBox.EndUpdate();
+
+        this.supertype2ComboBox.BeginUpdate();
+        this.supertype2ComboBox.Items.Clear();
+        this.supertype2ComboBox.Items.AddRange(supertypes);
+        this.supertype2ComboBox.EndUpdate();
+
+        var cardtypes = new[] { "" }.Concat(CardTypes.Types).ToArray();
+        this.type1ComboBox.BeginUpdate();
+        this.type1ComboBox.Items.Clear();
+        this.type1ComboBox.Items.AddRange(cardtypes);
+        this.type1ComboBox.EndUpdate();
+
+        this.type2ComboBox.BeginUpdate();
+        this.type2ComboBox.Items.Clear();
+        this.type2ComboBox.Items.AddRange(cardtypes);
+        this.type2ComboBox.EndUpdate();
+
+        this.type3ComboBox.BeginUpdate();
+        this.type3ComboBox.Items.Clear();
+        this.type3ComboBox.Items.AddRange(cardtypes);
+        this.type3ComboBox.EndUpdate();
     }
 
     void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -616,10 +651,131 @@ public partial class MainForm : Form
 
     void LoadCube()
     {
-        this.Cursor = Cursors.WaitCursor;
-        var cards = this.scryfallClient.GetCardsForCube(this.cube)?.ToList();
-        this.Cursor = Cursors.Default;
+        Application.UseWaitCursor = true;
+        this.scryfallCards = this.scryfallClient.GetCardsForCube(this.cube)?.ToList() ?? new();
 
+        ClearControls();
+
+        if (this.scryfallCards.Count == 0)
+        {
+            return;
+        }
+
+        SetControlsToCurrentCard();
+        
+        SetControlsEnabled(true);
+        this.panel.Hide();
+        this.saveToolStripMenuItem.Enabled = true;
+        Application.UseWaitCursor = false;
+    }
+
+    Card GetCurrentCard()
+    {
+        var scryfallCard = this.scryfallCards[this.currentCard];
+        var cubeCard = this.cube.Cards.FirstOrDefault(_ => _.ScryfallReference == scryfallCard.ImageUris.Normal);
+
+        var allCardTypes = scryfallCard.TypeLine
+             .Replace(" — ", " ")
+             .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+
+        var supertypes = new List<string>();
+        var types = new List<string>();
+        var subtypes = new List<string>();
+
+        for (int i = 0; i < allCardTypes.Length; ++i)
+        {
+            var cardType = allCardTypes[i];
+            if (CardTypes.Supertypes.Contains(cardType))
+            {
+                supertypes.Add(cardType);
+
+            }
+            else if (CardTypes.Types.Contains(cardType))
+            {
+                types.Add(cardType);
+            }
+            else
+            {
+                subtypes.Add(cardType);
+            }
+        }
+
+        return cubeCard ?? new Card
+        {
+            CardText = string.Empty,
+            FontSize = 11,
+            Frame = Frames.GetFrameForCard(scryfallCard).Description,
+            ManaCost = scryfallCard.ManaCost,
+            Name = string.Empty,
+            Power = scryfallCard.Power,
+            Rarity = Rarities.GetRarity(scryfallCard.Rarity),
+            ScryfallReference = scryfallCard.ImageUris.Normal,
+            Subtypes = subtypes,
+            Supertypes = supertypes,
+            Types = types,
+            Toughness = scryfallCard.Toughness
+        };
+    }
+
+    void SetControlsToCurrentCard()
+    {
+        var card = this.GetCurrentCard();
+
+        this.expansionCardPictureBox.ImageLocation = card.ScryfallReference;
+        
+        this.cardNameTextBox.Text = card.Name;
+        this.manaCostTextBox.Text = card.ManaCost;
+        this.frameComboBox.Text = card.Frame;
+        this.supertype1ComboBox.Text = card.Supertypes.Count > 0 ? card.Supertypes[0] : string.Empty;
+        this.supertype2ComboBox.Text = card.Supertypes.Count > 1 ? card.Supertypes[1] : string.Empty;
+        this.type1ComboBox.Text = card.Types.Count > 0 ? card.Types[0] : string.Empty;
+        this.type2ComboBox.Text = card.Types.Count > 1 ? card.Types[1] : string.Empty;
+        this.type3ComboBox.Text = card.Types.Count > 2 ? card.Types[2] : string.Empty;
+        this.subtype1TextBox.Text = card.Subtypes.Count > 0 ? card.Subtypes[0] : string.Empty;
+        this.subtype2TextBox.Text = card.Subtypes.Count > 1 ? card.Subtypes[1] : string.Empty;
+        this.subtype3TextBox.Text = card.Subtypes.Count > 2 ? card.Subtypes[2] : string.Empty;
+        this.rarityComboBox.Text = card.Rarity;
+        this.fontSizeTrackBar.Value = card.FontSize;
+        this.cardTextUserControl.CardText = card.CardText;
+
+        this.cardTextUserControl.HasPowerAndToughness =
+            !string.IsNullOrEmpty(card.Power) ||
+            !string.IsNullOrEmpty(card.Toughness);
+
+        this.cardTextUserControl.Power = card.Power;
+        this.cardTextUserControl.Toughness = card.Toughness;
+
+        var art = this.cube.GetArtImagePath(card.ScryfallReference);
+        AddArtControl(new CardArt
+        {
+            ArtUrl = art,
+            State = "completed"
+        }, selected: true);
+    }
+
+    void AddArtControl(CardArt art, bool selected = false)
+    {
+        var cardArtUserControl = new CardArtUserControl
+        {
+            CardArt = art,
+            Width = 150,
+            Height = 150
+        };
+
+        cardArtUserControl.SelectedChanged += CardArtUserControl_SelectedChanged;
+        cardArtUserControl.LoadCompleted += CardArtUserControl_LoadCompleted;
+
+        if (this.selectedCardArtUserControl == null || selected)
+        {
+            this.selectedCardArtUserControl = cardArtUserControl;
+            cardArtUserControl.Selected = true;
+        }
+
+        this.cardArtFlowLayoutPanel.Controls.Add(cardArtUserControl);
+    }
+    
+    void ClearControls()
+    {
         var cardTextFontFamily = Fonts.GetFontFamily("MPlantin");
         using var cardTextFont = new Font(cardTextFontFamily, 11, FontStyle.Regular);
         this.cardTextRichTextBox.Font = cardTextFont;
@@ -641,99 +797,10 @@ public partial class MainForm : Form
         this.cardTextUserControl.HasPowerAndToughness = false;
         this.cardTextUserControl.Power = string.Empty;
         this.cardTextUserControl.Toughness = string.Empty;
+        this.saveToolStripMenuItem.Enabled = false;
+
         ClearArt();
         ClearTabs();
-
-        if (cards == null || cards.Count == 0)
-        {
-            return;
-        }
-
-        var card = cards[0];
-
-        this.manaCostTextBox.Text = card.ManaCost;
-
-        var frames = Frames.GetFrames();
-        this.frameComboBox.BeginUpdate();
-        this.frameComboBox.Items.Clear();
-        this.frameComboBox.Items.AddRange(frames.ToArray());
-        this.frameComboBox.EndUpdate();
-        this.frameComboBox.Text = Frames.GetFrameForCard(card).Description;
-
-        var supertypes = new[] { "" }.Concat(CardTypes.Supertypes).ToArray();
-        this.supertype1ComboBox.BeginUpdate();
-        this.supertype1ComboBox.Items.Clear();
-        this.supertype1ComboBox.Items.AddRange(supertypes);
-        this.supertype1ComboBox.EndUpdate();
-
-        this.supertype2ComboBox.BeginUpdate();
-        this.supertype2ComboBox.Items.Clear();
-        this.supertype2ComboBox.Items.AddRange(supertypes);
-        this.supertype2ComboBox.EndUpdate();
-
-        var cardtypes = new[] { "" }.Concat(CardTypes.Types).ToArray();
-        this.type1ComboBox.BeginUpdate();
-        this.type1ComboBox.Items.Clear();
-        this.type1ComboBox.Items.AddRange(cardtypes);
-        this.type1ComboBox.EndUpdate();
-
-        this.type2ComboBox.BeginUpdate();
-        this.type2ComboBox.Items.Clear();
-        this.type2ComboBox.Items.AddRange(cardtypes);
-        this.type2ComboBox.EndUpdate();
-
-        this.type3ComboBox.BeginUpdate();
-        this.type3ComboBox.Items.Clear();
-        this.type3ComboBox.Items.AddRange(cardtypes);
-        this.type3ComboBox.EndUpdate();
-
-        this.expansionCardPictureBox.ImageLocation = card.ImageUris.Normal;
-
-        var allCardTypes = card.TypeLine
-            .Replace(" — ", " ")
-            .Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
-        int supertypeCount = 0;
-        int typeCount = 0;
-        int subtypeCount = 0;
-
-        for (int i = 0; i < allCardTypes.Length; ++i)
-        {
-            var cardType = allCardTypes[i];
-            if (CardTypes.Supertypes.Contains(cardType))
-            {
-                supertypeCount++;
-                if (supertypeCount == 1) this.supertype1ComboBox.Text = cardType;
-                else if (supertypeCount == 2) this.supertype2ComboBox.Text = cardType;
-
-            }
-            else if (CardTypes.Types.Contains(cardType))
-            {
-                typeCount++;
-                if (typeCount == 1) this.type1ComboBox.Text = cardType;
-                else if (typeCount == 2) this.type2ComboBox.Text = cardType;
-                else if (typeCount == 3) this.type3ComboBox.Text = cardType;
-            }
-            else
-            {
-                subtypeCount++;
-                if (subtypeCount == 1) this.subtype1TextBox.Text = cardType;
-                else if (subtypeCount == 2) this.subtype2TextBox.Text = cardType;
-                else if (subtypeCount == 3) this.subtype3TextBox.Text = cardType;
-            }
-        }
-
-        this.rarityComboBox.Text = Rarities.GetRarity(card.Rarity);
-        this.cardTextUserControl.HasPowerAndToughness =
-            !string.IsNullOrEmpty(card.Power) ||
-            !string.IsNullOrEmpty(card.Toughness);
-
-        this.cardTextUserControl.Power = card.Power;
-        this.cardTextUserControl.Toughness = card.Power;
-        this.saveToolStripMenuItem.Enabled = true;
-        
-        SetControlsEnabled(true);
-        this.panel.Hide();
     }
 
     void ClearArt()
