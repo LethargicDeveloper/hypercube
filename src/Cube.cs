@@ -75,6 +75,6 @@ public class Card
     public string Power { get; set; } = string.Empty;
     public string Toughness { get; set; } = string.Empty;
     public bool HasPowerAndToughness => !string.IsNullOrEmpty(Power) || !string.IsNullOrEmpty(Toughness);
-    public string Rarity = string.Empty;
-    public int FontSize = 0;
+    public string Rarity { get; set; } = string.Empty;
+    public int FontSize { get; set; }
 }
