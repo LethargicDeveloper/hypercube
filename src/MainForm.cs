@@ -749,10 +749,9 @@ public partial class MainForm : Form
 
     void ClearTabs()
     {
-        for (int i = 1; i < this.cardTextTabControl.TabPages.Count - 1; ++i)
-        {
-            this.cardTextTabControl.TabPages.RemoveAt(1);
-        }
+        var tab = this.cardTextTabControl.TabPages[0];
+        this.cardTextTabControl.TabPages.Clear();
+        this.cardTextTabControl.TabPages.Add(tab);
     }
 
     void SetControlsEnabled(bool enabled)
