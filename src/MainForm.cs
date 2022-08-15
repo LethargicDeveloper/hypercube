@@ -512,7 +512,6 @@ public partial class MainForm : Form
         }
 
         using var cardImage = RenderCardImage(card);
-        //using var scaledCardImage = ScaleImage(cardImage);
         if (cardImage != null)
         {
             this.cube.SaveCardImage(card.ScryfallReference, cardImage);
@@ -642,6 +641,7 @@ public partial class MainForm : Form
         this.cardTextUserControl.HasPowerAndToughness = false;
         this.cardTextUserControl.Power = string.Empty;
         this.cardTextUserControl.Toughness = string.Empty;
+        ClearArt();
         ClearTabs();
 
         if (cards == null || cards.Count == 0)
@@ -734,6 +734,17 @@ public partial class MainForm : Form
         
         SetControlsEnabled(true);
         this.panel.Hide();
+    }
+
+    void ClearArt()
+    {
+        foreach (CardArtUserControl artControl in this.cardArtFlowLayoutPanel.Controls)
+        {
+            artControl.SelectedChanged -= CardArtUserControl_SelectedChanged;
+        }
+
+        this.cardArtFlowLayoutPanel.Controls.Clear();
+        this.selectedCardArtUserControl = null;
     }
 
     void ClearTabs()
