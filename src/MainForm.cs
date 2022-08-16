@@ -262,13 +262,13 @@ public partial class MainForm : Form
             var powerFontSize = power.Length <= 2 ? 14 : 10;
             using var powerFont = new Font(beleren, powerFontSize);
             e.Graphics.DrawString(power, powerFont, Brushes.Black,
-                new Point(16 - powerLeftOffset, 6 + powerTopOffset));
+                new Point(17 - powerLeftOffset, 6 + powerTopOffset));
 
             var toughness = this.cardTextUserControl.Toughness;
             var toughnessTopOffset = toughness.Length <= 2 ? 0 : 2;
             using var toughnessFont = new Font(beleren, toughness.Length <= 2 ? 14 : 10);
             e.Graphics.DrawString(toughness, toughnessFont, Brushes.Black,
-                new Point(36, 6 + toughnessTopOffset));
+                new Point(35, 6 + toughnessTopOffset));
         }
     }
 
