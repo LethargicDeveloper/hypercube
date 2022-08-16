@@ -553,6 +553,34 @@ public partial class MainForm : Form
         }
     }
 
+    void NextButton_Click(object sender, EventArgs e)
+    {
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard++;
+        if (this.currentCard >= this.scryfallCards.Count)
+        {
+            this.currentCard = 0;
+        }
+
+        ClearControls();
+        SetControlsToCurrentCard();
+    }
+
+    void PreviousButton_Click(object sender, EventArgs e)
+    {
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard--;
+        if (this.currentCard < 0)
+        {
+            this.currentCard = this.scryfallCards.Count - 1;
+        }
+
+        ClearControls();
+        SetControlsToCurrentCard();
+    }
+
     Image RenderCardImage(Card card)
     {
         using var cardImage = new Bitmap(this.cardPictureBox.Width, this.cardPictureBox.Height);
@@ -666,6 +694,7 @@ public partial class MainForm : Form
         SetControlsEnabled(true);
         this.panel.Hide();
         this.saveToolStripMenuItem.Enabled = true;
+        this.navigationToolStripMenuItem.Visible = true;
         Application.UseWaitCursor = false;
     }
 
@@ -746,11 +775,14 @@ public partial class MainForm : Form
         this.cardTextUserControl.Toughness = card.Toughness;
 
         var art = this.cube.GetArtImagePath(card.ScryfallReference);
-        AddArtControl(new CardArt
+        if (!string.IsNullOrEmpty(art))
         {
-            ArtUrl = art,
-            State = "completed"
-        }, selected: true);
+            AddArtControl(new CardArt
+            {
+                ArtUrl = art,
+                State = "completed"
+            }, selected: true);
+        }
     }
 
     void AddArtControl(CardArt art, bool selected = false)
@@ -798,6 +830,7 @@ public partial class MainForm : Form
         this.cardTextUserControl.Power = string.Empty;
         this.cardTextUserControl.Toughness = string.Empty;
         this.saveToolStripMenuItem.Enabled = false;
+        this.navigationToolStripMenuItem.Visible = false;
 
         ClearArt();
         ClearTabs();

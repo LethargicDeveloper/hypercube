@@ -36,6 +36,9 @@ partial class MainForm
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previousCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.expansionCardPictureBox = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,6 +71,8 @@ partial class MainForm
             this.cardTextRichTextBox = new System.Windows.Forms.RichTextBox();
             this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
             this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.previousButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -81,7 +86,8 @@ partial class MainForm
             // 
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.navigationToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -136,6 +142,32 @@ partial class MainForm
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
+            // navigationToolStripMenuItem
+            // 
+            this.navigationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nextToolStripMenuItem,
+            this.previousCardToolStripMenuItem});
+            this.navigationToolStripMenuItem.Name = "navigationToolStripMenuItem";
+            this.navigationToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.navigationToolStripMenuItem.Text = "&Navigation";
+            this.navigationToolStripMenuItem.Visible = false;
+            // 
+            // nextToolStripMenuItem
+            // 
+            this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
+            this.nextToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Right)));
+            this.nextToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.nextToolStripMenuItem.Text = "Next Card";
+            this.nextToolStripMenuItem.Click += new System.EventHandler(this.NextButton_Click);
+            // 
+            // previousCardToolStripMenuItem
+            // 
+            this.previousCardToolStripMenuItem.Name = "previousCardToolStripMenuItem";
+            this.previousCardToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Left)));
+            this.previousCardToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.previousCardToolStripMenuItem.Text = "Previous Card";
+            this.previousCardToolStripMenuItem.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
             // expansionCardPictureBox
             // 
             this.expansionCardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -157,7 +189,7 @@ partial class MainForm
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 21);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Card &Name:";
+            this.label3.Text = "Card N&ame:";
             // 
             // label4
             // 
@@ -516,11 +548,33 @@ partial class MainForm
             this.fontSizeTrackBar.Value = 11;
             this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
             // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(257, 494);
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(111, 23);
+            this.nextButton.TabIndex = 104;
+            this.nextButton.Text = "Next ->";
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
+            // previousButton
+            // 
+            this.previousButton.Location = new System.Drawing.Point(53, 494);
+            this.previousButton.Name = "previousButton";
+            this.previousButton.Size = new System.Drawing.Size(111, 23);
+            this.previousButton.TabIndex = 105;
+            this.previousButton.Text = "<- Previous";
+            this.previousButton.UseVisualStyleBackColor = true;
+            this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
+            this.Controls.Add(this.previousButton);
+            this.Controls.Add(this.nextButton);
             this.Controls.Add(this.powerAndToughnessPictureBox);
             this.Controls.Add(this.cardTextRichTextBox);
             this.Controls.Add(this.cardPictureBox);
@@ -612,4 +666,9 @@ partial class MainForm
     private TrackBar fontSizeTrackBar;
     private CardTextUserControl cardTextUserControl;
     private ToolStripMenuItem saveToolStripMenuItem;
+    private Button nextButton;
+    private Button previousButton;
+    private ToolStripMenuItem navigationToolStripMenuItem;
+    private ToolStripMenuItem nextToolStripMenuItem;
+    private ToolStripMenuItem previousCardToolStripMenuItem;
 }

@@ -32,7 +32,8 @@ public class Cube
 
     public string GetArtImagePath(string scryfallReference)
     {
-        return Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        return File.Exists(path) ? path : string.Empty;
     }
 
     public void SaveArtImage(string scryfallReference, Image image)
