@@ -30,6 +30,12 @@ public class Cube
         File.WriteAllText(Path.Combine(path, "cube.json"), json);
     }
 
+    public string GetArtImagePath(string scryfallReference)
+    {
+        var path = Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        return File.Exists(path) ? path : string.Empty;
+    }
+
     public void SaveArtImage(string scryfallReference, Image image)
     {
         var path = Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
@@ -60,21 +66,4 @@ public class Cube
             return hash1 + (hash2 * 1566083941);
         }
     }
-}
-
-public class Card
-{
-    public string ScryfallReference { get; init; } = string.Empty;
-    public string Name { get; set; } = string.Empty;
-    public string ManaCost { get; set; } = string.Empty;
-    public string Frame { get; set; } = string.Empty;
-    public List<string> Supertypes { get; set; } = new();
-    public List<string> Types { get; set; } = new();
-    public List<string> Subtypes { get; set; } = new();
-    public string CardText { get; set; } = string.Empty;
-    public string Power { get; set; } = string.Empty;
-    public string Toughness { get; set; } = string.Empty;
-    public bool HasPowerAndToughness => !string.IsNullOrEmpty(Power) || !string.IsNullOrEmpty(Toughness);
-    public string Rarity = string.Empty;
-    public int FontSize = 0;
 }
