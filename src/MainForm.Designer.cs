@@ -72,7 +72,6 @@ partial class MainForm
             this.powerAndToughnessPictureBox = new System.Windows.Forms.PictureBox();
             this.fontSizeTrackBar = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.cardFontSizeInput = new System.Windows.Forms.NumericUpDown();
             this.nextButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
@@ -82,11 +81,10 @@ partial class MainForm
             this.newCardTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cardFontSizeInput)).BeginInit();
             this.SuspendLayout();
-            //
+            // 
             // menuStrip
-            //
+            // 
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -97,9 +95,9 @@ partial class MainForm
             this.menuStrip.Size = new System.Drawing.Size(1208, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
-            //
+            // 
             // fileToolStripMenuItem
-            //
+            // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newCubeToolStripMenuItem,
             this.openCubeToolStripMenuItem,
@@ -109,44 +107,44 @@ partial class MainForm
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
-            //
+            // 
             // newCubeToolStripMenuItem
-            //
+            // 
             this.newCubeToolStripMenuItem.Name = "newCubeToolStripMenuItem";
             this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newCubeToolStripMenuItem.Text = "&New Cube...";
             this.newCubeToolStripMenuItem.Click += new System.EventHandler(this.NewCubeToolStripMenuItem_Click);
-            //
+            // 
             // openCubeToolStripMenuItem
-            //
+            // 
             this.openCubeToolStripMenuItem.Name = "openCubeToolStripMenuItem";
             this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
-            //
+            // 
             // saveToolStripMenuItem
-            //
+            // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
-            //
+            // 
             // toolStripSeparator1
-            //
+            // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
-            //
+            // 
             // exitToolStripMenuItem
-            //
+            // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
-            //
+            // 
             // navigationToolStripMenuItem
-            //
+            // 
             this.navigationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nextToolStripMenuItem,
             this.previousCardToolStripMenuItem});
@@ -154,25 +152,25 @@ partial class MainForm
             this.navigationToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
             this.navigationToolStripMenuItem.Text = "&Navigation";
             this.navigationToolStripMenuItem.Visible = false;
-            //
+            // 
             // nextToolStripMenuItem
-            //
+            // 
             this.nextToolStripMenuItem.Name = "nextToolStripMenuItem";
             this.nextToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Right)));
             this.nextToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.nextToolStripMenuItem.Text = "Next Card";
             this.nextToolStripMenuItem.Click += new System.EventHandler(this.NextButton_Click);
-            //
+            // 
             // previousCardToolStripMenuItem
-            //
+            // 
             this.previousCardToolStripMenuItem.Name = "previousCardToolStripMenuItem";
             this.previousCardToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Left)));
             this.previousCardToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.previousCardToolStripMenuItem.Text = "Previous Card";
             this.previousCardToolStripMenuItem.Click += new System.EventHandler(this.PreviousButton_Click);
-            //
+            // 
             // expansionCardPictureBox
-            //
+            // 
             this.expansionCardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.expansionCardPictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.expansionCardPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -182,9 +180,9 @@ partial class MainForm
             this.expansionCardPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.expansionCardPictureBox.TabIndex = 1;
             this.expansionCardPictureBox.TabStop = false;
-            //
+            // 
             // label3
-            //
+            // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -193,9 +191,9 @@ partial class MainForm
             this.label3.Size = new System.Drawing.Size(99, 21);
             this.label3.TabIndex = 6;
             this.label3.Text = "Card N&ame:";
-            //
+            // 
             // label4
-            //
+            // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -204,9 +202,9 @@ partial class MainForm
             this.label4.Size = new System.Drawing.Size(94, 21);
             this.label4.TabIndex = 8;
             this.label4.Text = "Mana &Cost:";
-            //
+            // 
             // cardNameTextBox
-            //
+            // 
             this.cardNameTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardNameTextBox.Location = new System.Drawing.Point(486, 111);
             this.cardNameTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -214,9 +212,9 @@ partial class MainForm
             this.cardNameTextBox.Size = new System.Drawing.Size(318, 23);
             this.cardNameTextBox.TabIndex = 7;
             this.cardNameTextBox.TextChanged += new System.EventHandler(this.CardNameTextBox_TextChanged);
-            //
+            // 
             // manaCostTextBox
-            //
+            // 
             this.manaCostTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.manaCostTextBox.Location = new System.Drawing.Point(486, 145);
             this.manaCostTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -224,9 +222,9 @@ partial class MainForm
             this.manaCostTextBox.Size = new System.Drawing.Size(288, 23);
             this.manaCostTextBox.TabIndex = 9;
             this.manaCostTextBox.TextChanged += new System.EventHandler(this.ManaCostTextBox_TextChanged);
-            //
+            // 
             // manaCostHelpButton
-            //
+            // 
             this.manaCostHelpButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.manaCostHelpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.manaCostHelpButton.Location = new System.Drawing.Point(779, 140);
@@ -239,9 +237,9 @@ partial class MainForm
             this.manaCostHelpButton.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.manaCostHelpButton.UseVisualStyleBackColor = true;
             this.manaCostHelpButton.Click += new System.EventHandler(this.ManaCostHelpButton_Click);
-            //
+            // 
             // label5
-            //
+            // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -250,9 +248,9 @@ partial class MainForm
             this.label5.Size = new System.Drawing.Size(61, 21);
             this.label5.TabIndex = 10;
             this.label5.Text = "Fra&me:";
-            //
+            // 
             // frameComboBox
-            //
+            // 
             this.frameComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.frameComboBox.DisplayMember = "Description";
             this.frameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -264,9 +262,9 @@ partial class MainForm
             this.frameComboBox.TabIndex = 11;
             this.frameComboBox.ValueMember = "Key";
             this.frameComboBox.SelectedIndexChanged += new System.EventHandler(this.FrameComboBox_SelectedIndexChanged);
-            //
+            // 
             // label6
-            //
+            // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -275,9 +273,9 @@ partial class MainForm
             this.label6.Size = new System.Drawing.Size(50, 21);
             this.label6.TabIndex = 15;
             this.label6.Text = "&Type:";
-            //
+            // 
             // type1ComboBox
-            //
+            // 
             this.type1ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.type1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -288,9 +286,9 @@ partial class MainForm
             this.type1ComboBox.Size = new System.Drawing.Size(106, 23);
             this.type1ComboBox.TabIndex = 16;
             this.type1ComboBox.TextChanged += new System.EventHandler(this.Type1ComboBox_TextChanged);
-            //
+            // 
             // label7
-            //
+            // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -299,9 +297,9 @@ partial class MainForm
             this.label7.Size = new System.Drawing.Size(77, 21);
             this.label7.TabIndex = 19;
             this.label7.Text = "Su&btype:";
-            //
+            // 
             // label8
-            //
+            // 
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -310,9 +308,9 @@ partial class MainForm
             this.label8.Size = new System.Drawing.Size(59, 21);
             this.label8.TabIndex = 23;
             this.label8.Text = "&Rarity:";
-            //
+            // 
             // rarityComboBox
-            //
+            // 
             this.rarityComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.rarityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.rarityComboBox.FormattingEnabled = true;
@@ -327,9 +325,9 @@ partial class MainForm
             this.rarityComboBox.Size = new System.Drawing.Size(318, 23);
             this.rarityComboBox.TabIndex = 24;
             this.rarityComboBox.SelectedIndexChanged += new System.EventHandler(this.RarityComboBox_SelectedIndexChanged);
-            //
+            // 
             // generateButton
-            //
+            // 
             this.generateButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.generateButton.Enabled = false;
             this.generateButton.Location = new System.Drawing.Point(489, 739);
@@ -340,9 +338,9 @@ partial class MainForm
             this.generateButton.Text = "&Generate";
             this.generateButton.UseVisualStyleBackColor = true;
             this.generateButton.Click += new System.EventHandler(this.GenerateButton_Click);
-            //
+            // 
             // supertype1ComboBox
-            //
+            // 
             this.supertype1ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.supertype1ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.supertype1ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -353,9 +351,9 @@ partial class MainForm
             this.supertype1ComboBox.Size = new System.Drawing.Size(156, 23);
             this.supertype1ComboBox.TabIndex = 13;
             this.supertype1ComboBox.TextChanged += new System.EventHandler(this.Supertype1ComboBox_TextChanged);
-            //
+            // 
             // label9
-            //
+            // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -364,9 +362,9 @@ partial class MainForm
             this.label9.Size = new System.Drawing.Size(92, 21);
             this.label9.TabIndex = 12;
             this.label9.Text = "&Supertype:";
-            //
+            // 
             // cardPictureBox
-            //
+            // 
             this.cardPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardPictureBox.BackColor = System.Drawing.SystemColors.Control;
             this.cardPictureBox.Location = new System.Drawing.Point(842, 48);
@@ -376,9 +374,9 @@ partial class MainForm
             this.cardPictureBox.TabIndex = 21;
             this.cardPictureBox.TabStop = false;
             this.cardPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.CardPictureBox_Paint);
-            //
+            // 
             // label10
-            //
+            // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -387,9 +385,9 @@ partial class MainForm
             this.label10.Size = new System.Drawing.Size(85, 21);
             this.label10.TabIndex = 25;
             this.label10.Text = "Card Te&xt:";
-            //
+            // 
             // cardTextTabControl
-            //
+            // 
             this.cardTextTabControl.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardTextTabControl.Controls.Add(this.newCardTabPage);
             this.cardTextTabControl.Location = new System.Drawing.Point(486, 420);
@@ -398,9 +396,9 @@ partial class MainForm
             this.cardTextTabControl.SelectedIndex = 0;
             this.cardTextTabControl.Size = new System.Drawing.Size(318, 315);
             this.cardTextTabControl.TabIndex = 26;
-            //
+            // 
             // newCardTabPage
-            //
+            // 
             this.newCardTabPage.Controls.Add(this.cardTextUserControl);
             this.newCardTabPage.Location = new System.Drawing.Point(4, 24);
             this.newCardTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -409,9 +407,9 @@ partial class MainForm
             this.newCardTabPage.TabIndex = 4;
             this.newCardTabPage.Text = "New Card";
             this.newCardTabPage.UseVisualStyleBackColor = true;
-            //
+            // 
             // cardTextUserControl
-            //
+            // 
             this.cardTextUserControl.CardText = "";
             this.cardTextUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cardTextUserControl.HasPowerAndToughness = false;
@@ -426,9 +424,9 @@ partial class MainForm
             this.cardTextUserControl.HasPowerAndToughnessCheckChanged += new System.EventHandler(this.HasPowerToughnessCheckBox_CheckedChanged);
             this.cardTextUserControl.PowerTextChanged += new System.EventHandler(this.PowerTextBox_TextChanged);
             this.cardTextUserControl.ToughnessTextChanged += new System.EventHandler(this.ToughnessTextBox_TextChanged);
-            //
+            // 
             // cardArtFlowLayoutPanel
-            //
+            // 
             this.cardArtFlowLayoutPanel.AllowDrop = true;
             this.cardArtFlowLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardArtFlowLayoutPanel.AutoScroll = true;
@@ -440,9 +438,9 @@ partial class MainForm
             this.cardArtFlowLayoutPanel.TabIndex = 31;
             this.cardArtFlowLayoutPanel.DragDrop += new System.Windows.Forms.DragEventHandler(this.CardArtFlowLayoutPanel_DragDrop);
             this.cardArtFlowLayoutPanel.DragOver += new System.Windows.Forms.DragEventHandler(this.CardArtFlowLayoutPanel_DragOver);
-            //
+            // 
             // supertype2ComboBox
-            //
+            // 
             this.supertype2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.supertype2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.supertype2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -453,9 +451,9 @@ partial class MainForm
             this.supertype2ComboBox.Size = new System.Drawing.Size(156, 23);
             this.supertype2ComboBox.TabIndex = 14;
             this.supertype2ComboBox.TextChanged += new System.EventHandler(this.Supertype2ComboBox_TextChanged);
-            //
+            // 
             // type2ComboBox
-            //
+            // 
             this.type2ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.type2ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type2ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -466,9 +464,9 @@ partial class MainForm
             this.type2ComboBox.Size = new System.Drawing.Size(106, 23);
             this.type2ComboBox.TabIndex = 17;
             this.type2ComboBox.TextChanged += new System.EventHandler(this.Type2ComboBox_TextChanged);
-            //
+            // 
             // type3ComboBox
-            //
+            // 
             this.type3ComboBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.type3ComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.type3ComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
@@ -479,9 +477,9 @@ partial class MainForm
             this.type3ComboBox.Size = new System.Drawing.Size(106, 23);
             this.type3ComboBox.TabIndex = 18;
             this.type3ComboBox.TextChanged += new System.EventHandler(this.Type3ComboBox_TextChanged);
-            //
+            // 
             // subtype1TextBox
-            //
+            // 
             this.subtype1TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.subtype1TextBox.Location = new System.Drawing.Point(486, 299);
             this.subtype1TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -489,9 +487,9 @@ partial class MainForm
             this.subtype1TextBox.Size = new System.Drawing.Size(106, 23);
             this.subtype1TextBox.TabIndex = 20;
             this.subtype1TextBox.TextChanged += new System.EventHandler(this.Subtype1TextBox_TextChanged);
-            //
+            // 
             // subtype2TextBox
-            //
+            // 
             this.subtype2TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.subtype2TextBox.Location = new System.Drawing.Point(592, 299);
             this.subtype2TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -499,9 +497,9 @@ partial class MainForm
             this.subtype2TextBox.Size = new System.Drawing.Size(106, 23);
             this.subtype2TextBox.TabIndex = 21;
             this.subtype2TextBox.TextChanged += new System.EventHandler(this.Subtype2TextBox_TextChanged);
-            //
+            // 
             // subtype3TextBox
-            //
+            // 
             this.subtype3TextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.subtype3TextBox.Location = new System.Drawing.Point(698, 299);
             this.subtype3TextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -509,9 +507,9 @@ partial class MainForm
             this.subtype3TextBox.Size = new System.Drawing.Size(106, 23);
             this.subtype3TextBox.TabIndex = 22;
             this.subtype3TextBox.TextChanged += new System.EventHandler(this.Subtype3TextBox_TextChanged);
-            //
+            // 
             // cardTextRichTextBox
-            //
+            // 
             this.cardTextRichTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cardTextRichTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(234)))), ((int)(((byte)(235)))));
             this.cardTextRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -523,9 +521,9 @@ partial class MainForm
             this.cardTextRichTextBox.Size = new System.Drawing.Size(261, 129);
             this.cardTextRichTextBox.TabIndex = 101;
             this.cardTextRichTextBox.Text = "";
-            //
+            // 
             // powerAndToughnessPictureBox
-            //
+            // 
             this.powerAndToughnessPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.powerAndToughnessPictureBox.BackColor = System.Drawing.SystemColors.Window;
             this.powerAndToughnessPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -536,23 +534,23 @@ partial class MainForm
             this.powerAndToughnessPictureBox.TabIndex = 102;
             this.powerAndToughnessPictureBox.TabStop = false;
             this.powerAndToughnessPictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PowerAndToughnessPictureBox_Paint);
-            //
+            // 
             // fontSizeTrackBar
-            //
+            // 
             this.fontSizeTrackBar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.fontSizeTrackBar.LargeChange = 1;
-            this.fontSizeTrackBar.Location = new System.Drawing.Point(553, 370);
+            this.fontSizeTrackBar.Location = new System.Drawing.Point(486, 370);
             this.fontSizeTrackBar.Maximum = 15;
             this.fontSizeTrackBar.Minimum = 8;
             this.fontSizeTrackBar.Name = "fontSizeTrackBar";
-            this.fontSizeTrackBar.Size = new System.Drawing.Size(250, 45);
-            this.fontSizeTrackBar.TabIndex = 103;
+            this.fontSizeTrackBar.Size = new System.Drawing.Size(317, 45);
+            this.fontSizeTrackBar.TabIndex = 25;
             this.fontSizeTrackBar.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.fontSizeTrackBar.Value = 11;
             this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
-            //
+            // 
             // label1
-            //
+            // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -560,18 +558,10 @@ partial class MainForm
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 21);
             this.label1.TabIndex = 104;
-            this.label1.Text = "Font Size:";
-            //
-            // cardFontSizeInput
-            //
-            this.cardFontSizeInput.Location = new System.Drawing.Point(486, 378);
-            this.cardFontSizeInput.Name = "cardFontSizeInput";
-            this.cardFontSizeInput.Size = new System.Drawing.Size(61, 23);
-            this.cardFontSizeInput.TabIndex = 105;
-            this.cardFontSizeInput.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.cardFontSizeInput.ValueChanged += new System.EventHandler(this.cardFontSizeInput_ValueChanged);
+            this.label1.Text = "Font Si&ze:";
+            // 
             // nextButton
-            //
+            // 
             this.nextButton.Location = new System.Drawing.Point(257, 494);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(111, 23);
@@ -579,9 +569,9 @@ partial class MainForm
             this.nextButton.Text = "Next ->";
             this.nextButton.UseVisualStyleBackColor = true;
             this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
-            //
+            // 
             // previousButton
-            //
+            // 
             this.previousButton.Location = new System.Drawing.Point(53, 494);
             this.previousButton.Name = "previousButton";
             this.previousButton.Size = new System.Drawing.Size(111, 23);
@@ -589,13 +579,12 @@ partial class MainForm
             this.previousButton.Text = "<- Previous";
             this.previousButton.UseVisualStyleBackColor = true;
             this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
-            //
+            // 
             // MainForm
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
-            this.Controls.Add(this.cardFontSizeInput);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.previousButton);
             this.Controls.Add(this.nextButton);
@@ -644,7 +633,6 @@ partial class MainForm
             this.newCardTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.powerAndToughnessPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeTrackBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cardFontSizeInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -692,7 +680,6 @@ partial class MainForm
     private CardTextUserControl cardTextUserControl;
     private ToolStripMenuItem saveToolStripMenuItem;
     private Label label1;
-    private NumericUpDown cardFontSizeInput;
     private Button nextButton;
     private Button previousButton;
     private ToolStripMenuItem navigationToolStripMenuItem;
