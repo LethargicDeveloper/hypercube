@@ -28,6 +28,8 @@ public class Card
     public string CollectorNumber { get; init; } = string.Empty;
     [JsonPropertyName("rarity")]
     public string Rarity { get; init; } = string.Empty;
+    [JsonPropertyName("variation")]
+    public bool Variation { get; init; }
     [JsonPropertyName("colors")]
     public List<string> Colors { get; init; } = new();
 }

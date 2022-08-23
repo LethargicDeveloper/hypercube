@@ -18,7 +18,16 @@ public class ScryfallClient
         {
             var request = new RestRequest("sets");
             var result = this.client.Get<ScryfallResponse<Expansion>>(request);
-            expansions = result?.Data?.OrderBy(_ => _.Name).ToList();
+            expansions = result?.Data?
+                .OrderBy(_ => _.Name)
+                .Select(_ => new Expansion
+                {
+                    Name = _.Name,
+                    Code = _.Code,
+                    SearchUri = _.SearchUri.Replace("unique=prints", "unique=cards")
+                })
+                .ToList();
+
             SaveCache("expansions", expansions);
         }
 
@@ -76,6 +85,7 @@ public class ScryfallClient
         cards = cards?
             .OrderBy(_ => _, new CardColorComparer())
             .ThenBy(_ => _.Name)
+            .Where(_ => !_.Variation)
             .ToList();
 
         return cards ?? Enumerable.Empty<Card>();

@@ -583,6 +583,7 @@ partial class MainForm
             // 
             // colorNavigationComboBox
             // 
+            this.colorNavigationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colorNavigationComboBox.FormattingEnabled = true;
             this.colorNavigationComboBox.Location = new System.Drawing.Point(149, 493);
             this.colorNavigationComboBox.Name = "colorNavigationComboBox";
