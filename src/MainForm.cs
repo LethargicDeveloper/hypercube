@@ -607,6 +607,20 @@ public partial class MainForm : Form
         SetControlsToCurrentCard();
     }
 
+    void NextColorToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var index = this.colorNavigationComboBox.SelectedIndex + 1;
+        this.colorNavigationComboBox.SelectedIndex =
+            index > this.colorNavigationComboBox.Items.Count - 1 ? 0 : index;
+    }
+
+    void PreviousToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var index = this.colorNavigationComboBox.SelectedIndex - 1;
+        this.colorNavigationComboBox.SelectedIndex =
+            index < 0 ? this.colorNavigationComboBox.Items.Count - 1 : index;
+    }
+
     int FindSelectedCardByColor(string selectedColor, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; ++i)
