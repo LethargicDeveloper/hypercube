@@ -6,7 +6,8 @@ public static class Frames
     {
         { "", ("Colorless", "0.png") },
         { "L", ("Colorless (Legendary)", "0L.png") },
-        { "W", ("White", "W.png") }
+        { "W", ("White", "W.png") },
+        { "WL", ("White (Legendary)", "WL.png") }
     };
 
     public static Frame GetFrameForCard(Scryfall.Card card)

@@ -21,6 +21,7 @@ public partial class MainForm : Form
     readonly float dpiX;
     readonly float dpiY;
 
+    bool loading = false;
     Cube cube = new();
     int currentCard = 0;
     CardArtUserControl? selectedCardArtUserControl;
@@ -33,6 +34,8 @@ public partial class MainForm : Form
         UrzasAIClient urzasClient,
         CardSymbolProvider cardSymbolProvider)
     {
+        this.loading = true;
+
         InitializeComponent();
 
         this.form = form;
@@ -88,6 +91,8 @@ public partial class MainForm : Form
         this.colorNavigationComboBox.Items.Clear();
         this.colorNavigationComboBox.Items.AddRange(CardColors.Colors.ToArray());
         this.colorNavigationComboBox.EndUpdate();
+
+        this.loading = false;
     }
 
     void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -125,81 +130,111 @@ public partial class MainForm : Form
 
     void CardNameTextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
         CardTextBox_TextChanged(sender, e);
     }
 
     void ManaCostTextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void FrameComboBox_SelectedIndexChanged(object sender, EventArgs e)
-    {   
+    {
         var path = Path.Combine(".\\img", "frames",
             ((Frame)this.frameComboBox.SelectedItem).Path);
 
         this.cardPictureBox.ImageLocation = path;
+        
+        if (this.loading) return;
         this.cardPictureBox.LoadAsync();
     }
 
     void Supertype1ComboBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Supertype2ComboBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Type1ComboBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Type2ComboBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Type3ComboBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Subtype1TextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Subtype2TextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void Subtype3TextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void RarityComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardPictureBox.Refresh();
     }
 
     void HasPowerToughnessCheckBox_CheckedChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.powerAndToughnessPictureBox.Visible = this.cardTextUserControl.HasPowerAndToughness;
     }
 
     void PowerTextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.powerAndToughnessPictureBox.Refresh();
     }
 
     void ToughnessTextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.powerAndToughnessPictureBox.Refresh();
     }
 
@@ -281,6 +316,8 @@ public partial class MainForm : Form
 
     void CardTextBox_TextChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         if (string.IsNullOrEmpty(this.cardTextRichTextBox.Text))
             this.cardTextRichTextBox.Clear();
 
@@ -363,6 +400,8 @@ public partial class MainForm : Form
 
     void FontSizeTrackBar_Scroll(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         this.cardTextRichTextBox.SelectionStart = 0;
         this.cardTextRichTextBox.SelectionLength = this.cardTextRichTextBox.Text.Length;
         this.cardTextRichTextBox.SelectionFont = new Font(
@@ -482,6 +521,8 @@ public partial class MainForm : Form
 
     void CardArtUserControl_SelectedChanged(object? sender, EventArgs e)
     {
+        if (this.loading) return;
+
         var control = sender as CardArtUserControl;
         if (control == null) return;
 
@@ -515,6 +556,8 @@ public partial class MainForm : Form
 
     void SaveToolStripMenuItem_Click(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         var cardText = ((CardTextUserControl)this.cardTextTabControl.TabPages[0].Controls[0]);
         var card = new Card
         {
@@ -574,6 +617,7 @@ public partial class MainForm : Form
 
         ClearControls();
         SetControlsToCurrentCard();
+        SetControlsEnabled(true);
     }
 
     void PreviousButton_Click(object sender, EventArgs e)
@@ -588,10 +632,13 @@ public partial class MainForm : Form
 
         ClearControls();
         SetControlsToCurrentCard();
+        SetControlsEnabled(true);
     }
 
     void ColorNavigationComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (this.loading) return;
+
         var selectedColor = ((CardColorItem)this.colorNavigationComboBox.SelectedItem).Value;
         var prevCard = this.currentCard;
 
@@ -605,6 +652,7 @@ public partial class MainForm : Form
 
         ClearControls();
         SetControlsToCurrentCard();
+        SetControlsEnabled(true);
     }
 
     void NextColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -740,6 +788,7 @@ public partial class MainForm : Form
 
     void LoadCube()
     {
+        this.loading = true;
         Application.UseWaitCursor = true;
         this.scryfallCards = this.scryfallClient.GetCardsForCube(this.cube)?.ToList() ?? new();
 
@@ -754,9 +803,11 @@ public partial class MainForm : Form
         
         SetControlsEnabled(true);
         this.panel.Hide();
-        this.saveToolStripMenuItem.Enabled = true;
-        this.navigationToolStripMenuItem.Visible = true;
         Application.UseWaitCursor = false;
+        this.loading = false;
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
     }
 
     Card GetCurrentCard()
@@ -933,6 +984,12 @@ public partial class MainForm : Form
             {
                 control.Enabled = enabled;
             }
+        }
+
+        if (!string.IsNullOrEmpty(this.cube.CubeName))
+        {
+            this.saveToolStripMenuItem.Enabled = true;
+            this.navigationToolStripMenuItem.Visible = true;
         }
     }
 }
