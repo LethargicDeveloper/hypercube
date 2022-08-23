@@ -310,8 +310,10 @@ public partial class MainForm : Form
                 var pich = (int)Math.Round((bmp.Height / this.dpiY) * 2540);
                 var picwgoal = (int)Math.Round((bmp.Width / this.dpiX) * 1440);
                 var pichgoal = (int)Math.Round((bmp.Height / this.dpiY) * 1440);
+                int scalex = Math.Clamp((int)(100 * (this.fontSizeTrackBar.Value / 11.0f)), 0, 100);
+                int scaley = Math.Clamp((int)(100 * (this.fontSizeTrackBar.Value / 11.0f)), 0, 100);
 
-                sb.Append($@"\pvpg{{\pict\wmetafile8\picw{picw}\pich{pich}\picwgoal{picwgoal}\pichgoal{pichgoal} {hex}}}");
+                sb.Append($@"\pvpg{{\pict\wmetafile8\picw{picw}\pich{pich}\picwgoal{picwgoal}\pichgoal{pichgoal}\picscalex{scalex}\picscaley{scaley} {hex}}}");
                 symbolChars = string.Empty;
             }
             else if (symbol)
