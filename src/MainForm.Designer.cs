@@ -383,7 +383,7 @@ partial class MainForm
             this.label10.Location = new System.Drawing.Point(388, 420);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(85, 21);
-            this.label10.TabIndex = 25;
+            this.label10.TabIndex = 27;
             this.label10.Text = "Card Te&xt:";
             // 
             // cardTextTabControl
@@ -395,7 +395,7 @@ partial class MainForm
             this.cardTextTabControl.Name = "cardTextTabControl";
             this.cardTextTabControl.SelectedIndex = 0;
             this.cardTextTabControl.Size = new System.Drawing.Size(318, 315);
-            this.cardTextTabControl.TabIndex = 26;
+            this.cardTextTabControl.TabIndex = 28;
             // 
             // newCardTabPage
             // 
@@ -544,7 +544,7 @@ partial class MainForm
             this.fontSizeTrackBar.Minimum = 8;
             this.fontSizeTrackBar.Name = "fontSizeTrackBar";
             this.fontSizeTrackBar.Size = new System.Drawing.Size(317, 45);
-            this.fontSizeTrackBar.TabIndex = 25;
+            this.fontSizeTrackBar.TabIndex = 26;
             this.fontSizeTrackBar.TickStyle = System.Windows.Forms.TickStyle.TopLeft;
             this.fontSizeTrackBar.Value = 11;
             this.fontSizeTrackBar.Scroll += new System.EventHandler(this.FontSizeTrackBar_Scroll);
@@ -557,7 +557,7 @@ partial class MainForm
             this.label1.Location = new System.Drawing.Point(390, 375);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 21);
-            this.label1.TabIndex = 104;
+            this.label1.TabIndex = 25;
             this.label1.Text = "Font Si&ze:";
             // 
             // nextButton
