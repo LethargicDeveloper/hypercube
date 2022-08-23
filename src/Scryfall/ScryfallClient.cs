@@ -73,6 +73,11 @@ public class ScryfallClient
             SaveCache(cube.ExpansionCode, cards);
         }
 
+        cards = cards?
+            .OrderBy(_ => _, new CardColorComparer())
+            .ThenBy(_ => _.Name)
+            .ToList();
+
         return cards ?? Enumerable.Empty<Card>();
     }
 

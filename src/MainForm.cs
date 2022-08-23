@@ -81,6 +81,13 @@ public partial class MainForm : Form
         this.type3ComboBox.Items.Clear();
         this.type3ComboBox.Items.AddRange(cardtypes);
         this.type3ComboBox.EndUpdate();
+
+        this.colorNavigationComboBox.DisplayMember = "Name";
+        this.colorNavigationComboBox.ValueMember = "Value";
+        this.colorNavigationComboBox.BeginUpdate();
+        this.colorNavigationComboBox.Items.Clear();
+        this.colorNavigationComboBox.Items.AddRange(CardColors.Colors.ToArray());
+        this.colorNavigationComboBox.EndUpdate();
     }
 
     void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -583,6 +590,44 @@ public partial class MainForm : Form
         SetControlsToCurrentCard();
     }
 
+    void ColorNavigationComboBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var selectedColor = ((CardColorItem)this.colorNavigationComboBox.SelectedItem).Value;
+        var prevCard = this.currentCard;
+
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard = FindSelectedCardByColor(selectedColor, this.currentCard, this.scryfallCards.Count - 1);
+        if (prevCard == currentCard)
+        {
+            this.currentCard = FindSelectedCardByColor(selectedColor, 0, this.currentCard + 1);
+        }
+
+        ClearControls();
+        SetControlsToCurrentCard();
+    }
+
+    int FindSelectedCardByColor(string selectedColor, int startIndex, int endIndex)
+    {
+        for (int i = startIndex; i < endIndex; ++i)
+        {
+            var card = this.scryfallCards[i];
+            
+            var isMonoColored = card.Colors.Count == 1 && "WUBRG".Contains(selectedColor) && selectedColor == card.Colors[0];
+            var isMultiColored = card.Colors.Count > 1 && selectedColor == "M";
+            var isColorless = card.Colors.Count == 0 && selectedColor == "0" && !card.TypeLine.Contains("Land");
+            var isLand = card.Colors.Count == 0 && selectedColor == "L" && card.TypeLine.Contains("Land");
+
+            if (isMonoColored || isMultiColored || isColorless || isLand)
+            {
+                return i;
+            }
+        }
+
+        return startIndex;
+    }
+
+
     Image RenderCardImage(Card card)
     {
         using var cardImage = new Bitmap(this.cardPictureBox.Width, this.cardPictureBox.Height);
@@ -768,6 +813,16 @@ public partial class MainForm : Form
         this.rarityComboBox.Text = card.Rarity;
         this.fontSizeTrackBar.Value = card.FontSize;
         this.cardTextUserControl.CardText = card.CardText;
+
+        var selectedColor = new CardColorComparer().GetColorIndex(this.scryfallCards[this.currentCard]);
+        foreach (CardColorItem item in this.colorNavigationComboBox.Items)
+        {
+            if (item.Value == selectedColor)
+            {
+                this.colorNavigationComboBox.Text = item.Name;
+                break;
+            }
+        }
 
         this.cardTextUserControl.HasPowerAndToughness =
             !string.IsNullOrEmpty(card.Power) ||

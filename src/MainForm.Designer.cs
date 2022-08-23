@@ -74,6 +74,7 @@ partial class MainForm
             this.label1 = new System.Windows.Forms.Label();
             this.nextButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
+            this.colorNavigationComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -562,9 +563,9 @@ partial class MainForm
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(257, 494);
+            this.nextButton.Location = new System.Drawing.Point(278, 493);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(111, 23);
+            this.nextButton.Size = new System.Drawing.Size(90, 23);
             this.nextButton.TabIndex = 104;
             this.nextButton.Text = "Next ->";
             this.nextButton.UseVisualStyleBackColor = true;
@@ -574,17 +575,27 @@ partial class MainForm
             // 
             this.previousButton.Location = new System.Drawing.Point(53, 494);
             this.previousButton.Name = "previousButton";
-            this.previousButton.Size = new System.Drawing.Size(111, 23);
+            this.previousButton.Size = new System.Drawing.Size(90, 23);
             this.previousButton.TabIndex = 105;
             this.previousButton.Text = "<- Previous";
             this.previousButton.UseVisualStyleBackColor = true;
             this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
+            // colorNavigationComboBox
+            // 
+            this.colorNavigationComboBox.FormattingEnabled = true;
+            this.colorNavigationComboBox.Location = new System.Drawing.Point(149, 493);
+            this.colorNavigationComboBox.Name = "colorNavigationComboBox";
+            this.colorNavigationComboBox.Size = new System.Drawing.Size(123, 23);
+            this.colorNavigationComboBox.TabIndex = 106;
+            this.colorNavigationComboBox.SelectedIndexChanged += new System.EventHandler(this.ColorNavigationComboBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
+            this.Controls.Add(this.colorNavigationComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.previousButton);
             this.Controls.Add(this.nextButton);
@@ -685,4 +696,5 @@ partial class MainForm
     private ToolStripMenuItem navigationToolStripMenuItem;
     private ToolStripMenuItem nextToolStripMenuItem;
     private ToolStripMenuItem previousCardToolStripMenuItem;
+    private ComboBox colorNavigationComboBox;
 }
