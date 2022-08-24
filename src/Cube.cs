@@ -4,7 +4,12 @@ namespace Hypercube;
 
 public class Cube
 {
-    const string BaseDir = "Cubes";
+    readonly Settings settings;
+
+    public Cube(Settings settings)
+    {
+        this.settings = settings;
+    }
 
     public string CubeName { get; init; } = string.Empty;
     public string ScryfallUri { get; init; } = string.Empty;
@@ -25,26 +30,26 @@ public class Cube
 
     public void Save()
     {
-        var path = Path.Combine(BaseDir, CubeName);
+        var path = Path.Combine(this.settings.CubeLocation, CubeName);
         var json = JsonSerializer.Serialize(this);
         File.WriteAllText(Path.Combine(path, "cube.json"), json);
     }
 
     public string GetArtImagePath(string scryfallReference)
     {
-        var path = Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
         return File.Exists(path) ? path : string.Empty;
     }
 
     public void SaveArtImage(string scryfallReference, Image image)
     {
-        var path = Path.Combine(BaseDir, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
         image.Save(path);
     }
 
     public void SaveCardImage(string scryfallReference, Image image)
     {
-        var path = Path.Combine(BaseDir, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");
         image.Save(path);
     }
 

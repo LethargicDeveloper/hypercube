@@ -5,33 +5,33 @@ namespace Hypercube;
 
 public class CubeManager
 {
-    const string BaseDir = "Cubes";
-
     readonly ScryfallClient scryfall;
+    readonly Settings settings;
 
-    private CubeManager(ScryfallClient scryfall)
+    private CubeManager(ScryfallClient scryfall, Settings settings)
     {
         this.scryfall = scryfall;
+        this.settings = settings;
     }
 
-    public static CubeManager Create(ScryfallClient scryfall)
+    public static CubeManager Create(ScryfallClient scryfall, Settings settings)
     {
-        if (!Directory.Exists(BaseDir))
+        if (!Directory.Exists(settings.CubeLocation))
         {
-            Directory.CreateDirectory(BaseDir);
+            Directory.CreateDirectory(settings.CubeLocation);
         }
 
-        return new CubeManager(scryfall);
+        return new CubeManager(scryfall, settings);
     }
 
     public IEnumerable<string> GetCubes()
     {
-        return Directory.GetDirectories(BaseDir);
+        return Directory.GetDirectories(this.settings.CubeLocation);
     }
 
     public bool CreateCube(Cube cube)
     {
-        var path = Path.Combine(BaseDir, cube.CubeName);
+        var path = Path.Combine(this.settings.CubeLocation, cube.CubeName);
         if (Directory.Exists(path))
         {
             return false;
@@ -47,7 +47,7 @@ public class CubeManager
 
     public Cube? LoadCube(string cubeName)
     {
-        var path = Path.Combine(BaseDir, cubeName);
+        var path = Path.Combine(this.settings.CubeLocation, cubeName);
         if (!Directory.Exists(path))
         {
             return null;

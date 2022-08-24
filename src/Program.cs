@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Hypercube.Scryfall;
 using Hypercube.UrzasAI;
+using System.Configuration;
 
 namespace Hypercube;
 
@@ -22,6 +23,13 @@ static class Program
 
     static void ConfigureServices(IServiceCollection services)
     {
+        var cubeLocation = ConfigurationManager.AppSettings.Get("CubeLocation") ?? ".\\Cubes";
+        var settings = new Settings
+        {
+            CubeLocation = cubeLocation
+        };
+
+        services.AddSingleton(settings);
         services.AddScoped<FormFactory>();
         services.AddScoped<CardSymbolProvider>();
 
@@ -44,7 +52,9 @@ static class Program
         services.AddSingleton(provider =>
         {
             var scryfallClient = provider.GetRequiredService<ScryfallClient>();
-            return CubeManager.Create(scryfallClient);
+            var settings = provider.GetRequiredService<Settings>();
+
+            return CubeManager.Create(scryfallClient, settings);
         });
     }
 }

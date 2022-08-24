@@ -39,6 +39,8 @@ partial class MainForm
             this.navigationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.previousCardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.previousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.expansionCardPictureBox = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -75,8 +77,6 @@ partial class MainForm
             this.nextButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.colorNavigationComboBox = new System.Windows.Forms.ComboBox();
-            this.nextColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.previousToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -173,6 +173,24 @@ partial class MainForm
             this.previousCardToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.previousCardToolStripMenuItem.Text = "Previous Card";
             this.previousCardToolStripMenuItem.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
+            // nextColorToolStripMenuItem
+            // 
+            this.nextColorToolStripMenuItem.Name = "nextColorToolStripMenuItem";
+            this.nextColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Right)));
+            this.nextColorToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.nextColorToolStripMenuItem.Text = "Next Color";
+            this.nextColorToolStripMenuItem.Click += new System.EventHandler(this.NextColorToolStripMenuItem_Click);
+            // 
+            // previousToolStripMenuItem
+            // 
+            this.previousToolStripMenuItem.Name = "previousToolStripMenuItem";
+            this.previousToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Left)));
+            this.previousToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.previousToolStripMenuItem.Text = "Previous Color";
+            this.previousToolStripMenuItem.Click += new System.EventHandler(this.PreviousToolStripMenuItem_Click);
             // 
             // expansionCardPictureBox
             // 
@@ -594,24 +612,6 @@ partial class MainForm
             this.colorNavigationComboBox.Size = new System.Drawing.Size(123, 23);
             this.colorNavigationComboBox.TabIndex = 106;
             this.colorNavigationComboBox.SelectedIndexChanged += new System.EventHandler(this.ColorNavigationComboBox_SelectedIndexChanged);
-            // 
-            // nextColorToolStripMenuItem
-            // 
-            this.nextColorToolStripMenuItem.Name = "nextColorToolStripMenuItem";
-            this.nextColorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Right)));
-            this.nextColorToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.nextColorToolStripMenuItem.Text = "Next Color";
-            this.nextColorToolStripMenuItem.Click += new System.EventHandler(this.NextColorToolStripMenuItem_Click);
-            // 
-            // previousToolStripMenuItem
-            // 
-            this.previousToolStripMenuItem.Name = "previousToolStripMenuItem";
-            this.previousToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Left)));
-            this.previousToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.previousToolStripMenuItem.Text = "Previous Color";
-            this.previousToolStripMenuItem.Click += new System.EventHandler(this.PreviousToolStripMenuItem_Click);
             // 
             // MainForm
             // 

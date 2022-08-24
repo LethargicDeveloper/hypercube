@@ -22,7 +22,7 @@ public partial class MainForm : Form
     readonly float dpiY;
 
     bool loading = false;
-    Cube cube = new();
+    Cube cube;
     int currentCard = 0;
     CardArtUserControl? selectedCardArtUserControl;
     List<Scryfall.Card> scryfallCards = new();
@@ -32,8 +32,11 @@ public partial class MainForm : Form
         CubeManager cubeManager,
         ScryfallClient scryfallClient,
         UrzasAIClient urzasClient,
-        CardSymbolProvider cardSymbolProvider)
+        CardSymbolProvider cardSymbolProvider,
+        Settings settings)
     {
+        this.cube = new(settings);
+
         this.loading = true;
 
         InitializeComponent();

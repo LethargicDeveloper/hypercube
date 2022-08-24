@@ -6,16 +6,18 @@ public partial class NewCubeForm : Form
 {
     readonly ScryfallClient client;
     readonly CubeManager cubeManager;
+    readonly Settings settings;
 
     List<Expansion> expansions;
 
-    public NewCubeForm(ScryfallClient client, CubeManager cubeManager)
+    public NewCubeForm(ScryfallClient client, CubeManager cubeManager, Settings settings)
     {
         InitializeComponent();
 
         this.client = client;
         this.cubeManager = cubeManager;
         this.expansions = new List<Expansion>();
+        this.settings = settings;
     }
 
     public Cube Cube { get; private set; } = null!;
@@ -48,7 +50,7 @@ public partial class NewCubeForm : Form
     {
         var expansion = (Expansion)this.setListBox.SelectedItem;
 
-        this.Cube = new Cube
+        this.Cube = new Cube(this.settings)
         {
             CubeName = this.cubeNameTextBox.Text,
             Expansion = expansion.Name,
