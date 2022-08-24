@@ -16,6 +16,8 @@ static class Program
         ConfigureServices(services);
 
         using var provider = services.BuildServiceProvider();
+        ServiceLocator.Provider = provider;
+
         var mainForm = provider.GetRequiredService<MainForm>();
 
         Application.Run(mainForm);

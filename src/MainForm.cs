@@ -32,10 +32,9 @@ public partial class MainForm : Form
         CubeManager cubeManager,
         ScryfallClient scryfallClient,
         UrzasAIClient urzasClient,
-        CardSymbolProvider cardSymbolProvider,
-        Settings settings)
+        CardSymbolProvider cardSymbolProvider)
     {
-        this.cube = new(settings);
+        this.cube = new();
 
         this.loading = true;
 

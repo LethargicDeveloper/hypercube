@@ -1,14 +1,15 @@
-﻿using System.Text.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
 
 namespace Hypercube;
 
 public class Cube
 {
-    readonly Settings settings;
+    Settings settings;
 
-    public Cube(Settings settings)
+    public Cube()
     {
-        this.settings = settings;
+        this.settings = ServiceLocator.Provider.GetRequiredService<Settings>();
     }
 
     public string CubeName { get; init; } = string.Empty;
