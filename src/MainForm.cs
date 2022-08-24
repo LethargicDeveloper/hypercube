@@ -402,13 +402,13 @@ public partial class MainForm : Form
 
     void FontSizeTrackBar_Scroll(object sender, EventArgs e)
     {
-        if (this.loading) return;
-
         this.cardTextRichTextBox.SelectionStart = 0;
         this.cardTextRichTextBox.SelectionLength = this.cardTextRichTextBox.Text.Length;
         this.cardTextRichTextBox.SelectionFont = new Font(
             this.cardTextRichTextBox.Font.FontFamily,
             this.fontSizeTrackBar.Value);
+
+        if (this.loading) return;
 
         CardTextBox_TextChanged(sender, e);
     }
@@ -879,6 +879,10 @@ public partial class MainForm : Form
         this.rarityComboBox.Text = card.Rarity;
         this.fontSizeTrackBar.Value = card.FontSize;
         this.cardTextUserControl.CardText = card.CardText;
+
+        var cardTextFontFamily = Fonts.GetFontFamily("MPlantin");
+        using var cardTextFont = new Font(cardTextFontFamily, this.fontSizeTrackBar.Value, FontStyle.Regular);
+        this.cardTextRichTextBox.Font = cardTextFont;
 
         var selectedColor = new CardColorComparer().GetColorIndex(this.scryfallCards[this.currentCard]);
         foreach (CardColorItem item in this.colorNavigationComboBox.Items)
