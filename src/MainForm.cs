@@ -380,6 +380,10 @@ public partial class MainForm : Form
                 sb.Append(" ");
                 bold = !bold;
             }
+            else if (@char == '@')
+            {
+                sb.Append(@"\bullet ");
+            }
             else if (@char == '\n')
             {
                 sb.Append(@"\par ");
