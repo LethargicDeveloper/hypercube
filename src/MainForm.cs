@@ -689,7 +689,6 @@ public partial class MainForm : Form
         return startIndex;
     }
 
-
     Image RenderCardImage(Card card)
     {
         using var cardImage = new Bitmap(this.cardPictureBox.Width, this.cardPictureBox.Height);
