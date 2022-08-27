@@ -624,6 +624,9 @@ public partial class MainForm : Form
         ClearControls();
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
     }
 
     void PreviousButton_Click(object sender, EventArgs e)
@@ -639,6 +642,9 @@ public partial class MainForm : Form
         ClearControls();
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
     }
 
     void ColorNavigationComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -659,6 +665,9 @@ public partial class MainForm : Form
         ClearControls();
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
     }
 
     void NextColorToolStripMenuItem_Click(object sender, EventArgs e)
