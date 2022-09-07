@@ -3,6 +3,7 @@ using Hypercube.UrzasAI;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace Hypercube;
 
@@ -114,7 +115,8 @@ public partial class MainForm : Form
 
     void OpenCubeToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        this.folderBrowserDialog.InitialDirectory = Path.GetFullPath(".\\Cubes");
+        var cubeLocation = ConfigurationManager.AppSettings.Get("CubeLocation") ?? ".\\Cubes";
+        this.folderBrowserDialog.InitialDirectory = Path.GetFullPath(cubeLocation);
         if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
         {
             var cubeName = Path.GetFileName(this.folderBrowserDialog.SelectedPath);
@@ -646,6 +648,88 @@ public partial class MainForm : Form
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
         this.loading = false;
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
+    }
+
+    void FirstButton_Click(object sender, EventArgs e)
+    {
+        if (this.loading) return;
+
+        var selectedColor = ((CardColorItem)this.colorNavigationComboBox.SelectedItem).Value;
+
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard = FindSelectedCardByColor(selectedColor, 0, this.scryfallCards.Count - 1);
+
+        ClearControls();
+        SetControlsToCurrentCard();
+        SetControlsEnabled(true);
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
+    }
+
+    void LastButton_Click(object sender, EventArgs e)
+    {
+        if (this.loading) return;
+
+        string selectedColor;
+
+        var colorIndex = this.colorNavigationComboBox.SelectedIndex + 1;
+        if (colorIndex == this.colorNavigationComboBox.Items.Count)
+        {
+            selectedColor = ((CardColorItem)this.colorNavigationComboBox.Items[0]).Value;
+        } else
+        {
+            selectedColor = ((CardColorItem)this.colorNavigationComboBox.Items[this.colorNavigationComboBox.SelectedIndex + 1]).Value;
+        }
+
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard = FindSelectedCardByColor(selectedColor, 0, this.scryfallCards.Count - 1) - 1;
+
+        ClearControls();
+        SetControlsToCurrentCard();
+        SetControlsEnabled(true);
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
+    }
+
+    void LatestButton_Click(object sender, EventArgs e)
+    {
+        var prevColorName = ((CardColorItem)this.colorNavigationComboBox.Items[this.colorNavigationComboBox.SelectedIndex]).Value;
+
+        var firstIndex = FindSelectedCardByColor(prevColorName, 0, this.scryfallCards.Count - 1);
+        var lastIndex = -1;
+        if (this.colorNavigationComboBox.SelectedIndex == (this.colorNavigationComboBox.Items.Count - 1))
+        {
+            lastIndex = this.scryfallCards.Count - 1;
+        } 
+        else
+        {
+            var colorName = ((CardColorItem)this.colorNavigationComboBox.Items[this.colorNavigationComboBox.SelectedIndex + 1]).Value;
+            lastIndex = FindSelectedCardByColor(colorName, 0, this.scryfallCards.Count - 1) - 1;
+        }
+
+        var latestIndex = 0;
+        for (var i = firstIndex; i < lastIndex; i++)
+        {
+            var cubeCard = this.cube.Cards.FirstOrDefault(_ => _.ScryfallReference == scryfallCards[i].ImageUris.Normal);
+            if (cubeCard == null || cubeCard.Name == String.Empty)
+            {
+                latestIndex = i - 1;
+                break;
+            }
+        }
+
+        this.currentCard = latestIndex;
+
+        ClearControls();
+        SetControlsToCurrentCard();
+        SetControlsEnabled(true);
 
         CardTextBox_TextChanged(this, new EventArgs());
         this.cardPictureBox.Refresh();

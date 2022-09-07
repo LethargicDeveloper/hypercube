@@ -77,6 +77,9 @@ partial class MainForm
             this.nextButton = new System.Windows.Forms.Button();
             this.previousButton = new System.Windows.Forms.Button();
             this.colorNavigationComboBox = new System.Windows.Forms.ComboBox();
+            this.lastButton = new System.Windows.Forms.Button();
+            this.firstButton = new System.Windows.Forms.Button();
+            this.latestButton = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -114,14 +117,14 @@ partial class MainForm
             // newCubeToolStripMenuItem
             // 
             this.newCubeToolStripMenuItem.Name = "newCubeToolStripMenuItem";
-            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newCubeToolStripMenuItem.Text = "&New Cube...";
             this.newCubeToolStripMenuItem.Click += new System.EventHandler(this.NewCubeToolStripMenuItem_Click);
             // 
             // openCubeToolStripMenuItem
             // 
             this.openCubeToolStripMenuItem.Name = "openCubeToolStripMenuItem";
-            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
             // 
@@ -130,19 +133,19 @@ partial class MainForm
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -585,21 +588,21 @@ partial class MainForm
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(278, 493);
+            this.nextButton.Location = new System.Drawing.Point(276, 494);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(90, 23);
+            this.nextButton.Size = new System.Drawing.Size(43, 23);
             this.nextButton.TabIndex = 104;
-            this.nextButton.Text = "Next ->";
+            this.nextButton.Text = ">";
             this.nextButton.UseVisualStyleBackColor = true;
             this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // previousButton
             // 
-            this.previousButton.Location = new System.Drawing.Point(53, 494);
+            this.previousButton.Location = new System.Drawing.Point(102, 494);
             this.previousButton.Name = "previousButton";
-            this.previousButton.Size = new System.Drawing.Size(90, 23);
+            this.previousButton.Size = new System.Drawing.Size(43, 23);
             this.previousButton.TabIndex = 105;
-            this.previousButton.Text = "<- Previous";
+            this.previousButton.Text = "<";
             this.previousButton.UseVisualStyleBackColor = true;
             this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
@@ -607,17 +610,50 @@ partial class MainForm
             // 
             this.colorNavigationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colorNavigationComboBox.FormattingEnabled = true;
-            this.colorNavigationComboBox.Location = new System.Drawing.Point(149, 493);
+            this.colorNavigationComboBox.Location = new System.Drawing.Point(151, 494);
             this.colorNavigationComboBox.Name = "colorNavigationComboBox";
-            this.colorNavigationComboBox.Size = new System.Drawing.Size(123, 23);
+            this.colorNavigationComboBox.Size = new System.Drawing.Size(119, 23);
             this.colorNavigationComboBox.TabIndex = 106;
             this.colorNavigationComboBox.SelectedIndexChanged += new System.EventHandler(this.ColorNavigationComboBox_SelectedIndexChanged);
+            // 
+            // lastButton
+            // 
+            this.lastButton.Location = new System.Drawing.Point(325, 494);
+            this.lastButton.Name = "lastButton";
+            this.lastButton.Size = new System.Drawing.Size(43, 23);
+            this.lastButton.TabIndex = 107;
+            this.lastButton.Text = ">>";
+            this.lastButton.UseVisualStyleBackColor = true;
+            this.lastButton.Click += new System.EventHandler(this.LastButton_Click);
+            // 
+            // firstButton
+            // 
+            this.firstButton.Location = new System.Drawing.Point(53, 494);
+            this.firstButton.Name = "firstButton";
+            this.firstButton.Size = new System.Drawing.Size(43, 23);
+            this.firstButton.TabIndex = 108;
+            this.firstButton.Text = "<<";
+            this.firstButton.UseVisualStyleBackColor = true;
+            this.firstButton.Click += new System.EventHandler(this.FirstButton_Click);
+            // 
+            // latestButton
+            // 
+            this.latestButton.Location = new System.Drawing.Point(53, 523);
+            this.latestButton.Name = "latestButton";
+            this.latestButton.Size = new System.Drawing.Size(315, 23);
+            this.latestButton.TabIndex = 109;
+            this.latestButton.Text = "Latest";
+            this.latestButton.UseVisualStyleBackColor = true;
+            this.latestButton.Click += new System.EventHandler(this.LatestButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 827);
+            this.Controls.Add(this.latestButton);
+            this.Controls.Add(this.firstButton);
+            this.Controls.Add(this.lastButton);
             this.Controls.Add(this.colorNavigationComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.previousButton);
@@ -722,4 +758,7 @@ partial class MainForm
     private ComboBox colorNavigationComboBox;
     private ToolStripMenuItem nextColorToolStripMenuItem;
     private ToolStripMenuItem previousColorToolStripMenuItem;
+    private Button lastButton;
+    private Button firstButton;
+    private Button latestButton;
 }
