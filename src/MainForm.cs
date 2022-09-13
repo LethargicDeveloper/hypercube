@@ -714,8 +714,8 @@ public partial class MainForm : Form
             lastIndex = FindSelectedCardByColor(colorName, 0, this.scryfallCards.Count - 1) - 1;
         }
 
-        var latestIndex = 0;
-        for (var i = firstIndex; i < lastIndex; i++)
+        var latestIndex = -1;
+        for (var i = firstIndex + 1; i < lastIndex; i++)
         {
             var cubeCard = this.cube.Cards.FirstOrDefault(_ => _.ScryfallReference == scryfallCards[i].ImageUris.Normal);
             if (cubeCard == null || cubeCard.Name == String.Empty)
@@ -725,7 +725,10 @@ public partial class MainForm : Form
             }
         }
 
-        this.currentCard = latestIndex;
+        if (latestIndex > -1 && latestIndex != this.currentCard)
+        {
+            this.currentCard = latestIndex;
+        }
 
         ClearControls();
         SetControlsToCurrentCard();
