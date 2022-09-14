@@ -653,49 +653,18 @@ public partial class MainForm : Form
         this.cardPictureBox.Refresh();
     }
 
-    void FirstButton_Click(object sender, EventArgs e)
+    void NextColorButton_Click(object sender, EventArgs e)
     {
-        if (this.loading) return;
-
-        var selectedColor = ((CardColorItem)this.colorNavigationComboBox.SelectedItem).Value;
-
-        SaveToolStripMenuItem_Click(sender, e);
-
-        this.currentCard = FindSelectedCardByColor(selectedColor, 0, this.scryfallCards.Count - 1);
-
-        ClearControls();
-        SetControlsToCurrentCard();
-        SetControlsEnabled(true);
-
-        CardTextBox_TextChanged(this, new EventArgs());
-        this.cardPictureBox.Refresh();
+        var index = this.colorNavigationComboBox.SelectedIndex + 1;
+        this.colorNavigationComboBox.SelectedIndex =
+            index > this.colorNavigationComboBox.Items.Count - 1 ? 0 : index;
     }
 
-    void LastButton_Click(object sender, EventArgs e)
+    void PrevColorButton_Click(object sender, EventArgs e)
     {
-        if (this.loading) return;
-
-        string selectedColor;
-
-        var colorIndex = this.colorNavigationComboBox.SelectedIndex + 1;
-        if (colorIndex == this.colorNavigationComboBox.Items.Count)
-        {
-            selectedColor = ((CardColorItem)this.colorNavigationComboBox.Items[0]).Value;
-        } else
-        {
-            selectedColor = ((CardColorItem)this.colorNavigationComboBox.Items[this.colorNavigationComboBox.SelectedIndex + 1]).Value;
-        }
-
-        SaveToolStripMenuItem_Click(sender, e);
-
-        this.currentCard = FindSelectedCardByColor(selectedColor, 0, this.scryfallCards.Count - 1) - 1;
-
-        ClearControls();
-        SetControlsToCurrentCard();
-        SetControlsEnabled(true);
-
-        CardTextBox_TextChanged(this, new EventArgs());
-        this.cardPictureBox.Refresh();
+        var index = this.colorNavigationComboBox.SelectedIndex - 1;
+        this.colorNavigationComboBox.SelectedIndex =
+            index < 0 ? this.colorNavigationComboBox.Items.Count - 1 : index;
     }
 
     void LatestButton_Click(object sender, EventArgs e)
