@@ -588,21 +588,21 @@ partial class MainForm
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(290, 522);
+            this.nextButton.Location = new System.Drawing.Point(290, 494);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(78, 24);
             this.nextButton.TabIndex = 104;
-            this.nextButton.Text = "Next ->";
+            this.nextButton.Text = ">";
             this.nextButton.UseVisualStyleBackColor = true;
             this.nextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
             // previousButton
             // 
-            this.previousButton.Location = new System.Drawing.Point(53, 522);
+            this.previousButton.Location = new System.Drawing.Point(53, 494);
             this.previousButton.Name = "previousButton";
             this.previousButton.Size = new System.Drawing.Size(78, 24);
             this.previousButton.TabIndex = 105;
-            this.previousButton.Text = "<- Previous";
+            this.previousButton.Text = "<";
             this.previousButton.UseVisualStyleBackColor = true;
             this.previousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
@@ -610,7 +610,7 @@ partial class MainForm
             // 
             this.colorNavigationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colorNavigationComboBox.FormattingEnabled = true;
-            this.colorNavigationComboBox.Location = new System.Drawing.Point(137, 494);
+            this.colorNavigationComboBox.Location = new System.Drawing.Point(137, 525);
             this.colorNavigationComboBox.Name = "colorNavigationComboBox";
             this.colorNavigationComboBox.Size = new System.Drawing.Size(147, 23);
             this.colorNavigationComboBox.TabIndex = 106;
@@ -618,7 +618,7 @@ partial class MainForm
             // 
             // nextColorButton
             // 
-            this.nextColorButton.Location = new System.Drawing.Point(290, 494);
+            this.nextColorButton.Location = new System.Drawing.Point(290, 525);
             this.nextColorButton.Name = "nextColorButton";
             this.nextColorButton.Size = new System.Drawing.Size(78, 23);
             this.nextColorButton.TabIndex = 107;
@@ -628,7 +628,7 @@ partial class MainForm
             // 
             // prevColorButton
             // 
-            this.prevColorButton.Location = new System.Drawing.Point(53, 494);
+            this.prevColorButton.Location = new System.Drawing.Point(53, 525);
             this.prevColorButton.Name = "prevColorButton";
             this.prevColorButton.Size = new System.Drawing.Size(78, 23);
             this.prevColorButton.TabIndex = 108;
@@ -638,7 +638,7 @@ partial class MainForm
             // 
             // latestButton
             // 
-            this.latestButton.Location = new System.Drawing.Point(137, 522);
+            this.latestButton.Location = new System.Drawing.Point(137, 495);
             this.latestButton.Name = "latestButton";
             this.latestButton.Size = new System.Drawing.Size(147, 23);
             this.latestButton.TabIndex = 109;
