@@ -621,9 +621,11 @@ public partial class MainForm : Form
             this.currentCard = 0;
         }
 
+        this.loading = true;
         ClearControls();
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
+        this.loading = false;
 
         CardTextBox_TextChanged(this, new EventArgs());
         this.cardPictureBox.Refresh();
@@ -639,9 +641,11 @@ public partial class MainForm : Form
             this.currentCard = this.scryfallCards.Count - 1;
         }
 
+        this.loading = true;
         ClearControls();
         SetControlsToCurrentCard();
         SetControlsEnabled(true);
+        this.loading = false;
 
         CardTextBox_TextChanged(this, new EventArgs());
         this.cardPictureBox.Refresh();
@@ -677,7 +681,7 @@ public partial class MainForm : Form
             index > this.colorNavigationComboBox.Items.Count - 1 ? 0 : index;
     }
 
-    void PreviousToolStripMenuItem_Click(object sender, EventArgs e)
+    void PreviousColorToolStripMenuItem_Click(object sender, EventArgs e)
     {
         var index = this.colorNavigationComboBox.SelectedIndex - 1;
         this.colorNavigationComboBox.SelectedIndex =
