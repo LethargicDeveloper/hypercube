@@ -7,12 +7,16 @@ public class CubeManager
 {
     readonly ScryfallClient scryfall;
     readonly Settings settings;
+    
+    string? workingDirectory;
 
     private CubeManager(ScryfallClient scryfall, Settings settings)
     {
         this.scryfall = scryfall;
         this.settings = settings;
     }
+
+    string CubeDirectory => this.workingDirectory ?? this.settings.CubeLocation;
 
     public static CubeManager Create(ScryfallClient scryfall, Settings settings)
     {
@@ -24,14 +28,19 @@ public class CubeManager
         return new CubeManager(scryfall, settings);
     }
 
+    public void SetWorkingDirectory(string? path)
+    {
+        this.workingDirectory = path;
+    }
+
     public IEnumerable<string> GetCubes()
     {
-        return Directory.GetDirectories(this.settings.CubeLocation);
+        return Directory.GetDirectories(CubeDirectory);
     }
 
     public bool CreateCube(Cube cube)
     {
-        var path = Path.Combine(this.settings.CubeLocation, cube.CubeName);
+        var path = Path.Combine(CubeDirectory, cube.CubeName);
         if (Directory.Exists(path))
         {
             return false;
@@ -40,14 +49,14 @@ public class CubeManager
         Directory.CreateDirectory(path);
 
         CreateCubeConfig(path, cube);
-        CreateScryfallCache(path, cube);
+        CreateScryfallCache(cube);
 
         return true;
     }
 
     public Cube? LoadCube(string cubeName)
     {
-        var path = Path.Combine(this.settings.CubeLocation, cubeName);
+        var path = Path.Combine(CubeDirectory, cubeName);
         if (!Directory.Exists(path))
         {
             return null;
@@ -63,7 +72,7 @@ public class CubeManager
         File.WriteAllText(Path.Combine(path, "cube.json"), json);
     }
 
-    void CreateScryfallCache(string path, Cube cube)
+    void CreateScryfallCache(Cube cube)
     {
         this.scryfall.GetCardsForCube(cube);
     }

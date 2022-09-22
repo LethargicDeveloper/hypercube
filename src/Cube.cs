@@ -5,7 +5,9 @@ namespace Hypercube;
 
 public class Cube
 {
-    Settings settings;
+    readonly Settings settings;
+
+    string? workingDirectory;
 
     public Cube()
     {
@@ -17,6 +19,13 @@ public class Cube
     public string Expansion { get; init; } = string.Empty;
     public string ExpansionCode { get; init; } = string.Empty;
     public List<Card> Cards { get; set; } = new();
+
+    string CubeDirectory => this.workingDirectory ?? this.settings.CubeLocation;
+
+    public void SetWorkingDirectory(string? path)
+    {
+        this.workingDirectory = path;
+    }
 
     public void AddOrUpdate(Card card)
     {
@@ -31,26 +40,26 @@ public class Cube
 
     public void Save()
     {
-        var path = Path.Combine(this.settings.CubeLocation, CubeName);
+        var path = Path.Combine(CubeDirectory, CubeName);
         var json = JsonSerializer.Serialize(this);
         File.WriteAllText(Path.Combine(path, "cube.json"), json);
     }
 
     public string GetArtImagePath(string scryfallReference)
     {
-        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(CubeDirectory, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
         return File.Exists(path) ? path : string.Empty;
     }
 
     public void SaveArtImage(string scryfallReference, Image image)
     {
-        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(CubeDirectory, CubeName, $"art_{GetDeterministicHashCode(scryfallReference)}.png");
         image.Save(path);
     }
 
     public void SaveCardImage(string scryfallReference, Image image)
     {
-        var path = Path.Combine(this.settings.CubeLocation, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");
+        var path = Path.Combine(CubeDirectory, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");
         image.Save(path);
     }
 

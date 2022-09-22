@@ -14,6 +14,7 @@ public partial class MainForm : Form
     readonly ScryfallClient scryfallClient;
     readonly UrzasAIClient urzasClient;
     readonly CardSymbolProvider cardSymbolProvider;
+    readonly Settings settings;
     readonly Panel panel = new()
     {
         Dock = DockStyle.Fill
@@ -33,7 +34,8 @@ public partial class MainForm : Form
         CubeManager cubeManager,
         ScryfallClient scryfallClient,
         UrzasAIClient urzasClient,
-        CardSymbolProvider cardSymbolProvider)
+        CardSymbolProvider cardSymbolProvider,
+        Settings settings)
     {
         this.cube = new();
 
@@ -46,6 +48,7 @@ public partial class MainForm : Form
         this.scryfallClient = scryfallClient;
         this.urzasClient = urzasClient;
         this.cardSymbolProvider = cardSymbolProvider;
+        this.settings = settings;
         this.Controls.Add(this.panel);
         this.panel.BringToFront();
 
@@ -115,12 +118,16 @@ public partial class MainForm : Form
 
     void OpenCubeToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var cubeLocation = ConfigurationManager.AppSettings.Get("CubeLocation") ?? ".\\Cubes";
-        this.folderBrowserDialog.InitialDirectory = Path.GetFullPath(cubeLocation);
+        this.folderBrowserDialog.InitialDirectory = Path.GetFullPath(settings.CubeLocation);
         if (this.folderBrowserDialog.ShowDialog() == DialogResult.OK)
         {
+            var dir = Path.GetDirectoryName(this.folderBrowserDialog.SelectedPath);
             var cubeName = Path.GetFileName(this.folderBrowserDialog.SelectedPath);
+            
+            this.cubeManager.SetWorkingDirectory(dir);
+
             var cube = this.cubeManager.LoadCube(cubeName);
+
             if (cube == null)
             {
                 MessageBox.Show("Error loading cube.", "Error!");
@@ -128,6 +135,8 @@ public partial class MainForm : Form
             }
 
             this.cube = cube;
+            this.cube.SetWorkingDirectory(dir);
+
             LoadCube();
         }
     }
@@ -223,8 +232,6 @@ public partial class MainForm : Form
 
     void HasPowerToughnessCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        if (this.loading) return;
-
         this.powerAndToughnessPictureBox.Visible = this.cardTextUserControl.HasPowerAndToughness;
     }
 

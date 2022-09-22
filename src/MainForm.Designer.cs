@@ -117,14 +117,14 @@ partial class MainForm
             // newCubeToolStripMenuItem
             // 
             this.newCubeToolStripMenuItem.Name = "newCubeToolStripMenuItem";
-            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.newCubeToolStripMenuItem.Text = "&New Cube...";
             this.newCubeToolStripMenuItem.Click += new System.EventHandler(this.NewCubeToolStripMenuItem_Click);
             // 
             // openCubeToolStripMenuItem
             // 
             this.openCubeToolStripMenuItem.Name = "openCubeToolStripMenuItem";
-            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
             // 
@@ -133,19 +133,19 @@ partial class MainForm
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -622,7 +622,7 @@ partial class MainForm
             this.nextColorButton.Name = "nextColorButton";
             this.nextColorButton.Size = new System.Drawing.Size(78, 23);
             this.nextColorButton.TabIndex = 107;
-            this.nextColorButton.Text = ">";
+            this.nextColorButton.Text = ">>";
             this.nextColorButton.UseVisualStyleBackColor = true;
             this.nextColorButton.Click += new System.EventHandler(this.NextColorButton_Click);
             // 
@@ -632,7 +632,7 @@ partial class MainForm
             this.prevColorButton.Name = "prevColorButton";
             this.prevColorButton.Size = new System.Drawing.Size(78, 23);
             this.prevColorButton.TabIndex = 108;
-            this.prevColorButton.Text = "<";
+            this.prevColorButton.Text = "<<";
             this.prevColorButton.UseVisualStyleBackColor = true;
             this.prevColorButton.Click += new System.EventHandler(this.PrevColorButton_Click);
             // 
