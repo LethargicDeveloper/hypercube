@@ -2,7 +2,7 @@
 
 namespace Hypercube.Scryfall;
 
-public class Card
+public class ScryfallCard
 {
     [JsonPropertyName("object")]
     public string Object { get; init; } = string.Empty;

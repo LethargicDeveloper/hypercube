@@ -1,17 +1,17 @@
 ﻿namespace Hypercube.Scryfall;
 
-public class CardColorComparer : IComparer<Card>
+public class ScryfallCardColorComparer : IComparer<ScryfallCard>
 {
     Dictionary<string, int> values = new();
 
-    public CardColorComparer()
+    public ScryfallCardColorComparer()
     {
         values = CardColors.Colors
             .Select((_, index) => (index, value: _.Value))
             .ToDictionary(_ => _.value, _ => _.index);
     }
 
-    public int Compare(Card? x, Card? y)
+    public int Compare(ScryfallCard? x, ScryfallCard? y)
     {
         var indexX = GetColorIndex(x);
         var indexY = GetColorIndex(y);
@@ -24,7 +24,7 @@ public class CardColorComparer : IComparer<Card>
         return 0;
     }
 
-    public string GetColorIndex(Card? x)
+    public string GetColorIndex(ScryfallCard? x)
     {
         return x?.Colors switch
         {

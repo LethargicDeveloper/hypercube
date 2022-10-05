@@ -49,7 +49,7 @@ public static class Frames
         { "Land", ("Land", "Land.png") },
     };
 
-    public static Frame GetFrameForCard(Scryfall.Card card)
+    public static Frame GetFrameForCard(Scryfall.ScryfallCard card)
     {
         string key = card.TypeLine.Contains("Land")
             ? "Land" : string.Join("", card.Colors.OrderBy(_ => _)).ToUpper();
