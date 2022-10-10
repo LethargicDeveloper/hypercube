@@ -2,17 +2,17 @@
 
 public partial class CardTextUserControl : UserControl
 {
-    private bool @readonly;
-
-    public CardTextUserControl()
-    {
-        InitializeComponent();
-    }
+    bool @readonly;
 
     public event EventHandler? CardTextChanged;
     public event EventHandler? HasPowerAndToughnessCheckChanged;
     public event EventHandler? PowerTextChanged;
     public event EventHandler? ToughnessTextChanged;
+
+    public CardTextUserControl()
+    {
+        InitializeComponent();
+    }
 
     public string CardText
     {

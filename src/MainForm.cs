@@ -27,7 +27,7 @@ public partial class MainForm : Form
     Cube cube;
     int currentCard = 0;
     CardArtUserControl? selectedCardArtUserControl;
-    List<Scryfall.Card> scryfallCards = new();
+    List<Scryfall.ScryfallCard> scryfallCards = new();
 
     public MainForm(
         FormFactory form,
@@ -751,6 +751,31 @@ public partial class MainForm : Form
             index < 0 ? this.colorNavigationComboBox.Items.Count - 1 : index;
     }
 
+    void BrowseToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        var browser = new BrowseForm(this.cube);
+        browser.SelectionChanged += Browser_SelectionChanged;
+        browser.Show();
+    }
+
+    void Browser_SelectionChanged(object? sender, CardEventArgs e)
+    {
+        if (sender == null) return;
+
+        SaveToolStripMenuItem_Click(sender, e);
+
+        this.currentCard = this.scryfallCards.FindIndex(0, _ => _.ImageUris.Normal == e.Card.ScryfallReference);
+
+        this.loading = true;
+        ClearControls();
+        SetControlsToCurrentCard();
+        SetControlsEnabled(true);
+        this.loading = false;
+
+        CardTextBox_TextChanged(this, new EventArgs());
+        this.cardPictureBox.Refresh();
+    }
+
     int FindSelectedCardByColor(string selectedColor, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; ++i)
@@ -964,7 +989,7 @@ public partial class MainForm : Form
         using var cardTextFont = new Font(cardTextFontFamily, this.fontSizeTrackBar.Value, FontStyle.Regular);
         this.cardTextRichTextBox.Font = cardTextFont;
 
-        var selectedColor = new CardColorComparer().GetColorIndex(this.scryfallCards[this.currentCard]);
+        var selectedColor = new ScryfallCardColorComparer().GetColorIndex(this.scryfallCards[this.currentCard]);
         foreach (CardColorItem item in this.colorNavigationComboBox.Items)
         {
             if (item.Value == selectedColor)

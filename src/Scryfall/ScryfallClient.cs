@@ -54,20 +54,20 @@ public class ScryfallClient
         return response?.Content;
     }
 
-    public IEnumerable<Card> GetCardsForCube(Cube cube, bool reload = false)
+    public IEnumerable<ScryfallCard> GetCardsForCube(Cube cube, bool reload = false)
     {
-        if (reload || !TryLoadCache($"{cube.ExpansionCode}", out List<Card>? cards))
+        if (reload || !TryLoadCache($"{cube.ExpansionCode}", out List<ScryfallCard>? cards))
         {
-            cards = new List<Card>();
+            cards = new List<ScryfallCard>();
 
             string scryfallUri = cube.ScryfallUri;
-            ScryfallResponse<Card>? result;
+            ScryfallResponse<ScryfallCard>? result;
 
             do
             {
                 var request = new RestRequest(scryfallUri);
-                result = this.client.Get<ScryfallResponse<Card>>(request);
-                if (result?.Data == null) return Enumerable.Empty<Card>();
+                result = this.client.Get<ScryfallResponse<ScryfallCard>>(request);
+                if (result?.Data == null) return Enumerable.Empty<ScryfallCard>();
 
                 cards.AddRange(result.Data);
 
@@ -83,12 +83,12 @@ public class ScryfallClient
         }
 
         cards = cards?
-            .OrderBy(_ => _, new CardColorComparer())
+            .OrderBy(_ => _, new ScryfallCardColorComparer())
             .ThenBy(_ => _.Name)
             .Where(_ => !_.Variation)
             .ToList();
 
-        return cards ?? Enumerable.Empty<Card>();
+        return cards ?? Enumerable.Empty<ScryfallCard>();
     }
 
     bool TryLoadCache<T>(string key, out T? data)

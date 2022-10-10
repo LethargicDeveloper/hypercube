@@ -80,6 +80,8 @@ partial class MainForm
             this.nextColorButton = new System.Windows.Forms.Button();
             this.prevColorButton = new System.Windows.Forms.Button();
             this.latestButton = new System.Windows.Forms.Button();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.browseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.expansionCardPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cardPictureBox)).BeginInit();
@@ -117,14 +119,14 @@ partial class MainForm
             // newCubeToolStripMenuItem
             // 
             this.newCubeToolStripMenuItem.Name = "newCubeToolStripMenuItem";
-            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.newCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newCubeToolStripMenuItem.Text = "&New Cube...";
             this.newCubeToolStripMenuItem.Click += new System.EventHandler(this.NewCubeToolStripMenuItem_Click);
             // 
             // openCubeToolStripMenuItem
             // 
             this.openCubeToolStripMenuItem.Name = "openCubeToolStripMenuItem";
-            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.openCubeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openCubeToolStripMenuItem.Text = "&Open Cube...";
             this.openCubeToolStripMenuItem.Click += new System.EventHandler(this.OpenCubeToolStripMenuItem_Click);
             // 
@@ -133,25 +135,27 @@ partial class MainForm
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(140, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // navigationToolStripMenuItem
             // 
             this.navigationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.browseToolStripMenuItem,
+            this.toolStripSeparator2,
             this.nextToolStripMenuItem,
             this.previousCardToolStripMenuItem,
             this.nextColorToolStripMenuItem,
@@ -646,6 +650,18 @@ partial class MainForm
             this.latestButton.UseVisualStyleBackColor = true;
             this.latestButton.Click += new System.EventHandler(this.LatestButton_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(234, 6);
+            // 
+            // browseToolStripMenuItem
+            // 
+            this.browseToolStripMenuItem.Name = "browseToolStripMenuItem";
+            this.browseToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.browseToolStripMenuItem.Text = "&Browse...";
+            this.browseToolStripMenuItem.Click += new System.EventHandler(this.BrowseToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -761,4 +777,6 @@ partial class MainForm
     private Button nextColorButton;
     private Button prevColorButton;
     private Button latestButton;
+    private ToolStripMenuItem browseToolStripMenuItem;
+    private ToolStripSeparator toolStripSeparator2;
 }

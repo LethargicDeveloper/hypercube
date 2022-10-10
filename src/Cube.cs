@@ -57,6 +57,12 @@ public class Cube
         image.Save(path);
     }
 
+    public string GetCardImagePath(string scryfallReference)
+    {
+        var path = Path.Combine(CubeDirectory, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");
+        return File.Exists(path) ? path : string.Empty;
+    }
+
     public void SaveCardImage(string scryfallReference, Image image)
     {
         var path = Path.Combine(CubeDirectory, CubeName, $"card_{GetDeterministicHashCode(scryfallReference)}.png");

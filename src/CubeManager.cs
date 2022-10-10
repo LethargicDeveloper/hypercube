@@ -57,7 +57,7 @@ public class CubeManager
     public Cube? LoadCube(string cubeName)
     {
         var path = Path.Combine(CubeDirectory, cubeName);
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(path) || !File.Exists(Path.Combine(path, "cube.json")))
         {
             return null;
         }    

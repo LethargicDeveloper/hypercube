@@ -6,13 +6,13 @@ public partial class CardArtUserControl : UserControl
 {
     CardArt? cardArt;
 
+    public event EventHandler? SelectedChanged;
+    public event EventHandler? LoadCompleted;
+
     public CardArtUserControl()
     {
         InitializeComponent();
     }
-
-    public event EventHandler? SelectedChanged;
-    public event EventHandler? LoadCompleted;
 
     public bool Selected
     {
