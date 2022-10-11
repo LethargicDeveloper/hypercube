@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Hypercube;
 
@@ -14,11 +15,20 @@ public class Cube
         this.settings = ServiceLocator.Provider.GetRequiredService<Settings>();
     }
 
+    [JsonPropertyOrder(1)]
     public string CubeName { get; init; } = string.Empty;
+    
+    [JsonPropertyOrder(2)]
     public string ScryfallUri { get; init; } = string.Empty;
+
+    [JsonPropertyOrder(3)]
     public string Expansion { get; init; } = string.Empty;
+
+    [JsonPropertyOrder(4)]
     public string ExpansionCode { get; init; } = string.Empty;
-    public List<Card> Cards { get; set; } = new();
+
+    [JsonPropertyOrder(5)]
+    public SortedSet<Card> Cards { get; set; } = new(new ScryfallReferenceComparer());
 
     string CubeDirectory => this.workingDirectory ?? this.settings.CubeLocation;
 
@@ -41,7 +51,10 @@ public class Cube
     public void Save()
     {
         var path = Path.Combine(CubeDirectory, CubeName);
-        var json = JsonSerializer.Serialize(this);
+        var json = JsonSerializer.Serialize(this, new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
         File.WriteAllText(Path.Combine(path, "cube.json"), json);
     }
 

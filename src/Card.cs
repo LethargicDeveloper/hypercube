@@ -1,20 +1,62 @@
-﻿namespace Hypercube;
+﻿using System.Text.Json.Serialization;
 
-public class Card
+namespace Hypercube;
+
+public class Card : IComparable<Card>
 {
+    private static ScryfallReferenceComparer comparer = new ScryfallReferenceComparer();
+
+    [JsonPropertyOrder(1)]
     public string ScryfallReference { get; init; } = string.Empty;
+
+    [JsonPropertyOrder(2)]
     public string Name { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(3)]
     public string ManaCost { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(4)]
     public string Frame { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(5)]
     public List<string> Supertypes { get; set; } = new();
+
+    [JsonPropertyOrder(6)]
     public List<string> Types { get; set; } = new();
+
+    [JsonPropertyOrder(7)]
     public List<string> Subtypes { get; set; } = new();
+
+    [JsonPropertyOrder(8)]
     public string CardText { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(9)]
     public string Power { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(10)]
     public string Toughness { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(11)]
     public bool HasPowerAndToughness => !string.IsNullOrEmpty(Power) || !string.IsNullOrEmpty(Toughness);
+
+    [JsonPropertyOrder(12)]
     public string Rarity { get; set; } = string.Empty;
+
+    [JsonPropertyOrder(13)]
     public int FontSize { get; set; } = 11;
+
+    public int CompareTo(Card? other)
+    {
+        return comparer.Compare(this, other);
+    }
+}
+
+public class ScryfallReferenceComparer : IComparer<Card>
+{
+    public int Compare(Card? x, Card? y)
+    {
+        return string.Compare(x?.ScryfallReference, y?.ScryfallReference);
+    }
 }
 
 public class CardColorComparer : IComparer<Card>
