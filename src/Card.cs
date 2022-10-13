@@ -41,7 +41,7 @@ public class CardColorComparer : IComparer<Card>
         return 0;
     }
 
-    private string GetColorIndex(Card? x)
+    public string GetColorIndex(Card? x)
     {
         var cost = x?.ManaCost
             .Where(_ => "WUBRG".Contains(_))

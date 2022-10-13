@@ -41,8 +41,31 @@ public class Cube
     public void Save()
     {
         var path = Path.Combine(CubeDirectory, CubeName);
-        var json = JsonSerializer.Serialize(this);
-        File.WriteAllText(Path.Combine(path, "cube.json"), json);
+        
+        var cube = new Cube
+        {
+            CubeName = this.CubeName,
+            ScryfallUri = this.ScryfallUri,
+            Expansion = this.Expansion,
+            ExpansionCode = this.ExpansionCode
+        };
+
+        var json = JsonSerializer.Serialize(cube);
+        File.WriteAllText(Path.Combine(path, "config.json"), json);
+
+        var comparer = new CardColorComparer();
+        var colors = this.Cards.GroupBy(_ => comparer.GetColorIndex(_)).Select(_ => _.ToList()).ToList();
+        
+        foreach (var color in colors)
+        {
+            var card = color.FirstOrDefault();
+            if (card == null) continue;
+
+            var index = comparer.GetColorIndex(card);
+
+            json = JsonSerializer.Serialize(color);
+            File.WriteAllText(Path.Combine(path, $"{index}.json"), json);
+        }
     }
 
     public string GetArtImagePath(string scryfallReference)
