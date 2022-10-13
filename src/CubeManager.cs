@@ -48,7 +48,7 @@ public class CubeManager
 
         Directory.CreateDirectory(path);
 
-        CreateCubeConfig(path, cube);
+        cube.Save();
         CreateScryfallCache(cube);
 
         return true;
@@ -57,19 +57,41 @@ public class CubeManager
     public Cube? LoadCube(string cubeName)
     {
         var path = Path.Combine(CubeDirectory, cubeName);
-        if (!Directory.Exists(path) || !File.Exists(Path.Combine(path, "cube.json")))
+        if (!Directory.Exists(path)) return null;
+
+        if (File.Exists(Path.Combine(path, "cube.json")))
         {
-            return null;
-        }    
+            var cubePath = Path.Combine(path, "cube.json");
+            var json = File.ReadAllText(cubePath);
+            var cube = JsonSerializer.Deserialize<Cube>(json);
 
-        var json = File.ReadAllText(Path.Combine(path, "cube.json"));
-        return JsonSerializer.Deserialize<Cube>(json);
-    }
+            cube?.Save();
 
-    void CreateCubeConfig(string path, Cube cube)
-    {
-        var json = JsonSerializer.Serialize(cube);
-        File.WriteAllText(Path.Combine(path, "cube.json"), json);
+            File.Delete(cubePath);
+            return cube;
+        }
+        else if (File.Exists(Path.Combine(path, "config.json")))
+        {
+            var json = File.ReadAllText(Path.Combine(path, "config.json"));
+            var cube = JsonSerializer.Deserialize<Cube>(json);
+
+            foreach (var file in Directory.GetFiles(path)
+                .Where(_ => Path.GetExtension(_) == ".json")
+                .Where(_ => Path.GetFileName(_) != "config.json"))
+            {
+                json = File.ReadAllText(Path.Combine(path, file));
+                var cards = JsonSerializer.Deserialize<Card[]>(json)?.ToList();
+
+                if (cards != null)
+                {
+                    cube?.Cards.AddRange(cards);
+                }
+            }
+
+            return cube;
+        }
+
+        return null;
     }
 
     void CreateScryfallCache(Cube cube)
