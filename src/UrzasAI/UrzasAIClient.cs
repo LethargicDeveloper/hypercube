@@ -33,8 +33,14 @@ public class UrzasAIClient
         var queryString = string.Join("&", query.ToArray());
 
         var request = new RestRequest($"card?{queryString}");
-        var result = await this.client.GetAsync<CardText>(request);
-        return result ?? new CardText();
+        var result = await this.client.ExecuteGetAsync<CardText>(request);
+
+        if (!result.IsSuccessful)
+        {
+            return new CardText();
+        }
+
+        return result?.Data ?? new CardText();
     }
 
     public async Task<CardArt> GenerateImageAsync(CardText cardText)

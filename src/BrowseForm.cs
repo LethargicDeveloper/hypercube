@@ -5,29 +5,68 @@ namespace Hypercube;
 public partial class BrowseForm : Form
 {
     const float SizeMultiplier = 0.85f;
+    const int NumCards = 50;
 
     readonly Cube cube;
+    readonly List<PictureBox> controls;
+    List<Card> cards;
+    int startIndex = 0;
 
     public event EventHandler<CardEventArgs>? SelectionChanged;
 
     public BrowseForm(Cube cube)
     {
         this.cube = cube;
+        this.cards = new List<Card>();
+        this.controls = new List<PictureBox>();
+
         InitializeComponent();
     }
 
     void BrowseForm_Load(object sender, EventArgs e)
     {
-        // TODO: clicking card should load card in editor
-
-        var cards = this.cube.Cards?
+        this.cards = this.cube.Cards?
             .OrderBy(_ => _, new CardColorComparer())
             .ThenBy(_ => _.Name)
             .Where(_ => !string.IsNullOrEmpty(_.Name))
             .ToList() ?? new List<Card>();
 
-        foreach (var card in cards)
+        AddCardsToPanel();
+    }
+
+    private void FlowLayoutPanel_MouseWheel(object? sender, MouseEventArgs e)
+    {
+        var oldValue = this.flowLayoutPanel.VerticalScroll.Value;
+        var newValue = oldValue + this.flowLayoutPanel.VerticalScroll.LargeChange;
+        var eventArgs = new ScrollEventArgs(ScrollEventType.LargeIncrement, oldValue, newValue);
+
+        FlowLayoutPanel_Scroll(sender ?? this.flowLayoutPanel, eventArgs);
+    }
+
+    void FlowLayoutPanel_Scroll(object sender, ScrollEventArgs e)
+    {
+        var vs = this.flowLayoutPanel.VerticalScroll;
+        if (e.NewValue >= vs.Maximum - vs.LargeChange + 1)
         {
+            AddCardsToPanel();
+        }
+    }
+
+    void PictureBox_Click(object? sender, EventArgs e)
+    {
+        var pictureBox = sender as PictureBox;
+        if (pictureBox == null) return;
+
+        var card = (Card)pictureBox.Tag;
+        OnSelectionChanged(new CardEventArgs(card));
+    }
+
+    void AddCardsToPanel()
+    {
+        this.flowLayoutPanel.SuspendLayout();
+        for (int i = startIndex; i < startIndex + NumCards && i < this.cards.Count; ++i)
+        {
+            var card = cards[i];
             var pictureBox = new PictureBox
             {
                 ImageLocation = this.cube.GetCardImagePath(card.ScryfallReference),
@@ -43,15 +82,10 @@ public partial class BrowseForm : Form
 
             this.flowLayoutPanel.Controls.Add(pictureBox);
         }
-    }
 
-    private void PictureBox_Click(object? sender, EventArgs e)
-    {
-        var pictureBox = sender as PictureBox;
-        if (pictureBox == null) return;
+        startIndex += NumCards;
 
-        var card = (Card)pictureBox.Tag;
-        OnSelectionChanged(new CardEventArgs(card));
+        this.flowLayoutPanel.ResumeLayout();
     }
 
     protected virtual void OnSelectionChanged(CardEventArgs e)
