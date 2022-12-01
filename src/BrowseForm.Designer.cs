@@ -40,6 +40,8 @@
             this.flowLayoutPanel.Name = "flowLayoutPanel";
             this.flowLayoutPanel.Size = new System.Drawing.Size(925, 865);
             this.flowLayoutPanel.TabIndex = 0;
+            this.flowLayoutPanel.Scroll += new System.Windows.Forms.ScrollEventHandler(this.FlowLayoutPanel_Scroll);
+            this.flowLayoutPanel.MouseWheel += FlowLayoutPanel_MouseWheel;
             // 
             // BrowseForm
             // 
